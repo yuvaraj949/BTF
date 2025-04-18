@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:8080', 'http://localhost:3000', 'https://btfbpdc.vercel.app/'],
+  origin: ['http://localhost:8080', 'http://localhost:3000', 'https://btfbpdc.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   optionsSuccessStatus:200
@@ -47,6 +47,10 @@ const Registration = mongoose.model('Registration', registrationSchema);
 const generateRegistrationId = () => {
   return `BTF25-${Math.floor(100000 + Math.random() * 900000)}`;
 };
+
+app.options('*', (req, res) => {
+  res.status(200).end();
+});
 
 app.get('/', (req,res) => {
   res.send('api active')
