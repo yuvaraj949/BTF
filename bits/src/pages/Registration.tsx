@@ -367,7 +367,7 @@
                 <h2 className="text-2xl font-bold mb-4">Registration Complete!</h2>
               
                 <p className="text-white/80 mb-6">
-                  Thank you for registering for BITS Tech Fest 2025! We've sent a confirmation email to <span className="text-neon-purple">{formData.email}</span> with your ticket details and QR code.
+                  Thank you for registering for BITS Tech Fest 2025!
                 </p>
                 {error && (
                   <div className="mb-4 p-3 bg-red-900/30 border border-red-500 rounded-md text-red-300">
