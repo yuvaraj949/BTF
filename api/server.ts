@@ -13,10 +13,10 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: ['http://localhost:8080', 'http://localhost:3000', 'https://btfbpdc.vercel.app/'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
+  optionsSuccessStatus:200
 }));
 app.use(express.json());
 
@@ -48,6 +48,9 @@ const generateRegistrationId = () => {
   return `BTF25-${Math.floor(100000 + Math.random() * 900000)}`;
 };
 
+app.get('/', (req,res) => {
+  res.send('api active')
+})
 // Registration Route
 app.post('/api/register', [
   // Validation
@@ -114,55 +117,6 @@ app.post('/api/register', [
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Server error during registration' });
-  }
-});
-
-// Get registration details
-app.get('/api/registration/:id', async (req, res) => {
-  try {
-    const registration = await Registration.findOne({ registrationId: req.params.id });
-    if (!registration) {
-      return res.status(404).json({ message: 'Registration not found' });
-    }
-    
-    res.json({
-      firstName: registration.firstName,
-      lastName: registration.lastName,
-      email: registration.email,
-      registrationId: registration.registrationId,
-      interestedEvents: registration.interestedEvents
-    });
-  } catch (error) {
-    console.error('Error fetching registration:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// Get event statistics (for admin purposes)
-app.get('/api/event-stats', async (req, res) => {
-  try {
-    const totalRegistrations = await Registration.countDocuments();
-    
-    // Count registrations by affiliation type
-    const affiliationStats = await Registration.aggregate([
-      { $group: { _id: '$affiliationType', count: { $sum: 1 } } }
-    ]);
-    
-    // Count interest in each event
-    const eventInterestStats = await Registration.aggregate([
-      { $unwind: '$interestedEvents' },
-      { $group: { _id: '$interestedEvents', count: { $sum: 1 } } },
-      { $sort: { count: -1 } }
-    ]);
-    
-    res.json({
-      totalRegistrations,
-      affiliationStats,
-      eventInterestStats
-    });
-  } catch (error) {
-    console.error('Error fetching stats:', error);
-    res.status(500).json({ message: 'Server error' });
   }
 });
 

@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import { body, validationResult } from 'express-validator';
 import Registration from '../models/Registration';
 
@@ -21,7 +21,7 @@ router.post(
     body('institutionName').notEmpty().withMessage('Institution name is required'),
     body('agreeTerms').equals('true').withMessage('You must agree to the terms and conditions')
   ],
-  async (req: express.Request, res: express.Response) => {
+  async (req: Request, res: Response) => {
     // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
