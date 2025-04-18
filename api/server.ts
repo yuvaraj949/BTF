@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoose, { SetExpressionOperator } from 'mongoose';
+import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { body, validationResult } from 'express-validator';
@@ -16,8 +16,9 @@ app.use(cors({
   origin: ['http://localhost:8080', 'http://localhost:3000', 'https://btfbpdc.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
-  optionsSuccessStatus:200
+  optionsSuccessStatus: 200
 }));
+
 app.use(express.json());
 
 // MongoDB Connection
@@ -52,9 +53,10 @@ app.options('*', (req, res) => {
   res.status(200).end();
 });
 
-app.get('/', (req,res) => {
-  res.send('api active')
-})
+app.get('/', (req, res) => {
+  res.send('api active');
+});
+
 // Registration Route
 app.post('/api/register', [
   // Validation
@@ -70,30 +72,30 @@ app.post('/api/register', [
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { 
-    firstName, 
-    lastName, 
-    email, 
-    phone, 
-    affiliationType, 
-    institutionName, 
-    role, 
-    interestedEvents, 
-    agreeTerms 
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    affiliationType,
+    institutionName,
+    role,
+    interestedEvents,
+    agreeTerms
   } = req.body;
 
   try {
     // Check if user already registered
     const existingRegistration = await Registration.findOne({ email });
     if (existingRegistration) {
-      return res.status(400).json({ 
-        message: 'This email has already been registered for the event' 
+      return res.status(400).json({
+        message: 'This email has already been registered for the event'
       });
     }
 
     // Create registration ID
     const registrationId = generateRegistrationId();
-
+    
     // Create new registration
     const registration = new Registration({
       firstName,
@@ -112,8 +114,7 @@ app.post('/api/register', [
     await registration.save();
 
     // In a real application, you would send a confirmation email here
-    
-    res.status(201).json({ 
+    res.status(201).json({
       message: 'Registration successful',
       registrationId,
       email
@@ -133,4 +134,3 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Export the Express app for Vercel
 export default app;
-

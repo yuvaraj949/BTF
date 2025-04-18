@@ -39,7 +39,7 @@ router.post(
 
       // Generate registration ID
       const registrationId = generateRegistrationId();
-
+      
       // Create new registration
       const registration = new Registration({
         firstName: req.body.firstName,
@@ -77,7 +77,7 @@ router.get('/registration/:id', async (req, res) => {
     if (!registration) {
       return res.status(404).json({ message: 'Registration not found' });
     }
-    
+
     res.json({
       firstName: registration.firstName,
       lastName: registration.lastName,

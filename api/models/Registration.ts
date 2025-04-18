@@ -14,15 +14,15 @@ export interface IRegistration extends Document {
   registrationDate: Date;
 }
 
-const registrationSchema = new Schema<IRegistration>({
+const registrationSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
-  affiliationType: { 
-    type: String, 
+  affiliationType: {
+    type: String,
     enum: ['company', 'university', 'school'],
-    required: true 
+    required: true
   },
   institutionName: { type: String, required: true },
   role: { type: String },
