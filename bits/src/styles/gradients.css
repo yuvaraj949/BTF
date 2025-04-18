@@ -1,0 +1,21 @@
+.gradient-heading {
+  background: linear-gradient(
+    45deg,
+    #e13711,
+    #ccae03,
+    #a32307,
+    #ff0000,
+    #f32d00
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s linear infinite;
+}
+
+@keyframes gradient {
+  to {
+    background-position: 200% center;
+  }
+}

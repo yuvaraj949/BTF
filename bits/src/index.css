@@ -1,0 +1,178 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import './components/Aurora.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border selection:bg-neon-orange/30 selection:text-white;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-black text-white antialiased font-[Inter];
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-[Rajdhani] font-bold;
+  }
+}
+
+@layer components {
+  .neon-border {
+    @apply border border-transparent relative;
+    box-shadow: 0 0 5px theme('colors.neon.orange'), 
+                inset 0 0 5px theme('colors.neon.orange');
+    position: relative;
+    z-index: 1;
+  }
+  
+  .neon-text {
+    @apply text-white relative;
+    text-shadow: 0 0 5px theme('colors.neon.orange'), 
+                 0 0 10px theme('colors.neon.orange');
+  }
+
+  .neon-button {
+    @apply bg-transparent border border-neon-orange px-6 py-2 rounded-md 
+           text-white relative overflow-hidden transition-all duration-300
+           hover:bg-neon-orange/20;
+    box-shadow: 0 0 10px theme('colors.neon.orange'), 
+                inset 0 0 5px theme('colors.neon.orange');
+  }
+  
+  .parallax-layer {
+    @apply fixed w-full h-full top-0 left-0 pointer-events-none;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  .perspective-container {
+    perspective: 1000px;
+  }
+  
+  /* Text gradient animation */
+  .animate-gradient-background {
+    background-size: 200% 200%;
+    animation: gradientBackground 15s ease infinite;
+  }
+  
+  /* Glitch text effect */
+  .glitch-text {
+    position: relative;
+    animation: glitch 3s infinite;
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  
+  /* Rotate animation for 3D elements */
+  .rotate-y-10 {
+    transform: rotateY(10deg);
+  }
+  
+  .rotate-z-6 {
+    transform: rotateZ(6deg) rotateY(10deg);
+  }
+  
+  .rotate-y-5 {
+    transform: rotateY(5deg);
+  }
+
+  /* New gradient background classes */
+  .bg-gradient-purple-blue {
+    background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+  }
+  
+  .bg-gradient-purple-pink {
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  }
+  
+  .bg-gradient-blue-green {
+    background: linear-gradient(135deg, #3B82F6 0%, #10B981 100%);
+  }
+  
+  .text-gradient-purple-pink {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-purple to-neon-pink;
+  }
+  
+  .text-gradient-blue-green {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue to-neon-green;
+  }
+  
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 via-yellow-300 to-yellow-500;
+  }
+}
+
+.glass-card {
+  @apply bg-black/40 backdrop-blur-md border border-white/10 rounded-lg p-6;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.neon.purple');
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.neon.pink');
+}
+
+/* New animations */
+@keyframes gradientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glitch {
+  0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+  14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+  15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+  49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+  50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+  99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+  100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75); }
+}
