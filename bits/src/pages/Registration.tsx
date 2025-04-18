@@ -387,9 +387,6 @@
                 </div>
               
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <Button className="neon-button">
-                    Add to Calendar
-                  </Button>
                   <Button asChild variant="outline" className="border-white/20 hover:bg-white/5">
                     <a href="/">Return to Homepage</a>
                   </Button>

@@ -10,7 +10,7 @@ const highlightItems = [
   },
   {
     icon: Users,
-    title: "5000+",
+    title: "400+",
     description: "Expected Attendees",
   },
   {

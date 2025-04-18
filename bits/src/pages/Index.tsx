@@ -44,7 +44,7 @@ const Index = () => {
       <Highlights />
       <AboutEvent />
       <Features />
-      <Sponsors />
+      {/* <Sponsors /> */}
       <Footer />
     </main>
   );

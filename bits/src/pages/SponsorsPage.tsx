@@ -114,7 +114,6 @@ const SponsorsPage = () => {
               </div>
               
               <div className="p-6 pt-0">
-                <Button className="w-full neon-button">Become a Sponsor</Button>
               </div>
             </div>
           ))}

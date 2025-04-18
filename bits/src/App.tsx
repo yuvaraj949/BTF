@@ -23,7 +23,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/sponsors" element={<Sponsors />} />
+          {/* <Route path="/sponsors" element={<Sponsors />} /> */}
           <Route path="/agenda" element={<Agenda />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/contact" element={<Contact />} />

@@ -52,9 +52,9 @@ const AboutEvent = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-                <Button asChild className="neon-button">
+                {/* <Button asChild className="neon-button">
                   <Link to="/speakers">DISCOVER SPEAKERS</Link>
-                </Button>
+                </Button> */}
                 <Button asChild variant="outline" className="border-neon-pink/50 hover:bg-neon-pink/10 hover:border-neon-pink">
                   <Link to="/events">VIEW ALL EVENTS</Link>
                 </Button>
