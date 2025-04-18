@@ -7,6 +7,8 @@
   import { Checkbox } from '@/components/ui/checkbox';
   import { Calendar, Mail, User, Users, Briefcase, GraduationCap, Building, School } from 'lucide-react';
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
   const Registration = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState('');
@@ -64,7 +66,7 @@
       
       try {
         // Send data to backend
-        const response = await fetch(`http://localhost:5000/api/register`, {
+        const response = await fetch(`${API_URL}/api/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
