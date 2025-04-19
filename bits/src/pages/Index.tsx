@@ -43,7 +43,7 @@ const Index = () => {
       <Countdown targetDate="2025-04-30T09:00:00" />
       <Highlights />
       <AboutEvent />
-      <Features />
+      {/* <Features /> */}
       {/* <Sponsors /> */}
       <Footer />
     </main>
