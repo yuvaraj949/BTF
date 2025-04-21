@@ -6,36 +6,56 @@ import { Calendar, Clock, MapPin, Download, BookmarkPlus, Filter } from 'lucide-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import '../styles/gradients.css';
 
-// Updated agenda data for April 30th
+
 const agenda = [
+  // Opening Ceremony
   {
     id: 1,
     time: "8:00 AM - 8:20 AM",
-    title: "Registration & Welcome Breakfast",
+    title: "Registration",
     venue: "Main Lobby",
     type: "Registration",
-    description: "Check-in and enjoy morning refreshments"
+    description: "Check-in and collect your event materials"
   },
   {
     id: 2,
     time: "8:20 AM - 8:30 AM",
-    title: "Lamp Lighting & Opening Remarks",
+    title: "Lamp Lighting",
     venue: "Auditorium",
     type: "Ceremony",
-    description: "Traditional lamp lighting and welcome address"
+    description: "Traditional lamp lighting ceremony to inaugurate the event"
   },
   {
     id: 3,
     time: "8:30 AM - 8:45 AM",
-    title: "Keynote: Cosmic Intelligence",
+    title: "Opening Remarks: \"Cosmic Intelligence\"",
     venue: "Auditorium",
     type: "Keynote",
     description: "Opening keynote on this year's theme"
   },
-  // Club Events (Parallel Sessions)
+  
+  // Strategically Organized Club Events
   {
     id: 4,
-    time: "8:45 AM - 12:15 PM",
+    time: "8:45 AM - 10:15 AM",
+    title: "Hunter AI",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "AOEE",
+    description: "AI-based hunting and problem-solving challenge"
+  },
+  {
+    id: 5,
+    time: "8:45 AM - 10:15 AM",
+    title: "Research Paper Presentation",
+    venue: "Auditorium",
+    type: "Presentation",
+    club: "Research",
+    description: "Academic research presentations on emerging technologies"
+  },
+  {
+    id: 6,
+    time: "8:45 AM - 10:15 AM",
     title: "Crack The Penguin",
     venue: "Auditorium",
     type: "Competition",
@@ -43,8 +63,17 @@ const agenda = [
     description: "Linux-based technical challenge"
   },
   {
-    id: 5,
-    time: "8:45 AM - 12:15 PM",
+    id: 7,
+    time: "9:00 AM - 10:30 AM",
+    title: "Escape The Matrix",
+    venue: "Lab 333",
+    type: "Competition",
+    club: "ACM",
+    description: "Capture the flag cybersecurity challenge"
+  },
+  {
+    id: 8,
+    time: "10:15 AM - 11:45 AM",
     title: "Clue Connect",
     venue: "Auditorium",
     type: "Competition",
@@ -52,8 +81,8 @@ const agenda = [
     description: "Technical puzzle-solving competition"
   },
   {
-    id: 6,
-    time: "8:45 AM - 12:15 PM",
+    id: 9,
+    time: "10:15 AM - 11:45 AM",
     title: "STEM-Grid Challenge",
     venue: "Auditorium",
     type: "Competition",
@@ -61,79 +90,16 @@ const agenda = [
     description: "Engineering design challenge"
   },
   {
-    id: 7,
-    time: "8:45 AM - 12:15 PM",
-    title: "Decrypting Challenge",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "Oh-Crop",
-    description: "Cryptography and security competition"
-  },
-  {
-    id: 8,
-    time: "8:45 AM - 12:15 PM",
-    title: "Tech Taboo",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "ACM-W",
-    description: "Technology-themed word game for schools"
-  },
-  {
-    id: 9,
-    time: "8:45 AM - 12:15 PM",
-    title: "Marshmallow Tower Challenge",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "Skyline",
-    description: "Creative engineering challenge"
-  },
-  {
     id: 10,
-    time: "8:45 AM - 12:15 PM",
-    title: "Luck with Machines",
+    time: "10:30 AM - 11:30 AM",
+    title: "Debate Competition",
     venue: "Auditorium",
     type: "Competition",
-    club: "AOEE",
-    description: "Probability and machine learning challenge"
+    club: "Debate",
+    description: "Technical debate on emerging technology topics"
   },
   {
     id: 11,
-    time: "8:45 AM - 12:15 PM",
-    title: "Fizz Quiz",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "IEI",
-    description: "Technical quiz competition"
-  },
-  {
-    id: 12,
-    time: "8:45 AM - 12:15 PM",
-    title: "Hydro Purity Quest",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "AiCHE",
-    description: "Chemical engineering challenge"
-  },
-  {
-    id: 13,
-    time: "8:45 AM - 12:15 PM",
-    title: "Blood Grouping",
-    venue: "Bio Lab",
-    type: "Workshop",
-    club: "Chimera",
-    description: "Hands-on biology workshop"
-  },
-  {
-    id: 14,
-    time: "TBD",
-    title: "Satellite Tracking",
-    venue: "Ground Station",
-    type: "Demonstration",
-    club: "Mahasat",
-    description: "Live satellite tracking demonstration"
-  },
-  {
-    id: 15,
     time: "10:00 AM - 11:00 AM",
     title: "Space Docking",
     venue: "Ground Station",
@@ -142,34 +108,89 @@ const agenda = [
     description: "Spacecraft docking simulation"
   },
   {
+    id: 12,
+    time: "11:45 AM - 12:15 PM",
+    title: "Decrypting Challenge",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "Oh-Crop",
+    description: "Cryptography and security competition"
+  },
+  {
+    id: 13,
+    time: "11:45 AM - 12:15 PM",
+    title: "Tech Taboo",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "ACM-W",
+    description: "Technology-themed word game for schools"
+  },
+  {
+    id: 14,
+    time: "11:00 AM - 12:00 PM",
+    title: "Fizz Quiz",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "IEI",
+    description: "Technical quiz competition"
+  },
+  {
+    id: 15,
+    time: "9:30 AM - 12:00 PM",
+    title: "Blood Grouping",
+    venue: "Auditorium",
+    type: "Workshop",
+    club: "Chimera",
+    description: "Hands-on biology workshop"
+  },
+  {
     id: 16,
-    time: "9:00 AM - 11:30 AM",
+    time: "TBA (Announced Live)",
+    title: "Satellite Tracking",
+    venue: "Ground Station",
+    type: "Demonstration",
+    club: "Mahasat",
+    description: "Live satellite tracking demonstration"
+  },
+  {
+    id: 17,
+    time: "8:45 AM - 12:00 PM",
+    title: "Marshmallow Tower Challenge",
+    venue: "Auditorium",
+    type: "Workshop",
+    club: "Skyline",
+    description: "Creative engineering challenge"
+  },
+  {
+    id: 18,
+    time: "9:30 AM - 11:00 AM",
+    title: "Hydro Purity Quest",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "AiCHE",
+    description: "Chemical engineering challenge"
+  },
+  {
+    id: 19,
+    time: "10:45 AM - 12:15 PM",
     title: "No-Code Triwizard Hackathon",
-    venue: "Lab 332",
+    venue: "Lab 333",
     type: "Hackathon",
     club: "MTC",
     description: "No-code development competition"
   },
-  {
-    id: 17,
-    time: "9:00 AM - 10:30 AM",
-    title: "Escape The Matrix - CTF",
-    venue: "Lab 333",
-    type: "Competition",
-    club: "ACM",
-    description: "Capture the flag cybersecurity challenge"
-  },
+  
   // Closing Ceremony
   {
-    id: 18,
+    id: 20,
     time: "12:15 PM - 12:20 PM",
-    title: "Welcome & Opening Remarks",
+    title: "Group Photo",
     venue: "Auditorium",
     type: "Ceremony",
-    description: "Introduction to closing ceremony"
+    description: "Event group photo with all participants"
   },
   {
-    id: 19,
+    id: 21,
     time: "12:20 PM - 12:30 PM",
     title: "Prize Distribution to Winners",
     venue: "Auditorium",
@@ -177,23 +198,23 @@ const agenda = [
     description: "Award ceremony for competition winners"
   },
   {
-    id: 20,
+    id: 22,
     time: "12:30 PM - 12:40 PM",
-    title: "Felicitation of Sponsors & Guests",
+    title: "Felicitation of Sponsors",
     venue: "Auditorium",
     type: "Ceremony",
-    description: "Acknowledgement of sponsors and special guests"
+    description: "Acknowledgement of sponsors and partners"
   },
   {
-    id: 21,
+    id: 23,
     time: "12:40 PM - 12:50 PM",
-    title: "Volunteer Acknowledgements",
+    title: "Acknowledgements & Volunteer Recognition",
     venue: "Auditorium",
     type: "Ceremony",
     description: "Recognizing the organizing team and volunteers"
   },
   {
-    id: 22,
+    id: 24,
     time: "12:50 PM - 12:55 PM",
     title: "Vote of Thanks",
     venue: "Auditorium",
@@ -201,14 +222,15 @@ const agenda = [
     description: "Closing remarks and thanks"
   },
   {
-    id: 23,
+    id: 25,
     time: "12:55 PM - 1:00 PM",
-    title: "Group Photo & Closing Notes",
+    title: "Final Closing Notes",
     venue: "Auditorium",
     type: "Ceremony",
-    description: "Final group photo and event conclusion"
+    description: "Final announcements and event conclusion"
   }
 ];
+
 
 // Event types for filtering
 const eventTypes = ["All", "Ceremony", "Keynote", "Competition", "Workshop", "Hackathon", "Demonstration", "Simulation", "Registration"];
@@ -263,10 +285,10 @@ const Agenda = () => {
             </select>
           </div>
           
-          <Button className="flex items-center gap-2">
+          {/* <Button className="flex items-center gap-2">
             <Download size={16} />
             Download Full Schedule
-          </Button>
+          </Button> */}
         </div>
         
         {/* Agenda Items */}
