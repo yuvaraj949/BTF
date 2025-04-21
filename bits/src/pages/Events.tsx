@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, Filter, Calendar, Users, MapPin } from 'lucide-react';
+import { Search, Filter, Calendar, MapPin } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import '../styles/gradients.css';
 import { Link } from 'react-router-dom';
@@ -15,9 +15,8 @@ const events = [
     title: "Crack The Penguin",
     club: "LUG",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
-    description: "Linux-based technical challenge for enthusiasts",
     type: "Competition"
   },
   {
@@ -25,9 +24,8 @@ const events = [
     title: "Clue Connect",
     club: "WIE",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "10:15 AM - 11:45 AM",
     venue: "Auditorium",
-    description: "Technical puzzle-solving competition",
     type: "Competition"
   },
   {
@@ -35,9 +33,8 @@ const events = [
     title: "STEM-Grid Challenge",
     club: "SWE",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "10:15 AM - 11:45 AM",
     venue: "Auditorium",
-    description: "Engineering design challenge",
     type: "Competition"
   },
   {
@@ -45,9 +42,8 @@ const events = [
     title: "Decrypting Challenge",
     club: "Oh-Crop",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "11:45 AM - 12:15 PM",
     venue: "Auditorium",
-    description: "Cryptography and security challenge",
     type: "Competition"
   },
   {
@@ -55,9 +51,8 @@ const events = [
     title: "Tech Taboo",
     club: "ACM-W",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "11:45 AM - 12:15 PM",
     venue: "Auditorium",
-    description: "Technical communication game",
     type: "Competition"
   },
   {
@@ -65,19 +60,17 @@ const events = [
     title: "Marshmallow Tower Challenge",
     club: "Skyline",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "8:45 AM - 12:00 PM",
     venue: "Auditorium",
-    description: "Creative engineering challenge",
     type: "Workshop"
   },
   {
     id: 7,
-    title: "Luck with Machines",
+    title: "Hunter AI",
     club: "AOEE",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
-    description: "Probability and machine learning activity",
     type: "Workshop"
   },
   {
@@ -85,9 +78,8 @@ const events = [
     title: "Fizz Quiz",
     club: "IEI",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "11:00 AM - 12:00 PM",
     venue: "Auditorium",
-    description: "Technical quiz competition",
     type: "Competition"
   },
   {
@@ -95,9 +87,8 @@ const events = [
     title: "Hydro Purity Quest",
     club: "AiCHE",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
+    time: "9:30 AM - 11:00 AM",
     venue: "Auditorium",
-    description: "Chemical engineering challenge",
     type: "Competition"
   },
   {
@@ -105,9 +96,8 @@ const events = [
     title: "Blood Grouping",
     club: "Chimera",
     date: "April 30, 2025",
-    time: "8:45 AM - 12:15 PM",
-    venue: "Bio Lab",
-    description: "Hands-on biology activity",
+    time: "9:30 AM - 12:00 PM",
+    venue: "Auditorium",
     type: "Workshop"
   },
   {
@@ -117,7 +107,6 @@ const events = [
     date: "April 30, 2025",
     time: "10:00 AM - 11:00 AM",
     venue: "Ground Station",
-    description: "Space technology demonstration",
     type: "Workshop"
   },
   {
@@ -125,40 +114,94 @@ const events = [
     title: "No-Code Triwizard Hackathon",
     club: "MTC",
     date: "April 30, 2025",
-    time: "9:00 AM - 11:30 AM",
-    venue: "Lab 332",
-    description: "No-code development challenge",
+    time: "10:45 AM - 12:15 PM",
+    venue: "Lab 333",
     type: "Hackathon"
   },
   {
     id: 13,
-    title: "Escape The Matrix - CTF",
+    title: "Escape The Matrix",
     club: "ACM",
     date: "April 30, 2025",
     time: "9:00 AM - 10:30 AM",
     venue: "Lab 333",
-    description: "Capture the flag cybersecurity challenge",
     type: "Competition"
+  },
+  {
+    id: 14,
+    title: "Research Paper Presentation",
+    club: "Research",
+    date: "April 30, 2025",
+    time: "8:45 AM - 10:15 AM",
+    venue: "Auditorium",
+    type: "Presentation"
+  },
+  {
+    id: 15,
+    title: "Debate Competition",
+    club: "Debate",
+    date: "April 30, 2025",
+    time: "10:30 AM - 11:30 AM",
+    venue: "Auditorium",
+    type: "Competition"
+  },
+  {
+    id: 16,
+    title: "Satellite Tracking",
+    club: "Space",
+    date: "April 30, 2025",
+    time: "TBA (Announced Live)",
+    venue: "Ground Station",
+    type: "Workshop"
   }
 ];
 
 // Event types for filtering
-const eventTypes = ["All", "Hackathon", "Workshop", "Competition"];
+const eventTypes = ["All", "Hackathon", "Workshop", "Competition", "Presentation"];
+
+// Helper function to convert time string to minutes for sorting
+const timeToMinutes = (timeStr) => {
+  // Handle TBA case
+  if (timeStr.includes("TBA")) {
+    return Number.MAX_SAFE_INTEGER; // Put TBA events at the end
+  }
+  
+  // Extract start time (format: "HH:MM AM/PM - HH:MM AM/PM")
+  const startTime = timeStr.split(" - ")[0];
+  const [hourMin, period] = startTime.split(" ");
+  let [hours, minutes] = hourMin.split(":").map(Number);
+  
+  // Convert to 24-hour format for easier comparison
+  if (period === "PM" && hours < 12) {
+    hours += 12;
+  } else if (period === "AM" && hours === 12) {
+    hours = 0;
+  }
+  
+  return hours * 60 + minutes;
+};
 
 const Events = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("All");
 
-  // Filter events based on search term and filters
-  const filteredEvents = events.filter(event => {
-    const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                        event.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        event.club.toLowerCase().includes(searchTerm.toLowerCase());
+  // Sort events by starting time and apply filters
+  const filteredEvents = useMemo(() => {
+    // First sort the events by starting time
+    const sortedEvents = [...events].sort((a, b) => {
+      return timeToMinutes(a.time) - timeToMinutes(b.time);
+    });
     
-    const matchesType = selectedType === "All" || event.type === selectedType;
-    
-    return matchesSearch && matchesType;
-  });
+    // Then apply the filters
+    return sortedEvents.filter(event => {
+      const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          event.club.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesType = selectedType === "All" || event.type === selectedType;
+      
+      return matchesSearch && matchesType;
+    });
+  }, [searchTerm, selectedType]);
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -180,7 +223,7 @@ const Events = () => {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" size={18} />
               <Input
-                placeholder="Search events, clubs or keywords..."
+                placeholder="Search events or clubs..."
                 className="pl-10 bg-white/5 border-white/10"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -222,8 +265,6 @@ const Events = () => {
                     <MapPin size={14} className="text-neon-green" />
                     <span>{event.venue}</span>
                   </div>
-                  
-                  <p className="text-white/80 text-sm line-clamp-3">{event.description}</p>
                 </CardContent>
                 
                 <CardFooter className="pt-0">
