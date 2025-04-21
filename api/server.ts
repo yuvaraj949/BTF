@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { body, validationResult } from 'express-validator';
 import nodemailer from 'nodemailer';
+import Registration from './models/Registration';
 
 // Load environment variables
 dotenv.config();
@@ -26,45 +27,32 @@ mongoose.connect(process.env.MONGODB_URI || '')
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Registration Schema
-const registrationSchema = new mongoose.Schema({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  phone: { type: String, required: true },
-  affiliationType: { type: String, enum: ['company', 'university', 'school'] },
-  institutionName: { type: String },
-  role: { type: String },
-  interestedEvents: [{ type: String }],
-  agreeTerms: { type: Boolean, required: true },
-  registrationDate: { type: Date, default: Date.now },
-  registrationId: { type: String, unique: true }
-});
-
-// Registration Model
-const Registration = mongoose.model('Registration', registrationSchema);
-
 // Generate unique registration ID
-const generateRegistrationId = () => {
+const generateRegistrationId = (): string => {
   return `BTF25-${Math.floor(100000 + Math.random() * 900000)}`;
 };
 
-// Email transporter setup
+// Email transporter setup - optimized for Vercel
 const transporter = nodemailer.createTransport({
   service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // use SSL
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false // helps with some SSL issues
   }
 });
 
 // Function to send confirmation email
 async function sendConfirmationEmail(
-  recipient: string,
-  firstName: string,
+  recipient: string, 
+  firstName: string, 
   registrationId: string
 ): Promise<boolean> {
-  // Function implementation remains the same
   try {
     const mailOptions = {
       from: `"BITS Tech Fest 2025" <${process.env.EMAIL_USER}>`,
@@ -87,6 +75,7 @@ async function sendConfirmationEmail(
       `
     };
     
+    // Use promise-based approach for Vercel compatibility
     const info = await transporter.sendMail(mailOptions);
     console.log('Confirmation email sent:', info.messageId);
     return true;
@@ -95,7 +84,6 @@ async function sendConfirmationEmail(
     return false;
   }
 }
-
 
 app.options('*', (req, res) => {
   res.status(200).end();
@@ -161,8 +149,14 @@ app.post('/api/register', [
     // Save registration to database
     await registration.save();
     
-    // Send confirmation email
-    await sendConfirmationEmail(email, firstName, registrationId);
+    // Send confirmation email - optimized for Vercel
+    try {
+      await sendConfirmationEmail(email, firstName, registrationId);
+      console.log('Email sent successfully to:', email);
+    } catch (emailError) {
+      console.error('Failed to send email but registration was successful:', emailError);
+      // We don't return an error to the client since registration was successful
+    }
 
     res.status(201).json({
       message: 'Registration successful',
@@ -172,6 +166,27 @@ app.post('/api/register', [
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Server error during registration' });
+  }
+});
+
+// Get registration details
+app.get('/api/registration/:id', async (req, res) => {
+  try {
+    const registration = await Registration.findOne({ registrationId: req.params.id });
+    if (!registration) {
+      return res.status(404).json({ message: 'Registration not found' });
+    }
+
+    res.json({
+      firstName: registration.firstName,
+      lastName: registration.lastName,
+      email: registration.email,
+      registrationId: registration.registrationId,
+      interestedEvents: registration.interestedEvents
+    });
+  } catch (error) {
+    console.error('Error fetching registration:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

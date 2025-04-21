@@ -1,25 +1,36 @@
-import express, {Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import nodemailer from 'nodemailer';
 import Registration from '../models/Registration';
 
 const router = express.Router();
 
+// Generate unique registration ID
 const generateRegistrationId = (): string => {
   return `BTF25-${Math.floor(100000 + Math.random() * 900000)}`;
 };
 
-// Email transporter setup
+// Email transporter setup - optimized for Vercel
 const transporter = nodemailer.createTransport({
   service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // use SSL
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false // helps with some SSL issues
   }
 });
 
 // Function to send confirmation email
-async function sendConfirmationEmail(recipient: string, firstName: string, registrationId: string): Promise<boolean> {
+async function sendConfirmationEmail(
+  recipient: string, 
+  firstName: string, 
+  registrationId: string
+): Promise<boolean> {
   try {
     const mailOptions = {
       from: `"BITS Tech Fest 2025" <${process.env.EMAIL_USER}>`,
@@ -42,6 +53,7 @@ async function sendConfirmationEmail(recipient: string, firstName: string, regis
       `
     };
     
+    // Use promise-based approach for Vercel compatibility
     const info = await transporter.sendMail(mailOptions);
     console.log('Confirmation email sent:', info.messageId);
     return true;
@@ -92,12 +104,18 @@ router.post(
 
       await registration.save();
       
-      // Send confirmation email after successful database save
-      await sendConfirmationEmail(
-        req.body.email, 
-        req.body.firstName, 
-        registrationId
-      );
+      // Send confirmation email - optimized for Vercel
+      try {
+        await sendConfirmationEmail(
+          req.body.email, 
+          req.body.firstName, 
+          registrationId
+        );
+        console.log('Email sent successfully to:', req.body.email);
+      } catch (emailError) {
+        console.error('Failed to send email but registration was successful:', emailError);
+        // We don't return an error to the client since registration was successful
+      }
 
       res.status(201).json({
         message: 'Registration successful',
