@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { body, validationResult } from 'express-validator';
+import nodemailer from 'nodemailer';
 
 // Load environment variables
 dotenv.config();
@@ -18,7 +19,6 @@ app.use(cors({
   credentials: true,
   optionsSuccessStatus: 200
 }));
-
 app.use(express.json());
 
 // MongoDB Connection
@@ -48,6 +48,54 @@ const Registration = mongoose.model('Registration', registrationSchema);
 const generateRegistrationId = () => {
   return `BTF25-${Math.floor(100000 + Math.random() * 900000)}`;
 };
+
+// Email transporter setup
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
+
+// Function to send confirmation email
+async function sendConfirmationEmail(
+  recipient: string,
+  firstName: string,
+  registrationId: string
+): Promise<boolean> {
+  // Function implementation remains the same
+  try {
+    const mailOptions = {
+      from: `"BITS Tech Fest 2025" <${process.env.EMAIL_USER}>`,
+      to: recipient,
+      subject: 'Your BITS Tech Fest 2025 Registration Confirmation',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+          <h2 style="color: #333; text-align: center;">Registration Confirmation</h2>
+          <p>Dear ${firstName},</p>
+          <p>Thank you for registering for BITS Tech Fest 2025!</p>
+          <div style="background-color: #f5f5f5; padding: 15px; margin: 15px 0; border-radius: 5px;">
+            <p><strong>Event Date:</strong> April 30, 2025</p>
+            <p><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
+            <p><strong>Your Registration ID:</strong> ${registrationId}</p>
+          </div>
+          <p>We're excited to have you join us for this event. Please save your registration ID for future reference.</p>
+          <p>If you have any questions, feel free to reply to this email.</p>
+          <p>Best regards,<br>BITS Tech Fest Team</p>
+        </div>
+      `
+    };
+    
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Confirmation email sent:', info.messageId);
+    return true;
+  } catch (error) {
+    console.error('Error sending confirmation email:', error);
+    return false;
+  }
+}
+
 
 app.options('*', (req, res) => {
   res.status(200).end();
@@ -112,8 +160,10 @@ app.post('/api/register', [
 
     // Save registration to database
     await registration.save();
+    
+    // Send confirmation email
+    await sendConfirmationEmail(email, firstName, registrationId);
 
-    // In a real application, you would send a confirmation email here
     res.status(201).json({
       message: 'Registration successful',
       registrationId,

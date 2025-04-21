@@ -1,15 +1,56 @@
 import express, {Request, Response} from 'express';
 import { body, validationResult } from 'express-validator';
+import nodemailer from 'nodemailer';
 import Registration from '../models/Registration';
 
 const router = express.Router();
 
-// Generate unique registration ID
 const generateRegistrationId = (): string => {
   return `BTF25-${Math.floor(100000 + Math.random() * 900000)}`;
 };
 
-// Registration endpoint
+// Email transporter setup
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
+
+// Function to send confirmation email
+async function sendConfirmationEmail(recipient: string, firstName: string, registrationId: string): Promise<boolean> {
+  try {
+    const mailOptions = {
+      from: `"BITS Tech Fest 2025" <${process.env.EMAIL_USER}>`,
+      to: recipient,
+      subject: 'Your BITS Tech Fest 2025 Registration Confirmation',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+          <h2 style="color: #333; text-align: center;">Registration Confirmation</h2>
+          <p>Dear ${firstName},</p>
+          <p>Thank you for registering for BITS Tech Fest 2025!</p>
+          <div style="background-color: #f5f5f5; padding: 15px; margin: 15px 0; border-radius: 5px;">
+            <p><strong>Event Date:</strong> April 30, 2025</p>
+            <p><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
+            <p><strong>Your Registration ID:</strong> ${registrationId}</p>
+          </div>
+          <p>We're excited to have you join us for this event. Please save your registration ID for future reference.</p>
+          <p>If you have any questions, feel free to reply to this email.</p>
+          <p>Best regards,<br>BITS Tech Fest Team</p>
+        </div>
+      `
+    };
+    
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Confirmation email sent:', info.messageId);
+    return true;
+  } catch (error) {
+    console.error('Error sending confirmation email:', error);
+    return false;
+  }
+}
+
 router.post(
   '/register',
   [
@@ -22,14 +63,12 @@ router.post(
     body('agreeTerms').equals('true').withMessage('You must agree to the terms and conditions')
   ],
   async (req: Request, res: Response) => {
-    // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
     try {
-      // Check if email already registered
       const existingRegistration = await Registration.findOne({ email: req.body.email });
       if (existingRegistration) {
         return res.status(400).json({
@@ -37,10 +76,7 @@ router.post(
         });
       }
 
-      // Generate registration ID
       const registrationId = generateRegistrationId();
-      
-      // Create new registration
       const registration = new Registration({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -54,10 +90,15 @@ router.post(
         registrationId
       });
 
-      // Save to database
       await registration.save();
+      
+      // Send confirmation email after successful database save
+      await sendConfirmationEmail(
+        req.body.email, 
+        req.body.firstName, 
+        registrationId
+      );
 
-      // Send successful response
       res.status(201).json({
         message: 'Registration successful',
         registrationId,
@@ -70,7 +111,6 @@ router.post(
   }
 );
 
-// Get registration by ID
 router.get('/registration/:id', async (req, res) => {
   try {
     const registration = await Registration.findOne({ registrationId: req.params.id });
