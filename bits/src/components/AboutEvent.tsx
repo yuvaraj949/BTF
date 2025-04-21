@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ScrollText, Cpu, Rocket, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -72,13 +71,13 @@ const AboutEvent = () => {
                     <span className="text-neon-blue">Apr 30:</span> Opening Ceremony & Keynote
                   </li>
                   <li className="border-l-2 border-neon-purple pl-3 py-1 hover:text-white transition-colors">
-                    <span className="text-neon-purple">Apr 30-May 1:</span> Hackathon (24hr)
+                    <span className="text-neon-purple">Apr 30:</span> Enginuity
                   </li>
                   <li className="border-l-2 border-neon-green pl-3 py-1 hover:text-white transition-colors">
-                    <span className="text-neon-green">May 1:</span> Workshops & Tech Expo
+                    <span className="text-neon-green">May 10:</span> Hackathon
                   </li>
                   <li className="border-l-2 border-neon-pink pl-3 py-1 hover:text-white transition-colors">
-                    <span className="text-neon-pink">May 10:</span> Finals & Awards Ceremony
+                    <span className="text-neon-pink">May 10:</span> Close
                   </li>
                 </ul>
               </div>

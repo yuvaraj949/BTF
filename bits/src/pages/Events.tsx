@@ -13,7 +13,7 @@ const events = [
   {
     id: 1,
     title: "Crack The Penguin",
-    club: "LUG",
+    club: "Linux Users Group",
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
