@@ -121,9 +121,6 @@ app.post('/api/register', [
   } = req.body;
 
   try {
-    // REMOVED: Check if user already registered
-    // This was preventing duplicate email registrations
-
     // Create registration ID
     const registrationId = generateRegistrationId();
     

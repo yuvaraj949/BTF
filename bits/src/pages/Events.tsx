@@ -3,12 +3,12 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, Filter, Calendar, MapPin } from 'lucide-react';
+import { Search, Filter, Calendar, MapPin, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import '../styles/gradients.css';
 import { Link } from 'react-router-dom';
 
-// Updated event data for April 30th (single day event)
+// Updated event data for April 30th (single day event) with Google Drive links
 const events = [
   {
     id: 1,
@@ -17,7 +17,8 @@ const events = [
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-crack-the-penguin"
   },
   {
     id: 2,
@@ -26,7 +27,8 @@ const events = [
     date: "April 30, 2025",
     time: "10:15 AM - 11:45 AM",
     venue: "Auditorium",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-clue-connect"
   },
   {
     id: 3,
@@ -35,7 +37,8 @@ const events = [
     date: "April 30, 2025",
     time: "10:15 AM - 11:45 AM",
     venue: "Auditorium",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-stem-grid"
   },
   {
     id: 4,
@@ -44,7 +47,8 @@ const events = [
     date: "April 30, 2025",
     time: "11:45 AM - 12:15 PM",
     venue: "Auditorium",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-decrypting"
   },
   {
     id: 5,
@@ -53,7 +57,8 @@ const events = [
     date: "April 30, 2025",
     time: "11:45 AM - 12:15 PM",
     venue: "Auditorium",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-tech-taboo"
   },
   {
     id: 6,
@@ -62,7 +67,8 @@ const events = [
     date: "April 30, 2025",
     time: "8:45 AM - 12:00 PM",
     venue: "Auditorium",
-    type: "Workshop"
+    type: "Workshop",
+    driveLink: "https://drive.google.com/drive/folders/event-marshmallow"
   },
   {
     id: 7,
@@ -71,7 +77,8 @@ const events = [
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
-    type: "Workshop"
+    type: "Workshop",
+    driveLink: "https://drive.google.com/drive/folders/event-hunter-ai"
   },
   {
     id: 8,
@@ -80,7 +87,8 @@ const events = [
     date: "April 30, 2025",
     time: "11:00 AM - 12:00 PM",
     venue: "Auditorium",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-fizz-quiz"
   },
   {
     id: 9,
@@ -89,7 +97,8 @@ const events = [
     date: "April 30, 2025",
     time: "9:30 AM - 11:00 AM",
     venue: "Auditorium",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-hydro-purity"
   },
   {
     id: 10,
@@ -98,7 +107,8 @@ const events = [
     date: "April 30, 2025",
     time: "9:30 AM - 12:00 PM",
     venue: "Auditorium",
-    type: "Workshop"
+    type: "Workshop",
+    driveLink: "https://drive.google.com/drive/folders/event-blood-grouping"
   },
   {
     id: 11,
@@ -107,7 +117,8 @@ const events = [
     date: "April 30, 2025",
     time: "10:00 AM - 11:00 AM",
     venue: "Ground Station",
-    type: "Workshop"
+    type: "Workshop",
+    driveLink: "https://drive.google.com/drive/folders/event-space-docking"
   },
   {
     id: 12,
@@ -116,7 +127,8 @@ const events = [
     date: "April 30, 2025",
     time: "10:45 AM - 12:15 PM",
     venue: "Lab 333",
-    type: "Hackathon"
+    type: "Hackathon",
+    driveLink: "https://drive.google.com/drive/folders/event-triwizard"
   },
   {
     id: 13,
@@ -125,7 +137,8 @@ const events = [
     date: "April 30, 2025",
     time: "9:00 AM - 10:30 AM",
     venue: "Lab 333",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-escape-matrix"
   },
   {
     id: 14,
@@ -134,7 +147,8 @@ const events = [
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
-    type: "Presentation"
+    type: "Presentation",
+    driveLink: "https://drive.google.com/drive/folders/event-research-paper"
   },
   {
     id: 15,
@@ -143,7 +157,8 @@ const events = [
     date: "April 30, 2025",
     time: "10:30 AM - 11:30 AM",
     venue: "Auditorium",
-    type: "Competition"
+    type: "Competition",
+    driveLink: "https://drive.google.com/drive/folders/event-debate"
   },
   {
     id: 16,
@@ -152,7 +167,8 @@ const events = [
     date: "April 30, 2025",
     time: "TBA (Announced Live)",
     venue: "Ground Station",
-    type: "Workshop"
+    type: "Workshop",
+    driveLink: "https://drive.google.com/drive/folders/event-satellite-tracking"
   }
 ];
 
@@ -196,12 +212,16 @@ const Events = () => {
     return sortedEvents.filter(event => {
       const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           event.club.toLowerCase().includes(searchTerm.toLowerCase());
-      
       const matchesType = selectedType === "All" || event.type === selectedType;
       
       return matchesSearch && matchesType;
     });
   }, [searchTerm, selectedType]);
+
+  // Function to handle card click
+  const handleCardClick = (driveLink) => {
+    window.open(driveLink, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -249,30 +269,44 @@ const Events = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredEvents.length > 0 ? (
             filteredEvents.map(event => (
-              <Card key={event.id} className="glass-card transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] overflow-hidden group h-full flex flex-col">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg font-bold text-white">{event.title}</CardTitle>
-                  <CardDescription className="text-white/70">{event.club}</CardDescription>
-                </CardHeader>
-                
-                <CardContent className="flex-1 space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-white/70">
-                    <Calendar size={14} className="text-neon-blue" />
-                    <span>{event.time}</span>
-                  </div>
+              <div key={event.id} className="relative h-full">
+                <Card 
+                  className="glass-card transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] overflow-hidden group h-full flex flex-col cursor-pointer"
+                  onClick={() => handleCardClick(event.driveLink)}
+                >
+                  <CardHeader className="pb-2">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-lg font-bold text-white">{event.title}</CardTitle>
+                        <CardDescription className="text-white/70">{event.club}</CardDescription>
+                      </div>
+                      <div className="relative z-10">
+                        <a 
+                          href={event.driveLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-neon-purple hover:text-neon-blue transition-colors"
+                          title="View event details"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      </div>
+                    </div>
+                  </CardHeader>
                   
-                  <div className="flex items-center gap-2 text-sm text-white/70">
-                    <MapPin size={14} className="text-neon-green" />
-                    <span>{event.venue}</span>
-                  </div>
-                </CardContent>
-                
-                <CardFooter className="pt-0">
-                <Button asChild className="w-full neon-button text-sm py-1 h-8">
-                  <Link to="/registration">Register Now</Link>
-                </Button>
-                </CardFooter>
-              </Card>
+                  <CardContent className="flex-1 space-y-2">
+                    <div className="flex items-center gap-2 text-sm text-white/70">
+                      <Calendar size={14} className="text-neon-blue" />
+                      <span>{event.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-white/70">
+                      <MapPin size={14} className="text-neon-green" />
+                      <span>{event.venue}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             ))
           ) : (
             <div className="col-span-full text-center py-12">
@@ -290,6 +324,15 @@ const Events = () => {
             </div>
           )}
         </div>
+        
+        {/* Single Register Button */}
+        {filteredEvents.length > 0 && (
+          <div className="mt-12 text-center">
+            <Button asChild className="neon-button px-8 py-3 text-lg">
+              <Link to="/registration">Register Now</Link>
+            </Button>
+          </div>
+        )}
       </main>
       
       <Footer />
