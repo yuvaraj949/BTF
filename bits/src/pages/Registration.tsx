@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Calendar, Mail, User, Briefcase, GraduationCap, School, MapPin, Clock } from 'lucide-react';
+import Modal from '@/components/Modal'; // Import our custom Modal component
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -68,6 +69,10 @@ const Registration = () => {
     agreeTerms: false,
     registrationId: ""
   });
+  
+  // Modal state
+  const [termsModalOpen, setTermsModalOpen] = useState(false);
+  const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -351,10 +356,6 @@ const Registration = () => {
                               <Clock size={12} className="text-neon-blue" />
                               <span>{event.time}</span>
                             </div>
-                            {/* <div className="flex items-center gap-1 mt-1"> */}
-                              {/* <MapPin size={12} className="text-neon-green" /> */}
-                              {/* <span>{event.venue}</span> */}
-                            {/* </div> */}
                           </div>
                         </div>
                       </div>
@@ -371,9 +372,29 @@ const Registration = () => {
                       required
                     />
                     <Label htmlFor="agreeTerms" className="text-white text-sm">
-                      I agree to the BITS Tech Fest <a href="#" className="text-neon-purple hover:underline">Terms & Conditions</a> and 
-                      <a href="#" className="text-neon-purple hover:underline"> Privacy Policy</a>. I consent to receiving 
-                      communications about this event.
+                      I agree to the BITS Tech Fest{' '}
+                      <a 
+                        href="#" 
+                        className="text-neon-purple hover:underline"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setTermsModalOpen(true);
+                        }}
+                      >
+                        Terms & Conditions
+                      </a>{' '}
+                      and{' '}
+                      <a 
+                        href="#" 
+                        className="text-neon-purple hover:underline"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setPrivacyModalOpen(true);
+                        }}
+                      >
+                        Privacy Policy
+                      </a>
+                      . I consent to receiving communications about this event.
                     </Label>
                   </div>
                 </div>
@@ -436,6 +457,33 @@ const Registration = () => {
           )}
         </div>
       </main>
+    
+      {/* Terms & Conditions Modal */}
+      <Modal 
+        isOpen={termsModalOpen} 
+        onClose={() => setTermsModalOpen(false)} 
+        title="Terms & Conditions"
+      >
+        <div className="space-y-4 text-white/80">
+          <ol className="list-decimal pl-5 space-y-2">
+            <li>The participants can refer to the rule book for individual events and follow the same.</li>
+            <li>The participants shall observe all the safety precautions.</li>
+          </ol>
+        </div>
+      </Modal>
+
+      {/* Privacy Policy Modal */}
+      <Modal 
+        isOpen={privacyModalOpen} 
+        onClose={() => setPrivacyModalOpen(false)} 
+        title="Privacy Policy"
+      >
+        <div className="space-y-4 text-white/80">
+          <ol className="list-decimal pl-5 space-y-2">
+            <li>The registration details will be used only for BTF 2025 Competition purposes and kept confidential.</li>
+          </ol>
+        </div>
+      </Modal>
     
       <Footer />
     </div>
