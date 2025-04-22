@@ -121,13 +121,8 @@ app.post('/api/register', [
   } = req.body;
 
   try {
-    // Check if user already registered
-    const existingRegistration = await Registration.findOne({ email });
-    if (existingRegistration) {
-      return res.status(400).json({
-        message: 'This email has already been registered for the event'
-      });
-    }
+    // REMOVED: Check if user already registered
+    // This was preventing duplicate email registrations
 
     // Create registration ID
     const registrationId = generateRegistrationId();
