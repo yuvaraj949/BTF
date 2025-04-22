@@ -61,7 +61,7 @@ const Registration = () => {
     lastName: '',
     email: '',
     phone: '',
-    affiliationType: '', // 'company', 'university', or 'school'
+    affiliationType: '', // 'university' or 'school' (removed 'company')
     institutionName: '',
     role: '',
     interestedEvents: [] as string[],
@@ -251,16 +251,7 @@ const Registration = () => {
               
                 <div className="mb-6">
                   <Label className="text-white mb-3 block">Affiliation</Label>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="companyCheckbox" 
-                        checked={formData.affiliationType === 'company'}
-                        onCheckedChange={() => handleAffiliationChange('company')}
-                      />
-                      <Label htmlFor="companyCheckbox" className="text-white">Company</Label>
-                    </div>
-                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex items-center space-x-2">
                       <Checkbox 
                         id="universityCheckbox" 
@@ -284,12 +275,9 @@ const Registration = () => {
                 {formData.affiliationType && (
                   <div className="mb-6">
                     <Label htmlFor="institutionName" className="text-white mb-2 block">
-                      {formData.affiliationType === 'company' ? 'Company Name' : 
-                       formData.affiliationType === 'university' ? 'University Name' : 'School Name'}
+                      {formData.affiliationType === 'university' ? 'University Name' : 'School Name'}
                     </Label>
                     <div className="relative">
-                      {formData.affiliationType === 'company' && 
-                        <Briefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" size={16} />}
                       {formData.affiliationType === 'university' && 
                         <GraduationCap className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" size={16} />}
                       {formData.affiliationType === 'school' && 
@@ -298,7 +286,6 @@ const Registration = () => {
                         id="institutionName"
                         name="institutionName"
                         placeholder={
-                          formData.affiliationType === 'company' ? 'Enter company name' : 
                           formData.affiliationType === 'university' ? 'Enter university name' : 'Enter school name'
                         }
                         className="pl-10 bg-white/5 border-white/10"
@@ -313,13 +300,12 @@ const Registration = () => {
                 {formData.affiliationType && (
                   <div className="mb-6">
                     <Label htmlFor="role" className="text-white mb-2 block">
-                      {formData.affiliationType === 'company' ? 'Job Title / Role' : 'Student Level / Year'}
+                      {formData.affiliationType === 'university' ? 'Student Level / Year' : 'Student Level / Year'}
                     </Label>
                     <Input
                       id="role"
                       name="role"
                       placeholder={
-                        formData.affiliationType === 'company' ? 'Software Engineer' : 
                         formData.affiliationType === 'university' ? 'Undergraduate, Year 2' : 'Grade 10'
                       }
                       className="bg-white/5 border-white/10"
