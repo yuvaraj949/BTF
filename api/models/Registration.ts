@@ -17,7 +17,7 @@ export interface IRegistration extends Document {
 const registrationSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true }, // Removed unique: true
   phone: { type: String, required: true },
   affiliationType: {
     type: String,
@@ -32,4 +32,4 @@ const registrationSchema = new Schema({
   registrationDate: { type: Date, default: Date.now }
 });
 
-export default mongoose.model<IRegistration>('Registration', registrationSchema);
+export default mongoose.model('Registration', registrationSchema);
