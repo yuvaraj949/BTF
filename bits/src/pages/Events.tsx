@@ -18,7 +18,7 @@ const events = [
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1hiAlJCZ58qIcfOlOA6VKQksWYml9vIxc/view?usp=sharing"
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const events = [
     time: "10:15 AM - 11:45 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1uFx6uODqf7ZrVAQsfvd_TtsMnLuow0mL/view?usp=sharing"
   },
   {
     id: 3,
@@ -48,7 +48,7 @@ const events = [
     time: "11:45 AM - 12:15 PM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1pYgns45lARhDDZX9geFhf1-1pkws8RGJ/view?usp=sharing"
   },
   {
     id: 5,
@@ -58,7 +58,7 @@ const events = [
     time: "11:45 AM - 12:15 PM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1kgV1__ddJAtFCjyJHKTdI-dxnDhL_hpK/view?usp=sharing"
   },
   {
     id: 6,
@@ -73,22 +73,22 @@ const events = [
   {
     id: 7,
     title: "Hunter AI",
-    club: "AOEE",
+    club: "GDG",
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
     type: "Workshop",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1Y642AALeJocrok1_wY6SBkA9IWBdX36J/view?usp=sharing"
   },
   {
     id: 8,
     title: "Fizz Quiz",
-    club: "ASME",
+    club: "IEI",
     date: "April 30, 2025",
     time: "11:00 AM - 12:00 PM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1y4XiGW8iUVPTFgCB0iXWpYG8KlEKV1AS/view?usp=sharing"
   },
   {
     id: 9,
@@ -108,7 +108,7 @@ const events = [
     time: "9:30 AM - 12:00 PM",
     venue: "Auditorium",
     type: "Workshop",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1k2jbH6APOyup0Zmjp1f4qW7ogb1TQadV/view?usp=sharing"
   },
   {
     id: 11,
@@ -118,7 +118,7 @@ const events = [
     time: "10:00 AM - 11:00 AM",
     venue: "Ground Station",
     type: "Workshop",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1FJuHZl5sgesPImysjYfFFnIE0xGCmszu/view?usp=sharing"
   },
   {
     id: 12,
@@ -128,7 +128,7 @@ const events = [
     time: "10:45 AM - 12:15 PM",
     venue: "Lab 333",
     type: "Hackathon",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1xOiPjntDZSgIxcRt3dTndtn2GEzzpyyt/view?usp=sharing"
   },
   {
     id: 13,
@@ -143,12 +143,12 @@ const events = [
   {
     id: 14,
     title: "Research Paper Presentation",
-    club: "Research",
+    club: "IEEE",
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
     type: "Presentation",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/14cQXQCrTr4e-zhhPE59bL4Bj8VTak2-b/view?usp=sharing"
   },
   {
     id: 15,
@@ -163,20 +163,20 @@ const events = [
   {
     id: 16,
     title: "Satellite Tracking",
-    club: "Space",
+    club: "Mahasat",
     date: "April 30, 2025",
     time: "TBA (Announced Live)",
     venue: "Ground Station",
     type: "Workshop",
-    driveLink: ""
+    driveLink: "https://drive.google.com/file/d/1epWTbfR0bO8dS7lPh_D9ZxO3Q9z6X-v9/view?usp=sharing"
   },
   {
     id: 17,
-    title: "Threat Hunter AI",
-    club: "Google Developers Group",
+    title: "Clue Connect",
+    club: "Womenin Engineering",
     date: "April 30, 2025",
-    time: "TBA (Announced Live)",
-    venue: "Ground Station",
+    time: "10:15 AM - 11:45 AM",
+    venue: "Auditorium",
     type: "Workshop",
     driveLink: ""
   }
