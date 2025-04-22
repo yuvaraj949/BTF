@@ -18,17 +18,17 @@ const events = [
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-crack-the-penguin"
+    driveLink: ""
   },
   {
     id: 2,
-    title: "Clue Connect",
+    title: "The Engineer's riddle Road",
     club: "WIE",
     date: "April 30, 2025",
     time: "10:15 AM - 11:45 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-clue-connect"
+    driveLink: ""
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const events = [
     time: "10:15 AM - 11:45 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-stem-grid"
+    driveLink: ""
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const events = [
     time: "11:45 AM - 12:15 PM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-decrypting"
+    driveLink: ""
   },
   {
     id: 5,
@@ -58,7 +58,7 @@ const events = [
     time: "11:45 AM - 12:15 PM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-tech-taboo"
+    driveLink: ""
   },
   {
     id: 6,
@@ -68,7 +68,7 @@ const events = [
     time: "8:45 AM - 12:00 PM",
     venue: "Auditorium",
     type: "Workshop",
-    driveLink: "https://drive.google.com/drive/folders/event-marshmallow"
+    driveLink: ""
   },
   {
     id: 7,
@@ -78,17 +78,17 @@ const events = [
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
     type: "Workshop",
-    driveLink: "https://drive.google.com/drive/folders/event-hunter-ai"
+    driveLink: ""
   },
   {
     id: 8,
     title: "Fizz Quiz",
-    club: "IEI",
+    club: "ASME",
     date: "April 30, 2025",
     time: "11:00 AM - 12:00 PM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-fizz-quiz"
+    driveLink: ""
   },
   {
     id: 9,
@@ -98,7 +98,7 @@ const events = [
     time: "9:30 AM - 11:00 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-hydro-purity"
+    driveLink: ""
   },
   {
     id: 10,
@@ -108,7 +108,7 @@ const events = [
     time: "9:30 AM - 12:00 PM",
     venue: "Auditorium",
     type: "Workshop",
-    driveLink: "https://drive.google.com/drive/folders/event-blood-grouping"
+    driveLink: ""
   },
   {
     id: 11,
@@ -118,7 +118,7 @@ const events = [
     time: "10:00 AM - 11:00 AM",
     venue: "Ground Station",
     type: "Workshop",
-    driveLink: "https://drive.google.com/drive/folders/event-space-docking"
+    driveLink: ""
   },
   {
     id: 12,
@@ -128,7 +128,7 @@ const events = [
     time: "10:45 AM - 12:15 PM",
     venue: "Lab 333",
     type: "Hackathon",
-    driveLink: "https://drive.google.com/drive/folders/event-triwizard"
+    driveLink: ""
   },
   {
     id: 13,
@@ -138,7 +138,7 @@ const events = [
     time: "9:00 AM - 10:30 AM",
     venue: "Lab 333",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-escape-matrix"
+    driveLink: ""
   },
   {
     id: 14,
@@ -148,7 +148,7 @@ const events = [
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
     type: "Presentation",
-    driveLink: "https://drive.google.com/drive/folders/event-research-paper"
+    driveLink: ""
   },
   {
     id: 15,
@@ -158,7 +158,7 @@ const events = [
     time: "10:30 AM - 11:30 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/drive/folders/event-debate"
+    driveLink: ""
   },
   {
     id: 16,
@@ -168,7 +168,17 @@ const events = [
     time: "TBA (Announced Live)",
     venue: "Ground Station",
     type: "Workshop",
-    driveLink: "https://drive.google.com/drive/folders/event-satellite-tracking"
+    driveLink: ""
+  },
+  {
+    id: 17,
+    title: "Threat Hunter AI",
+    club: "Google Developers Group",
+    date: "April 30, 2025",
+    time: "TBA (Announced Live)",
+    venue: "Ground Station",
+    type: "Workshop",
+    driveLink: ""
   }
 ];
 
