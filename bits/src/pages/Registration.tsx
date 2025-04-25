@@ -311,7 +311,7 @@ const Registration = () => {
                       id="role"
                       name="role"
                       placeholder={
-                        formData.affiliationType === 'university' ? 'Undergraduate, Year 2' : 'Grade 10'
+                        formData.affiliationType === 'university' ? 'Undergraduate, Year 2' : 'Grade 9-12'
                       }
                       className="bg-white/5 border-white/10"
                       value={formData.role}
@@ -337,7 +337,7 @@ const Registration = () => {
             <div className="glass-card animation-fade-in p-6">
               <form onSubmit={handleSubmit}>
                 <div className="mb-8">
-                  <h3 className="text-xl font-bold mb-4">Which events would you like to attend?</h3>
+                  <h3 className="text-xl font-bold mb-4">What events interest you?</h3>
                   <p className="text-white/70 mb-4">All events take place on April 30, 2025. Select the events you're interested in attending:</p>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
