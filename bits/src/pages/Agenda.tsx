@@ -162,6 +162,15 @@ const agenda = [
     // description: "Technology-themed word game for schools"
   },
   {
+    id: 19,
+    time: "11:30 PM - 12:15 PM",
+    title: "Hunter AI",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "Google Developers Group",
+    // description: "Technology-themed word game for schools"
+  },
+  {
     id: 18,
     time: "TBA",
     title: "Satellite Tracking",
