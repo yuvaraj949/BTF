@@ -172,6 +172,16 @@ const events = [
   },
   {
     id: 17,
+    title: "Hunter AI",
+    club: "Google Developers Group",
+    date: "April 30, 2025",
+    time: "11:30 PM - 12:15 PM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 18,
     title: "Satellite Tracking",
     club: "MAHASAT",
     date: "April 30, 2025",
