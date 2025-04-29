@@ -28,7 +28,7 @@ const techFestEvents = [
   { name: "The Engineers Riddle Road", time: "11:30-12:15 PM", venue: "Auditorium" },
   { name: "QR n FONT", time: "11:30-12:15 PM", venue: "Auditorium" },
   { name: "Tech Taboo", time: "11:30-12:15 PM", venue: "Auditorium" },
-  { name: "Space Docking", time: "TBA", venue: "Ground Station" }
+  { name: "Satellite Tracking", time: "TBA", venue: "Ground Station" }
 ];
 
 

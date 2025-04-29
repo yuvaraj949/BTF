@@ -164,7 +164,7 @@ const agenda = [
   {
     id: 18,
     time: "TBA",
-    title: "Space Docking",
+    title: "Satellite Tracking",
     venue: "Ground Station",
     type: "Demonstration",
     club: "MAHASAT",

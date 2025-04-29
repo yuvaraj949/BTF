@@ -172,7 +172,7 @@ const events = [
   },
   {
     id: 17,
-    title: "Space Docking",
+    title: "Satellite Tracking",
     club: "MAHASAT",
     date: "April 30, 2025",
     time: "TBA",
