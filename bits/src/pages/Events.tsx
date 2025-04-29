@@ -12,175 +12,176 @@ import { Link } from 'react-router-dom';
 const events = [
   {
     id: 1,
-    title: "Crack The Penguin",
-    club: "Linux Users Group",
+    title: "Crack the Penguin",
+    club: "LUG",
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/file/d/1hiAlJCZ58qIcfOlOA6VKQksWYml9vIxc/view?usp=sharing"
+    driveLink: "/events"
   },
   {
     id: 2,
-    title: "The Engineer's riddle Road",
-    club: "WIE",
-    date: "April 30, 2025",
-    time: "10:15 AM - 11:45 AM",
-    venue: "Auditorium",
-    type: "Competition",
-    driveLink: "https://drive.google.com/file/d/1uFx6uODqf7ZrVAQsfvd_TtsMnLuow0mL/view?usp=sharing"
-  },
-  {
-    id: 3,
-    title: "STEM-Grid Challenge",
-    club: "SWE",
-    date: "April 30, 2025",
-    time: "10:15 AM - 11:45 AM",
-    venue: "Auditorium",
-    type: "Competition",
-    driveLink: ""
-  },
-  {
-    id: 4,
-    title: "Decrypting Challenge",
-    club: "Oh-Crop",
-    date: "April 30, 2025",
-    time: "11:45 AM - 12:15 PM",
-    venue: "Auditorium",
-    type: "Competition",
-    driveLink: "https://drive.google.com/file/d/1pYgns45lARhDDZX9geFhf1-1pkws8RGJ/view?usp=sharing"
-  },
-  {
-    id: 5,
-    title: "Tech Taboo",
-    club: "ACM-W",
-    date: "April 30, 2025",
-    time: "11:45 AM - 12:15 PM",
-    venue: "Auditorium",
-    type: "Competition",
-    driveLink: "https://drive.google.com/file/d/1kgV1__ddJAtFCjyJHKTdI-dxnDhL_hpK/view?usp=sharing"
-  },
-  {
-    id: 6,
-    title: "Marshmallow Tower Challenge",
-    club: "Skyline",
-    date: "April 30, 2025",
-    time: "8:45 AM - 12:00 PM",
-    venue: "Auditorium",
-    type: "Workshop",
-    driveLink: ""
-  },
-  {
-    id: 7,
-    title: "Hunter AI",
-    club: "GDG",
+    title: "F1 Reaction Time",
+    club: "AOEE",
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
-    type: "Workshop",
-    driveLink: "https://drive.google.com/file/d/1Y642AALeJocrok1_wY6SBkA9IWBdX36J/view?usp=sharing"
-  },
-  {
-    id: 8,
-    title: "Fizz Quiz",
-    club: "IEI",
-    date: "April 30, 2025",
-    time: "11:00 AM - 12:00 PM",
-    venue: "Auditorium",
     type: "Competition",
-    driveLink: "https://drive.google.com/file/d/1y4XiGW8iUVPTFgCB0iXWpYG8KlEKV1AS/view?usp=sharing"
+    driveLink: "/events"
   },
   {
-    id: 9,
-    title: "Hydro Purity Quest",
-    club: "AiCHE",
-    date: "April 30, 2025",
-    time: "9:30 AM - 11:00 AM",
-    venue: "Auditorium",
-    type: "Competition",
-    driveLink: ""
-  },
-  {
-    id: 10,
-    title: "Blood Grouping",
-    club: "Chimera",
-    date: "April 30, 2025",
-    time: "9:30 AM - 12:00 PM",
-    venue: "Auditorium",
-    type: "Workshop",
-    driveLink: "https://drive.google.com/file/d/1k2jbH6APOyup0Zmjp1f4qW7ogb1TQadV/view?usp=sharing"
-  },
-  {
-    id: 11,
-    title: "Space Docking",
-    club: "Supernova",
-    date: "April 30, 2025",
-    time: "10:00 AM - 11:00 AM",
-    venue: "Ground Station",
-    type: "Workshop",
-    driveLink: "https://drive.google.com/file/d/1FJuHZl5sgesPImysjYfFFnIE0xGCmszu/view?usp=sharing"
-  },
-  {
-    id: 12,
-    title: "No-Code Triwizard Hackathon",
-    club: "MTC",
-    date: "April 30, 2025",
-    time: "10:45 AM - 12:15 PM",
-    venue: "Lab 333",
-    type: "Hackathon",
-    driveLink: "https://drive.google.com/file/d/1xOiPjntDZSgIxcRt3dTndtn2GEzzpyyt/view?usp=sharing"
-  },
-  {
-    id: 13,
-    title: "Escape The Matrix",
-    club: "ACM",
-    date: "April 30, 2025",
-    time: "9:00 AM - 10:30 AM",
-    venue: "Lab 333",
-    type: "Competition",
-    driveLink: ""
-  },
-  {
-    id: 14,
-    title: "Research Paper Presentation",
+    id: 3,
+    title: "Spark Quest",
     club: "IEEE",
     date: "April 30, 2025",
     time: "8:45 AM - 10:15 AM",
     venue: "Auditorium",
-    type: "Presentation",
-    driveLink: "https://drive.google.com/file/d/14cQXQCrTr4e-zhhPE59bL4Bj8VTak2-b/view?usp=sharing"
+    type: "Competition",
+    driveLink: "/events"
   },
   {
-    id: 15,
+    id: 4,
+    title: "Marshmallow Tower Challenge",
+    club: "SKYLINE",
+    date: "April 30, 2025",
+    time: "8:45 AM - 10:15 AM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 5,
+    title: "Skribbl.bio",
+    club: "CHIMERA",
+    date: "April 30, 2025",
+    time: "8:45 AM - 10:15 AM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 6,
+    title: "Escape the Matrix",
+    club: "ACM",
+    date: "April 30, 2025",
+    time: "9:00 AM - 10:30 AM",
+    venue: "333",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 7,
+    title: "STEMSteps",
+    club: "SWE",
+    date: "April 30, 2025",
+    time: "9:15 AM - 10:30 AM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 8,
+    title: "Space Docking",
+    club: "SUPERNOVA",
+    date: "April 30, 2025",
+    time: "10:00 AM - 11:00 AM",
+    venue: "Ground Station",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 9,
+    title: "Gears & Gadgets",
+    club: "ASME",
+    date: "April 30, 2025",
+    time: "10:00 AM - 10:30 AM",
+    venue: "Mech Block",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 10,
     title: "Debate Competition",
-    club: "Debate",
+    club: "EXPRESSIONS",
     date: "April 30, 2025",
     time: "10:30 AM - 11:30 AM",
     venue: "Auditorium",
     type: "Competition",
-    driveLink: ""
+    driveLink: "/events"
+  },
+  {
+    id: 11,
+    title: "No Code Triwizard Hackathon",
+    club: "MTC",
+    date: "April 30, 2025",
+    time: "10:45 AM - 12:15 PM",
+    venue: "332",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 12,
+    title: "Fizz Quiz",
+    club: "IEI",
+    date: "April 30, 2025",
+    time: "11:30 AM - 12:15 PM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 13,
+    title: "Hydro Purity Quest",
+    club: "AICHE",
+    date: "April 30, 2025",
+    time: "11:30 AM - 12:15 PM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 14,
+    title: "The Engineers Riddle Road",
+    club: "WIE",
+    date: "April 30, 2025",
+    time: "11:30 AM - 12:15 PM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
+  },
+  {
+    id: 15,
+    title: "QR n FONT",
+    club: "OH CROP",
+    date: "April 30, 2025",
+    time: "11:30 PM - 12:15 PM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
   },
   {
     id: 16,
-    title: "Satellite Tracking",
-    club: "Mahasat",
+    title: "Tech Taboo",
+    club: "ACM-W",
     date: "April 30, 2025",
-    time: "TBA (Announced Live)",
-    venue: "Ground Station",
-    type: "Workshop",
-    driveLink: "https://drive.google.com/file/d/1epWTbfR0bO8dS7lPh_D9ZxO3Q9z6X-v9/view?usp=sharing"
+    time: "11:30 PM - 12:15 PM",
+    venue: "Auditorium",
+    type: "Competition",
+    driveLink: "/events"
   },
   {
     id: 17,
-    title: "Clue Connect",
-    club: "Womenin Engineering",
+    title: "Space Docking",
+    club: "MAHASAT",
     date: "April 30, 2025",
-    time: "10:15 AM - 11:45 AM",
-    venue: "Auditorium",
-    type: "Workshop",
-    driveLink: ""
+    time: "TBA",
+    venue: "Ground Station",
+    type: "Competition",
+    driveLink: "/events"
   }
 ];
+
 
 // Event types for filtering
 const eventTypes = ["All", "Hackathon", "Workshop", "Competition", "Presentation"];

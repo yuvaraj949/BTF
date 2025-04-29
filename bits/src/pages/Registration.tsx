@@ -12,23 +12,25 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 // Actual events from the BITS Tech Fest 2025 timetable
 const techFestEvents = [
-  { name: "Hunter AI", time: "8:45-10:15 AM", venue: "Auditorium" },
-  { name: "Research Paper Presentation", time: "8:45-10:15 AM", venue: "Auditorium" },
-  { name: "Crack The Penguin", time: "8:45-10:15 AM", venue: "Auditorium" },
-  { name: "Escape The Matrix", time: "9:00-10:30 AM", venue: "Lab 333" },
-  { name: "Hydro Purity Quest", time: "9:30-11:00 AM", venue: "Auditorium" },
-  { name: "Blood Grouping", time: "9:30-12:00 PM", venue: "Auditorium" },
+  { name: "F1 Reaction Time", time: "8:45-10:15 AM", venue: "Auditorium" },
+  { name: "Spark Quest", time: "8:45-10:15 AM", venue: "Auditorium" },
+  { name: "Crack the Penguin", time: "8:45-10:15 AM", venue: "Auditorium" },
+  { name: "Marshmallow Tower Challenge", time: "8:45-10:15 AM", venue: "Auditorium" },
+  { name: "Skribbl.bio", time: "8:45-10:15 AM", venue: "Auditorium" },
+  { name: "Escape the Matrix", time: "9:00-10:30 AM", venue: "333" },
+  { name: "STEMSteps", time: "9:15-10:30 AM", venue: "Auditorium" },
   { name: "Space Docking", time: "10:00-11:00 AM", venue: "Ground Station" },
-  { name: "Clue Connect", time: "10:15-11:45 AM", venue: "Auditorium" },
-  { name: "STEM-Grid Challenge", time: "10:15-11:45 AM", venue: "Auditorium" },
+  { name: "Gears & Gadgets", time: "10:00-10:30 AM", venue: "Mech Block" },
   { name: "Debate Competition", time: "10:30-11:30 AM", venue: "Auditorium" },
-  { name: "Fizz Quiz", time: "11:00-12:00 PM", venue: "Auditorium" },
-  { name: "No-Code Triwizard Hackathon", time: "10:45-12:15 PM", venue: "Lab 333" },
-  { name: "Decrypting Challenge", time: "11:45-12:15 PM", venue: "Auditorium" },
-  { name: "Tech Taboo", time: "11:45-12:15 PM", venue: "Auditorium" },
-  { name: "Marshmallow Tower Challenge", time: "8:45-12:00 PM", venue: "Auditorium" },
-  { name: "Satellite Tracking", time: "TBA (Announced Live)", venue: "Ground Station" }
+  { name: "No Code Triwizard Hackathon", time: "10:45-12:15 PM", venue: "332" },
+  { name: "Fizz Quiz", time: "11:30-12:15 PM", venue: "Auditorium" },
+  { name: "Hydro Purity Quest", time: "11:30-12:15 PM", venue: "Auditorium" },
+  { name: "The Engineers Riddle Road", time: "11:30-12:15 PM", venue: "Auditorium" },
+  { name: "QR n FONT", time: "11:30-12:15 PM", venue: "Auditorium" },
+  { name: "Tech Taboo", time: "11:30-12:15 PM", venue: "Auditorium" },
+  { name: "Space Docking", time: "TBA", venue: "Ground Station" }
 ];
+
 
 // Sort events by start time
 const sortedEvents = [...techFestEvents].sort((a, b) => {

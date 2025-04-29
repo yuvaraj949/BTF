@@ -38,148 +38,138 @@ const agenda = [
   {
     id: 4,
     time: "8:45 AM - 10:15 AM",
-    title: "Hunter AI",
+    title: "F1 Reaction Time",
     venue: "Auditorium",
     type: "Competition",
     club: "AOEE",
-    description: "AI-based hunting and problem-solving challenge"
+    // description: "AI-based hunting and problem-solving challenge"
   },
   {
     id: 5,
     time: "8:45 AM - 10:15 AM",
-    title: "Research Paper Presentation",
+    title: "Spark Quest",
     venue: "Auditorium",
-    type: "Presentation",
-    club: "Research",
-    description: "Academic research presentations on emerging technologies"
+    type: "Competition",
+    club: "IEEE",
+    // description: "Academic research presentations on emerging technologies"
   },
   {
     id: 6,
     time: "8:45 AM - 10:15 AM",
-    title: "Crack The Penguin",
+    title: "Crack the Penguin",
     venue: "Auditorium",
     type: "Competition",
     club: "LUG",
-    description: "Linux-based technical challenge"
+    // description: "Linux-based technical challenge"
   },
   {
     id: 7,
     time: "9:00 AM - 10:30 AM",
-    title: "Escape The Matrix",
-    venue: "Lab 333",
+    title: "Escape the Matrix",
+    venue: "333",
     type: "Competition",
     club: "ACM",
-    description: "Capture the flag cybersecurity challenge"
+    // description: "Capture the flag cybersecurity challenge"
   },
   {
     id: 8,
-    time: "10:15 AM - 11:45 AM",
-    title: "Clue Connect",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "WIE",
-    description: "Technical puzzle-solving competition"
-  },
-  {
-    id: 9,
-    time: "10:15 AM - 11:45 AM",
-    title: "STEM-Grid Challenge",
+    time: "9:15 AM - 10:30 AM",
+    title: "STEMSteps",
     venue: "Auditorium",
     type: "Competition",
     club: "SWE",
-    description: "Engineering design challenge"
+    // description: "Engineering design challenge"
   },
   {
-    id: 10,
+    id: 9,
     time: "10:30 AM - 11:30 AM",
     title: "Debate Competition",
     venue: "Auditorium",
     type: "Competition",
-    club: "Debate",
-    description: "Technical debate on emerging technology topics"
+    club: "EXPRESSIONS",
+    // description: "Technical debate on emerging technology topics"
   },
   {
-    id: 11,
+    id: 10,
     time: "10:00 AM - 11:00 AM",
     title: "Space Docking",
     venue: "Ground Station",
     type: "Simulation",
-    club: "Supernova",
-    description: "Spacecraft docking simulation"
+    club: "SUPERNOVA",
+    // description: "Spacecraft docking simulation"
+  },
+  {
+    id: 11,
+    time: "10:00 AM - 10:30 AM",
+    title: "Gears & Gadgets",
+    venue: "Mech Block",
+    type: "Competition",
+    club: "ASME",
+    // description: "Mechanical engineering gadget challenge"
   },
   {
     id: 12,
-    time: "11:45 AM - 12:15 PM",
-    title: "Decrypting Challenge",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "Oh-Crop",
-    description: "Cryptography and security competition"
+    time: "10:45 AM - 12:15 PM",
+    title: "No Code Triwizard Hackathon",
+    venue: "332",
+    type: "Hackathon",
+    club: "MTC",
+    // description: "No-code development competition"
   },
   {
     id: 13,
-    time: "11:45 AM - 12:15 PM",
-    title: "Tech Taboo",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "ACM-W",
-    description: "Technology-themed word game for schools"
-  },
-  {
-    id: 14,
-    time: "11:00 AM - 12:00 PM",
+    time: "11:30 AM - 12:15 PM",
     title: "Fizz Quiz",
     venue: "Auditorium",
     type: "Competition",
     club: "IEI",
-    description: "Technical quiz competition"
+    // description: "Technical quiz competition"
   },
   {
-    id: 15,
-    time: "9:30 AM - 12:00 PM",
-    title: "Blood Grouping",
-    venue: "Auditorium",
-    type: "Workshop",
-    club: "Chimera",
-    description: "Hands-on biology workshop"
-  },
-  {
-    id: 16,
-    time: "TBA (Announced Live)",
-    title: "Satellite Tracking",
-    venue: "Ground Station",
-    type: "Demonstration",
-    club: "Mahasat",
-    description: "Live satellite tracking demonstration"
-  },
-  {
-    id: 17,
-    time: "8:45 AM - 12:00 PM",
-    title: "Marshmallow Tower Challenge",
-    venue: "Auditorium",
-    type: "Workshop",
-    club: "Skyline",
-    description: "Creative engineering challenge"
-  },
-  {
-    id: 18,
-    time: "9:30 AM - 11:00 AM",
+    id: 14,
+    time: "11:30 AM - 12:15 PM",
     title: "Hydro Purity Quest",
     venue: "Auditorium",
     type: "Competition",
-    club: "AiCHE",
-    description: "Chemical engineering challenge"
+    club: "AICHE",
+    // description: "Chemical engineering challenge"
   },
   {
-    id: 19,
-    time: "10:45 AM - 12:15 PM",
-    title: "No-Code Triwizard Hackathon",
-    venue: "Lab 333",
-    type: "Hackathon",
-    club: "MTC",
-    description: "No-code development competition"
+    id: 15,
+    time: "11:30 AM - 12:15 PM",
+    title: "The Engineers Riddle Road",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "WIE",
+    // description: "Technical puzzle-solving competition"
   },
-  
+  {
+    id: 16,
+    time: "11:30 PM - 12:15 PM",
+    title: "QR n FONT",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "OH CROP",
+    // description: "Cryptography and security competition"
+  },
+  {
+    id: 17,
+    time: "11:30 PM - 12:15 PM",
+    title: "Tech Taboo",
+    venue: "Auditorium",
+    type: "Competition",
+    club: "ACM-W",
+    // description: "Technology-themed word game for schools"
+  },
+  {
+    id: 18,
+    time: "TBA",
+    title: "Space Docking",
+    venue: "Ground Station",
+    type: "Demonstration",
+    club: "MAHASAT",
+    // description: "Live satellite tracking demonstration"
+  },
   // Closing Ceremony
   {
     id: 20,
