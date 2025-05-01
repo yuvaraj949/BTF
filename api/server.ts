@@ -62,7 +62,7 @@ async function sendTeamConfirmationEmail(
           <p>Dear ${leaderName},</p>
           <p>Thank you for registering your team <b>${teamName}</b> for BITS Hackathon 2025!</p>
           <div style="background-color: #f5f5f5; padding: 15px; margin: 15px 0; border-radius: 5px;">
-            <p><strong>Event Date:</strong> April 30, 2025</p>
+            <p><strong>Event Date:</strong> May 10, 2025</p>
             <p><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
             <p><strong>Your Team Registration ID:</strong> ${registrationId}</p>
           </div>
