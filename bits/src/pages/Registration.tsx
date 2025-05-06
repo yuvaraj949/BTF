@@ -420,7 +420,7 @@ const Registration = () => {
                 </div>
               )}
               <div className="mb-8 p-6 bg-white/5 rounded-lg inline-block">
-                <p className="text-lg font-semibold mb-2">April 30, 2025</p>
+                <p className="text-lg font-semibold mb-2">May 10, 2025</p>
                 <p className="text-white/70">BITS Pilani Dubai Campus</p>
                 <p className="text-white/70 mb-4">Dubai, UAE</p>
                 <p className="text-sm">Your registration ID: <span className="text-neon-green">
