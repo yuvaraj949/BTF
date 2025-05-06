@@ -56,7 +56,7 @@ const Hero = () => {
             BITS TECH FEST
           </h1>
           <p className="text-xl md:text-2xl mb-4 text-[#f32d00]">
-            April 30 & May 10, 2025
+            May 10, 2025
           </p>
           <p className="text-sm md:text-base lg:text-lg text-gray-300 font-medium mt-1">
             Birla Institute of Technology And Science, Dubai, United Arab Emirates
@@ -71,7 +71,7 @@ const Hero = () => {
             <Link to="/registration">REGISTER NOW</Link>
           </Button>
           <Button asChild variant="outline" className="border-white/20 bg-transparent hover:bg-white/5 hover:text-[#f32d00] w-full sm:w-auto min-w-[150px]">
-            <Link to="/agenda">EXPLORE EVENTS</Link>
+            <Link to="/agenda">EXPLORE AGENDA</Link>
           </Button>
         </div>
       </div>

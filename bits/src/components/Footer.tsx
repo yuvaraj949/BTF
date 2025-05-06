@@ -53,8 +53,8 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
               <li><Link to="/" className="text-white/70 hover:text-[#009dff] transition-colors">Home</Link></li>
-              <li><Link to="/events" className="text-white/70 hover:text-[#009dff] transition-colors">Events</Link></li>
-              <li><Link to="/speakers" className="text-white/70 hover:text-[#009dff] transition-colors">Speakers</Link></li>
+              {/* <li><Link to="/events" className="text-white/70 hover:text-[#009dff] transition-colors">Events</Link></li> */}
+              <li><Link to="/register" className="text-white/70 hover:text-[#009dff] transition-colors">Register</Link></li>
               <li><Link to="/agenda" className="text-white/70 hover:text-[#009dff] transition-colors">Agenda</Link></li>
             </ul>
           </div>
@@ -68,7 +68,7 @@ const Footer = () => {
                   href="mailto:contact.btf@dubai.bits-pilani.ac.in" 
                   className="text-white/70 hover:text-[#009dff] transition-colors"
                 >
-                  contact.btf@dubai.bits-pilani.ac.in
+                  bitstechfest@dubai.bits-pilani.ac.in
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -80,24 +80,12 @@ const Footer = () => {
                   +971 586290281
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <Mail size={18} className="text-[#009dff] mt-0.5 flex-shrink-0" />
-                <a 
-                  href="mailto:btf.sponsorship@dubai.bits-pilani.ac.in" 
-                  className="text-white/70 hover:text-[#009dff] transition-colors"
-                >
-                  btf.sponsorship@dubai.bits-pilani.ac.in
-                </a>
-              </li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white">Legal</h4>
             <ul className="space-y-2">
-              <li><Link to="/terms" className="text-white/70 hover:text-[#009dff] transition-colors">Terms of Service</Link></li>
-              <li><Link to="/privacy" className="text-white/70 hover:text-[#009dff] transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/cookies" className="text-white/70 hover:text-[#009dff] transition-colors">Cookie Policy</Link></li>
               <li><Link to="/contact" className="text-white/70 hover:text-[#009dff] transition-colors">Contact Us</Link></li>
             </ul>
           </div>
