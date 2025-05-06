@@ -79,7 +79,7 @@ const agenda = [
     title: "Stalls Setup",
     venue: "Exhibition Area",
     type: "Preparation",
-    description: "Teams prepare their demonstration stalls",
+    description: "Clubs and Associations at BPDC set up their stalls for the exhibition",
     day: "May 10th"
   },
   {
@@ -97,7 +97,7 @@ const agenda = [
     title: "Project Pitching & Stall Interaction",
     venue: "Exhibition Area",
     type: "Presentation",
-    description: "Teams present their solutions and judges interact with stalls",
+    description: "Teams present their solutions to the judges and interact with the stalls hosted by the clubs at BPDC",
     day: "May 10th"
   },
   {
