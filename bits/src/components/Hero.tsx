@@ -71,7 +71,7 @@ const Hero = () => {
             <Link to="/registration">REGISTER NOW</Link>
           </Button>
           <Button asChild variant="outline" className="border-white/20 bg-transparent hover:bg-white/5 hover:text-[#f32d00] w-full sm:w-auto min-w-[150px]">
-            <Link to="/events">EXPLORE EVENTS</Link>
+            <Link to="/agenda">EXPLORE EVENTS</Link>
           </Button>
         </div>
       </div>
