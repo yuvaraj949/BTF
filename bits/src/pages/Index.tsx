@@ -40,9 +40,9 @@ const Index = () => {
       
       <Navbar />
       <Hero />
-      <Countdown targetDate="2025-04-30T09:00:00" />
+      <Countdown targetDate="2025-05-10T09:00:00" />
       <Highlights />
-      <AboutEvent />
+      {/* <AboutEvent /> */}
       {/* <Features /> */}
       {/* <Sponsors /> */}
       <Footer />

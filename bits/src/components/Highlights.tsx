@@ -1,53 +1,16 @@
-
 import React from 'react';
-import { Award, Calendar, School, Users } from 'lucide-react';
 
-const highlightItems = [
-  {
-    icon: Calendar,
-    title: "20+",
-    description: "Exciting Tech Events",
-  },
-  {
-    icon: Users,
-    title: "400+",
-    description: "Expected Attendees",
-  },
-  {
-    icon: Award,
-    title: "15+",
-    description: "Participating Clubs",
-  },
-  {
-    icon: School,
-    title: "30+",
-    description: "Schools & Universities",
-  }
-];
-
-const Highlights = () => {
+const Sponsor = () => {
   return (
-    <section id="highlights" className="py-20 relative bg-black">
+    <section className="py-8 relative bg-black">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 gradient-heading">
-          QUICK HIGHLIGHTS
-        </h2>
-        <br/>
-      
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {highlightItems.map((item, index) => (
-            <div 
-              key={index}
-              className="glass-card flex flex-col items-center text-center transform transition-all duration-300 hover:translate-y-[-10px] hover:shadow-[0_0_25px_rgba(139,92,246,0.4)]"
-            >
-              <div className="mb-4 text-neon-purple">
-                <item.icon size={48} />
-              </div>
-              <h3 className="text-3xl font-bold mb-2">{item.title}</h3>
-              <p className="text-white/70">{item.description}</p>
-            </div>
-          ))}
+        <div className="flex flex-col items-center justify-center">
+          <p className="text-white/70 text-lg mb-4">Powered By</p>
+          <img 
+            src="@/../hpe.jpeg" 
+            alt="Sponsor Logo" 
+            className="h-24 md:h-32 transition-all duration-300 hover:opacity-80"
+          />
         </div>
       </div>
       
@@ -60,4 +23,4 @@ const Highlights = () => {
   );
 };
 
-export default Highlights;
+export default Sponsor;

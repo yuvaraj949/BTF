@@ -142,7 +142,7 @@ const Registration = () => {
                 <div className="mb-6">
                   <Label className="text-white mb-2 block">Number of Team Members (including you)</Label>
                   <select
-                    className="bg-white/5 border-white/10 px-3 py-2 rounded w-full"
+                    className="bg-black/5 border-white/10 px-3 py-2 rounded w-full"
                     value={teamSize}
                     onChange={handleTeamSizeChange}
                   >

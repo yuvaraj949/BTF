@@ -6,236 +6,120 @@ import { Calendar, Clock, MapPin, Download, BookmarkPlus, Filter } from 'lucide-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import '../styles/gradients.css';
 
-
 const agenda = [
-  // Opening Ceremony
+  // May 9th - Pre-hackathon
   {
     id: 1,
-    time: "8:00 AM - 8:20 AM",
-    title: "Registration",
-    venue: "Main Lobby",
-    type: "Registration",
-    description: "Check-in and collect your event materials"
+    time: "3:00 PM - 5:00 PM",
+    title: "Technical Workshops",
+    venue: "Main Hall",
+    type: "Workshop",
+    description: "Hands-on workshops to prepare participants for the hackathon",
+    day: "May 9th"
   },
   {
     id: 2,
-    time: "8:20 AM - 8:30 AM",
-    title: "Lamp Lighting",
+    time: "5:00 PM - 5:30 PM",
+    title: "Judges Reveal and Keynotes",
     venue: "Auditorium",
-    type: "Ceremony",
-    description: "Traditional lamp lighting ceremony to inaugurate the event"
+    type: "Keynote",
+    description: "Introduction of the judging panel and inspirational keynote speeches",
+    day: "May 9th"
   },
   {
     id: 3,
-    time: "8:30 AM - 8:45 AM",
-    title: "Opening Remarks: \"Cosmic Intelligence\"",
+    time: "5:30 PM - 6:00 PM",
+    title: "Theme Release",
     venue: "Auditorium",
-    type: "Keynote",
-    description: "Opening keynote on this year's theme"
+    type: "Ceremony",
+    description: "Official announcement of the hackathon theme and problem statements",
+    day: "May 9th"
   },
   
-  // Strategically Organized Club Events
+  // May 10th - Hackathon Day
   {
     id: 4,
-    time: "8:45 AM - 10:15 AM",
-    title: "F1 Reaction Time",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "AOEE",
-    // description: "AI-based hunting and problem-solving challenge"
+    time: "8:00 AM - 8:30 AM",
+    title: "Registration",
+    venue: "Main Lobby",
+    type: "Registration",
+    description: "Check-in and collect your hackathon materials",
+    day: "May 10th"
   },
   {
     id: 5,
-    time: "8:45 AM - 10:15 AM",
-    title: "Spark Quest",
+    time: "8:30 AM - 8:45 AM",
+    title: "Inauguration Ceremony",
     venue: "Auditorium",
-    type: "Competition",
-    club: "IEEE",
-    // description: "Academic research presentations on emerging technologies"
+    type: "Ceremony",
+    description: "Official opening of the hackathon event",
+    day: "May 10th"
   },
   {
     id: 6,
-    time: "8:45 AM - 10:15 AM",
-    title: "Crack the Penguin",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "LUG",
-    // description: "Linux-based technical challenge"
+    time: "9:00 AM - 4:00 PM",
+    title: "Hacking Period",
+    venue: "Hackathon Floor",
+    type: "Hackathon",
+    description: "Main coding and development session for all teams",
+    day: "May 10th"
   },
   {
     id: 7,
-    time: "9:00 AM - 10:30 AM",
-    title: "Escape the Matrix",
-    venue: "333",
-    type: "Competition",
-    club: "ACM",
-    // description: "Capture the flag cybersecurity challenge"
+    time: "12:00 PM - 1:00 PM",
+    title: "Lunch Break",
+    venue: "Cafeteria",
+    type: "Break",
+    description: "Refreshment break for participants",
+    day: "May 10th"
   },
   {
     id: 8,
-    time: "9:15 AM - 10:30 AM",
-    title: "STEMSteps",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "SWE",
-    // description: "Engineering design challenge"
+    time: "3:30 PM - 4:00 PM",
+    title: "Stalls Setup",
+    venue: "Exhibition Area",
+    type: "Preparation",
+    description: "Teams prepare their demonstration stalls",
+    day: "May 10th"
   },
   {
     id: 9,
-    time: "10:30 AM - 11:30 AM",
-    title: "Debate Competition",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "EXPRESSIONS",
-    // description: "Technical debate on emerging technology topics"
+    time: "4:00 PM - 4:30 PM",
+    title: "Submission Deadline",
+    venue: "Hackathon Floor",
+    type: "Deadline",
+    description: "Final code submission and preparation for presentations",
+    day: "May 10th"
   },
   {
     id: 10,
-    time: "10:00 AM - 11:00 AM",
-    title: "Space Docking",
-    venue: "Ground Station",
-    type: "Simulation",
-    club: "SUPERNOVA",
-    // description: "Spacecraft docking simulation"
+    time: "4:30 PM - 6:30 PM",
+    title: "Project Pitching & Stall Interaction",
+    venue: "Exhibition Area",
+    type: "Presentation",
+    description: "Teams present their solutions and judges interact with stalls",
+    day: "May 10th"
   },
   {
     id: 11,
-    time: "10:00 AM - 10:30 AM",
-    title: "Gears & Gadgets",
-    venue: "Mech Block",
-    type: "Competition",
-    club: "ASME",
-    // description: "Mechanical engineering gadget challenge"
-  },
-  {
-    id: 12,
-    time: "10:45 AM - 12:15 PM",
-    title: "No Code Triwizard Hackathon",
-    venue: "332",
-    type: "Hackathon",
-    club: "MTC",
-    // description: "No-code development competition"
-  },
-  {
-    id: 13,
-    time: "11:30 AM - 12:15 PM",
-    title: "Fizz Quiz",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "IEI",
-    // description: "Technical quiz competition"
-  },
-  {
-    id: 14,
-    time: "11:30 AM - 12:15 PM",
-    title: "Hydro Purity Quest",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "AICHE",
-    // description: "Chemical engineering challenge"
-  },
-  {
-    id: 15,
-    time: "11:30 AM - 12:15 PM",
-    title: "The Engineers Riddle Road",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "WIE",
-    // description: "Technical puzzle-solving competition"
-  },
-  {
-    id: 16,
-    time: "11:30 PM - 12:15 PM",
-    title: "QR n FONT",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "OH CROP",
-    // description: "Cryptography and security competition"
-  },
-  {
-    id: 17,
-    time: "11:30 PM - 12:15 PM",
-    title: "Tech Taboo",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "ACM-W",
-    // description: "Technology-themed word game for schools"
-  },
-  {
-    id: 19,
-    time: "11:30 PM - 12:15 PM",
-    title: "Hunter AI",
-    venue: "Auditorium",
-    type: "Competition",
-    club: "Google Developers Group",
-    // description: "Technology-themed word game for schools"
-  },
-  {
-    id: 18,
-    time: "TBA",
-    title: "Satellite Tracking",
-    venue: "Ground Station",
-    type: "Demonstration",
-    club: "MAHASAT",
-    // description: "Live satellite tracking demonstration"
-  },
-  // Closing Ceremony
-  {
-    id: 20,
-    time: "12:15 PM - 12:20 PM",
-    title: "Group Photo",
+    time: "6:30 PM - 7:00 PM",
+    title: "Closing Ceremony & Awards",
     venue: "Auditorium",
     type: "Ceremony",
-    description: "Event group photo with all participants"
-  },
-  {
-    id: 21,
-    time: "12:20 PM - 12:30 PM",
-    title: "Prize Distribution to Winners",
-    venue: "Auditorium",
-    type: "Ceremony",
-    description: "Award ceremony for competition winners"
-  },
-  {
-    id: 22,
-    time: "12:30 PM - 12:40 PM",
-    title: "Felicitation of Sponsors",
-    venue: "Auditorium",
-    type: "Ceremony",
-    description: "Acknowledgement of sponsors and partners"
-  },
-  {
-    id: 23,
-    time: "12:40 PM - 12:50 PM",
-    title: "Acknowledgements & Volunteer Recognition",
-    venue: "Auditorium",
-    type: "Ceremony",
-    description: "Recognizing the organizing team and volunteers"
-  },
-  {
-    id: 24,
-    time: "12:50 PM - 12:55 PM",
-    title: "Vote of Thanks",
-    venue: "Auditorium",
-    type: "Ceremony",
-    description: "Closing remarks and thanks"
-  },
-  {
-    id: 25,
-    time: "12:55 PM - 1:00 PM",
-    title: "Final Closing Notes",
-    venue: "Auditorium",
-    type: "Ceremony",
-    description: "Final announcements and event conclusion"
+    description: "Announcement of winners and closing remarks",
+    day: "May 10th"
   }
 ];
 
-
 // Event types for filtering
-const eventTypes = ["All", "Ceremony", "Keynote", "Competition", "Workshop", "Hackathon", "Demonstration", "Simulation", "Registration"];
+const eventTypes = ["All", "Ceremony", "Keynote", "Workshop", "Hackathon", "Presentation", "Registration", "Break", "Preparation", "Deadline"];
+
+// Days for tab navigation
+const days = ["All Days", "May 9th", "May 10th"];
 
 const Agenda = () => {
   const [selectedType, setSelectedType] = useState("All");
+  const [selectedDay, setSelectedDay] = useState("All Days");
   const [bookmarkedEvents, setBookmarkedEvents] = useState<number[]>([]);
 
   // Toggle bookmark status
@@ -247,13 +131,38 @@ const Agenda = () => {
     }
   };
 
-  // Filter events based on selected type
+  // Filter events based on selected type and day
   const filterEvents = () => {
-    if (selectedType === "All") return agenda;
-    return agenda.filter(event => event.type === selectedType);
+    let filtered = agenda;
+    
+    if (selectedType !== "All") {
+      filtered = filtered.filter(event => event.type === selectedType);
+    }
+    
+    if (selectedDay !== "All Days") {
+      filtered = filtered.filter(event => event.day === selectedDay);
+    }
+    
+    return filtered;
   };
 
   const filteredEvents = filterEvents();
+
+  // Group events by day for display
+  const groupEventsByDay = (events: typeof agenda) => {
+    const grouped: Record<string, typeof agenda> = {};
+    
+    events.forEach(event => {
+      if (!grouped[event.day]) {
+        grouped[event.day] = [];
+      }
+      grouped[event.day].push(event);
+    });
+    
+    return grouped;
+  };
+
+  const groupedEvents = groupEventsByDay(filteredEvents);
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -266,8 +175,26 @@ const Agenda = () => {
           <span className="text-4xl md:text-5xl font-bold text-center mb-4 gradient-heading">AGENDA</span>
         </h1>
         <p className="text-lg text-center mb-8 max-w-2xl mx-auto">
-          BITS Tech Fest 2025 - April 30th Timetable. Plan your day and don't miss the exciting events.
+          Hackathon 2025 - May 9th & 10th Schedule. Plan your participation and don't miss any important sessions.
         </p>
+        
+        {/* Day Tabs */}
+        <div className="mb-6">
+          <Tabs defaultValue="All Days" className="w-full">
+            <TabsList className="grid grid-cols-3 mb-8 w-full">
+              {days.map(day => (
+                <TabsTrigger 
+                  key={day} 
+                  value={day}
+                  onClick={() => setSelectedDay(day)}
+                  className="data-[state=active]:bg-neon-purple/20 data-[state=active]:text-neon-purple"
+                >
+                  {day}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        </div>
         
         {/* Filter and Download Section */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 glass-card p-4">
@@ -283,76 +210,72 @@ const Agenda = () => {
               ))}
             </select>
           </div>
-          
-          {/* <Button className="flex items-center gap-2">
-            <Download size={16} />
-            Download Full Schedule
-          </Button> */}
         </div>
         
-        {/* Agenda Items */}
-        <div className="space-y-4">
-          {filteredEvents.map(event => (
-            <div 
-              key={event.id} 
-              className="glass-card p-4 md:p-6 transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]"
-            >
-              <div className="flex flex-col md:flex-row gap-4 justify-between">
-                <div className="md:w-1/4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Clock size={16} className="text-neon-blue" />
-                    <span className="text-white font-medium">{event.time}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin size={16} className="text-neon-green" />
-                    <span className="text-white/70">{event.venue}</span>
-                  </div>
-                </div>
-                
-                <div className="md:w-3/4">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-xl font-bold text-white">{event.title}</h3>
-                      {event.club && (
-                        <p className="text-neon-purple mb-2">Organized by: {event.club}</p>
-                      )}
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className={`ml-2 ${bookmarkedEvents.includes(event.id) ? 'text-neon-orange' : 'text-white/50'}`}
-                      onClick={() => toggleBookmark(event.id)}
+        {/* Agenda Items Grouped by Day */}
+        <div className="space-y-8">
+          {Object.keys(groupedEvents).length > 0 ? (
+            Object.entries(groupedEvents).map(([day, events]) => (
+              <div key={day} className="mb-8">
+                <h2 className="text-2xl font-bold mb-4 gradient-text">{day}</h2>
+                <div className="space-y-4">
+                  {events.map(event => (
+                    <div 
+                      key={event.id} 
+                      className="glass-card p-4 md:p-6 transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]"
                     >
-                      <BookmarkPlus size={18} />
-                    </Button>
-                  </div>
-                  
-                  <p className="text-white/70 mt-2">{event.description}</p>
-                  
-                  <div className="mt-3 flex gap-2">
-                    <span className="inline-block px-3 py-1 bg-white/10 text-white/80 text-xs rounded-full">
-                      {event.type}
-                    </span>
-                    {event.club && (
-                      <span className="inline-block px-3 py-1 bg-neon-purple/20 text-neon-purple text-xs rounded-full">
-                        {event.club}
-                      </span>
-                    )}
-                  </div>
+                      <div className="flex flex-col md:flex-row gap-4 justify-between">
+                        <div className="md:w-1/4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Clock size={16} className="text-neon-blue" />
+                            <span className="text-white font-medium">{event.time}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin size={16} className="text-neon-green" />
+                            <span className="text-white/70">{event.venue}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="md:w-3/4">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h3 className="text-xl font-bold text-white">{event.title}</h3>
+                            </div>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className={`ml-2 ${bookmarkedEvents.includes(event.id) ? 'text-neon-orange' : 'text-white/50'}`}
+                              onClick={() => toggleBookmark(event.id)}
+                            >
+                              <BookmarkPlus size={18} />
+                            </Button>
+                          </div>
+                          <p className="text-white/70 mt-2">{event.description}</p>
+                          
+                          <div className="mt-3 flex gap-2">
+                            <span className="inline-block px-3 py-1 bg-white/10 text-white/80 text-xs rounded-full">
+                              {event.type}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-          ))}
-          
-          {filteredEvents.length === 0 && (
+            ))
+          ) : (
             <div className="text-center py-8">
               <p className="text-white/60">No events match your filter criteria.</p>
               <Button 
                 variant="outline" 
                 className="mt-4 border-white/20 hover:bg-white/5"
-                onClick={() => setSelectedType("All")}
+                onClick={() => {
+                  setSelectedType("All");
+                  setSelectedDay("All Days");
+                }}
               >
-                Reset Filter
+                Reset Filters
               </Button>
             </div>
           )}
@@ -367,7 +290,11 @@ const Agenda = () => {
               {agenda
                 .filter(event => bookmarkedEvents.includes(event.id))
                 .sort((a, b) => {
-                  // Extract start times for comparison (assuming format "HH:MM AM/PM")
+                  // First sort by day
+                  if (a.day !== b.day) {
+                    return a.day === "May 9th" ? -1 : 1;
+                  }
+                  // Then sort by time
                   const timeA = a.time.split(' - ')[0];
                   const timeB = b.time.split(' - ')[0];
                   return timeA.localeCompare(timeB);
@@ -377,15 +304,14 @@ const Agenda = () => {
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="flex items-center gap-2 text-sm text-white/70 mb-1">
-                          <Clock size={14} />
+                          <Calendar size={14} />
+                          <span className="text-neon-purple">{event.day}</span>
+                          <Clock size={14} className="ml-2" />
                           <span>{event.time}</span>
                           <MapPin size={14} className="ml-2" />
                           <span>{event.venue}</span>
                         </div>
                         <h4 className="font-semibold">{event.title}</h4>
-                        {event.club && (
-                          <p className="text-sm text-neon-purple">By {event.club}</p>
-                        )}
                         <p className="text-sm text-white/70 mt-1">{event.description}</p>
                       </div>
                       <Button 
