@@ -1,26 +1,51 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Calendar, Mail, User, GraduationCap } from 'lucide-react';
-import Modal from '@/components/Modal';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
-const emptyMember = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  countryCode: '+971',
-  phoneNumber: '',
-  college: '',
-  educationLevel: 'UG',
-};
 
 const Registration = () => {
+  return (
+    <div className="bg-black text-white min-h-screen flex flex-col">
+      <div className="scanline fixed top-0 left-0 pointer-events-none"></div>
+      <Navbar />
+      <main className="container mx-auto px-4 py-16 flex-1 flex flex-col items-center justify-center">
+        <div className="max-w-lg w-full flex flex-col items-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 gradient-heading">
+            HACKATHON TEAM REGISTRATION
+          </h1>
+          <p className="text-lg text-center mb-12 max-w-2xl mx-auto">
+            Register your team for the BITS Hackathon 2025. Team size: 1–5 members.
+          </p>
+          <div className="glass-card animation-fade-in p-8 rounded-xl shadow-xl w-full flex flex-col items-center">
+            <span className="text-2xl font-semibold mb-2 text-neon-purple">Sorry!</span>
+            <p className="text-lg text-center text-white/90 mb-2">
+              Registrations are now closed.
+            </p>
+            <p className="text-center text-white/60">
+              Please check back for future events.
+            </p>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+  /*
+  // Original registration form code commented out below
+
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+  const emptyMember = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    countryCode: '+971',
+    phoneNumber: '',
+    college: '',
+    educationLevel: 'UG',
+  };
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [step, setStep] = useState(1);
@@ -340,11 +365,6 @@ const Registration = () => {
                     </div>
                   </div>
                 ))}
-                {/* --- Events selection commented out --- */}
-                {/* <div className="mb-8">
-                  <h3 className="text-xl font-bold mb-4">What events interest you?</h3>
-                  ...event selection UI...
-                </div> */}
                 <div className="mb-8">
                   <div className="flex items-start space-x-2">
                     <Checkbox
@@ -436,7 +456,6 @@ const Registration = () => {
           )}
         </div>
       </main>
-      {/* Terms & Conditions Modal */}
       <Modal
         isOpen={termsModalOpen}
         onClose={() => setTermsModalOpen(false)}
@@ -449,7 +468,6 @@ const Registration = () => {
           </ol>
         </div>
       </Modal>
-      {/* Privacy Policy Modal */}
       <Modal
         isOpen={privacyModalOpen}
         onClose={() => setPrivacyModalOpen(false)}
@@ -464,6 +482,7 @@ const Registration = () => {
       <Footer />
     </div>
   );
-};
+  */
+// };
 
 export default Registration;
