@@ -10,9 +10,9 @@ const agenda = [
   // May 9th - Pre-hackathon
   {
     id: 1,
-    time: "3:00 PM - 5:00 PM",
+    time: "4:30 PM - 8:00 PM",
     title: "Technical Workshops",
-    venue: "Main Hall",
+    venue: "ONLINE",
     type: "Workshop",
     description: "Hands-on workshops to prepare participants for the hackathon",
     day: "May 9th"
@@ -21,7 +21,7 @@ const agenda = [
     id: 2,
     time: "5:00 PM - 5:30 PM",
     title: "Judges Reveal and Keynotes",
-    venue: "Auditorium",
+    venue: "ONLINE",
     type: "Keynote",
     description: "Introduction of the judging panel and inspirational keynote speeches",
     day: "May 9th"
@@ -30,7 +30,7 @@ const agenda = [
     id: 3,
     time: "5:30 PM - 6:00 PM",
     title: "Theme Release",
-    venue: "Auditorium",
+    venue: "ONLINE",
     type: "Ceremony",
     description: "Official announcement of the hackathon theme and problem statements",
     day: "May 9th"
