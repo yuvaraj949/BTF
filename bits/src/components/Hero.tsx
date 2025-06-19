@@ -56,7 +56,7 @@ const Hero = () => {
             BITS TECH FEST
           </h1>
           <p className="text-xl md:text-2xl mb-4 text-[#f32d00]">
-            May 10, 2025
+            Nov 19, 2025
           </p>
           <p className="text-sm md:text-base lg:text-lg text-gray-300 font-medium mt-1">
             Birla Institute of Technology And Science, Dubai, United Arab Emirates
