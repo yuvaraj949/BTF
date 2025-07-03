@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import Registration from "./pages/Registration";
 import Lookup from "./pages/Lookup";
 import NotFound from "./pages/NotFound";
+import Events from "./pages/Events";
+import ContactUs from "./pages/ContactUs";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +21,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          {/* About, Tracks, and Sponsors are now sections on the homepage. Their routes have been removed. */}
           <Route path="/registration" element={<Registration />} />
           <Route path="/lookup" element={<Lookup />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

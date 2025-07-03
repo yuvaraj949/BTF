@@ -1,29 +1,61 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import NavigationBar from "../components/NavigationBar";
+import Footer from '../components/Footer';
 
 export default function ContactUs() {
+  const [scrollY, setScrollY] = useState(0);
+  const [isDayTime] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="max-w-2xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-      <div className="mb-4">
-        <p><b>Email:</b> <a href="mailto:contact.btf@dubai.bits-pilani.ac.in" className="text-blue-600 underline">contact.btf@dubai.bits-pilani.ac.in</a></p>
-        <p><b>Phone:</b> <a href="tel:+971586290281" className="text-blue-600 underline">+971 586290281</a></p>
-        <p><b>Address:</b><br />
-          BITS Pilani Dubai Campus,<br />
-          Dubai International Academic City,<br />
-          Dubai, UAE
-        </p>
-      </div>
-      <div className="border rounded overflow-hidden" style={{height: 300}}>
-        <iframe
-          title="BITS Pilani Dubai Campus Map"
-          src="https://www.google.com/maps?q=BITS+Pilani+Dubai+Campus&output=embed"
-          width="100%"
-          height="300"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-        ></iframe>
-      </div>
-    </section>
+    <div className="min-h-screen flex flex-col bg-gray-900">
+      <main className="flex-1 flex flex-col">
+        <NavigationBar />
+        <div className="container mx-auto px-4 py-8 mt-16">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <h1 className="text-4xl font-bold text-yellow-400 mb-4 font-cinzel">
+                Contact Us
+              </h1>
+            </div>
+            <div className="mb-4 text-lg space-y-2">
+              <p>
+                <span className="text-yellow-400 font-semibold">Email:</span>
+                <span className="text-white"> <a href="mailto:contact.btf@dubai.bits-pilani.ac.in" className="underline">contact.btf@dubai.bits-pilani.ac.in</a></span>
+              </p>
+              <p>
+                <span className="text-yellow-400 font-semibold">Phone:</span>
+                <span className="text-white"> <a href="tel:+971586290281" className="underline">+971 586290281</a></span>
+              </p>
+              <p>
+                <span className="text-yellow-400 font-semibold">Address:</span><br />
+                <span className="text-white">
+                  BITS Pilani Dubai Campus,<br />
+                  Dubai International Academic City,<br />
+                  Dubai, UAE
+                </span>
+              </p>
+            </div>
+            <div className="border border-yellow-400/30 rounded overflow-hidden" style={{height: 300}}>
+              <iframe
+                title="BITS Pilani Dubai Campus Map"
+                src="https://www.google.com/maps?q=BITS+Pilani+Dubai+Campus&output=embed"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
   );
 }

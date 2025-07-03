@@ -15,7 +15,7 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-gray-900 to-black" />
       
       {/* Stars */}
-      <div className="absolute inset-0 opacity-90">
+      <div className="absolute inset-0 opacity-90 pointer-events-none">
         {[...Array(150)].map((_, i) => (
           <div
             key={i}
@@ -29,6 +29,43 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
           />
         ))}
       </div>
+
+      {/* Flying Dragons and Witches */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 2 }}>
+        {/* Dragon 1 */}
+        <g style={{
+          transform: `translate(${(scrollY * 0.2) % 1200}px, ${80 + 20 * Math.sin(scrollY / 200)}px)`,
+          transition: 'transform 0.2s linear'
+        }}>
+          <path d="M100 100 Q120 90 140 100 Q160 110 180 100 Q200 90 220 100" fill="none" stroke="#a3e635" strokeWidth="4" />
+          <ellipse cx="140" cy="100" rx="18" ry="8" fill="#64748b" />
+          <polygon points="158,100 170,90 170,110" fill="#64748b" />
+          <polygon points="122,100 110,90 110,110" fill="#64748b" />
+          {/* Wings */}
+          <path d="M130 95 Q135 80 150 95" fill="none" stroke="#a3e635" strokeWidth="3" />
+          <path d="M150 105 Q155 120 170 105" fill="none" stroke="#a3e635" strokeWidth="3" />
+        </g>
+        {/* Witch on Broom */}
+        <g style={{
+          transform: `translate(${(1200 - (scrollY * 0.3) % 1200)}px, ${180 + 30 * Math.cos(scrollY / 150)}px)`,
+          transition: 'transform 0.2s linear'
+        }}>
+          {/* Broom */}
+          <rect x="0" y="0" width="40" height="4" rx="2" fill="#fbbf24" />
+          {/* Witch Body */}
+          <ellipse cx="20" cy="-10" rx="10" ry="18" fill="#1e293b" />
+          {/* Head */}
+          <circle cx="20" cy="-25" r="6" fill="#f1c27d" />
+          {/* Hat */}
+          <polygon points="14,-25 20,-40 26,-25" fill="#1e293b" />
+          {/* Cape */}
+          <path d="M20 -10 Q30 0 40 4 Q25 5 20 -10" fill="#334155" />
+          {/* Magic trail */}
+          <circle cx="40" cy="4" r="3" fill="#a5b4fc" opacity="0.7" />
+          <circle cx="48" cy="8" r="2" fill="#a5b4fc" opacity="0.5" />
+        </g>
+        {/* More dragons/witches can be added similarly for more realism */}
+      </svg>
       
       {/* Moon */}
       <div

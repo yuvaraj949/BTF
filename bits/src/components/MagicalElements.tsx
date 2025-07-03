@@ -8,20 +8,8 @@ interface MagicalElementsProps {
 const MagicalElements: React.FC<MagicalElementsProps> = ({ isDayTime }) => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Spider Webs */}
+      {/* Spider Webs (removed top left and bottom left webs to remove cross marks) */}
       <div className="absolute inset-0">
-        {/* Top left corner web */}
-        <div className="absolute top-4 left-4 opacity-60">
-          <svg width="80" height="80" viewBox="0 0 80 80" className="text-gray-300">
-            <path d="M5 5 L75 5 L75 75 L5 75 Z" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.3"/>
-            <path d="M5 5 L40 40 L75 5" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-            <path d="M5 75 L40 40 L75 75" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-            <path d="M5 5 L40 40 L5 75" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-            <path d="M75 5 L40 40 L75 75" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-            <circle cx="15" cy="15" r="2" fill="currentColor" opacity="0.8"/>
-          </svg>
-        </div>
-        
         {/* Top right corner web */}
         <div className="absolute top-4 right-4 opacity-60">
           <svg width="60" height="60" viewBox="0 0 60 60" className="text-gray-400">
@@ -29,18 +17,6 @@ const MagicalElements: React.FC<MagicalElementsProps> = ({ isDayTime }) => {
             <path d="M5 5 L30 30 L55 5" stroke="currentColor" strokeWidth="0.5" fill="none"/>
             <path d="M5 55 L30 30 L55 55" stroke="currentColor" strokeWidth="0.5" fill="none"/>
             <circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.8"/>
-          </svg>
-        </div>
-        
-        {/* Bottom left corner web */}
-        <div className="absolute bottom-20 left-8 opacity-50">
-          <svg width="100" height="100" viewBox="0 0 100 100" className="text-gray-500">
-            <path d="M10 10 L90 10 L90 90 L10 90 Z" stroke="currentColor" strokeWidth="0.5" fill="none" opacity="0.2"/>
-            <path d="M10 10 L50 50 L90 10" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-            <path d="M10 90 L50 50 L90 90" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-            <path d="M10 10 L50 50 L10 90" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-            <path d="M90 10 L50 50 L90 90" stroke="currentColor" strokeWidth="0.5" fill="none"/>
-            <circle cx="20" cy="20" r="2" fill="currentColor" opacity="0.7"/>
           </svg>
         </div>
       </div>
