@@ -20,14 +20,22 @@ const NavigationBar = () => {
           
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            {['ABOUT', 'TRACKS', 'SPEAKERS', 'FAQ', 'SPONSORS'].map((item) => (
+            {[
+              { name: 'HOME', href: '/' },
+              { name: 'ABOUT', href: '/about' },
+              { name: 'TRACKS', href: '/tracks' },
+              { name: 'EVENTS', href: '/events' },
+              { name: 'SPONSORS', href: '/sponsors' },
+              { name: 'CONTACT US', href: '/contactus' },
+              { name: 'REGISTER', href: '/registration' }
+            ].map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.name}
+                href={item.href}
                 className="text-white hover:text-yellow-400 transition-colors duration-300 font-medium tracking-wide text-sm"
                 style={{ fontFamily: 'Cinzel, serif' }}
               >
-                {item}
+                {item.name}
               </a>
             ))}
           </div>

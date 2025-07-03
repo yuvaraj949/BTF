@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
-import HackathonTeam from './models/HackathonTeam'; // <-- NEW MODEL
+import Registration from './models/Registration';
 
 dotenv.config();
 
@@ -40,37 +40,40 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Send confirmation email to team leader
-async function sendTeamConfirmationEmail(
+// Send confirmation email for general registration
+async function sendRegistrationConfirmationEmail(
   recipient: string,
-  leaderName: string,
-  teamName: string,
+  firstName: string,
   registrationId: string,
-  members: any[]
+  registrationData: any
 ): Promise<boolean> {
   try {
-    const memberList = members.map((m, i) =>
-      `<li><b>${i === 0 ? 'Team Leader' : `Member ${i+1}`}</b>: ${m.firstName} ${m.lastName} (${m.email}, ${m.countryCode}${m.phoneNumber}, ${m.college}, ${m.educationLevel})</li>`
-    ).join('');
     const mailOptions = {
-      from: `"BITS Hackathon 2025" <${process.env.EMAIL_USER}>`,
+      from: `"BITS Event 2025" <${process.env.EMAIL_USER}>`,
       to: recipient,
-      subject: 'Your BITS Hackathon 2025 Team Registration Confirmation',
+      subject: 'Your BITS Event 2025 Registration Confirmation',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-          <h2 style="color: #333; text-align: center;">Team Registration Confirmation</h2>
-          <p>Dear ${leaderName},</p>
-          <p>Thank you for registering your team <b>${teamName}</b> for BITS Hackathon 2025!</p>
+          <h2 style="color: #333; text-align: center;">Registration Confirmation</h2>
+          <p>Dear ${firstName},</p>
+          <p>Thank you for registering for BITS Event 2025!</p>
           <div style="background-color: #f5f5f5; padding: 15px; margin: 15px 0; border-radius: 5px;">
             <p><strong>Event Date:</strong> Nov 19, 2025</p>
             <p><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
-            <p><strong>Your Team Registration ID:</strong> ${registrationId}</p>
+            <p><strong>Your Registration ID:</strong> ${registrationId}</p>
           </div>
-          <p><b>Team Members:</b></p>
-          <ul>${memberList}</ul>
-          <p>We're excited to have your team join us. Please save your registration ID for future reference.</p>
+          <p><b>Your Details:</b></p>
+          <ul>
+            <li><b>Name:</b> ${registrationData.firstName} ${registrationData.lastName}</li>
+            <li><b>Email:</b> ${registrationData.email}</li>
+            <li><b>Phone:</b> ${registrationData.phone}</li>
+            <li><b>Affiliation:</b> ${registrationData.affiliationType} - ${registrationData.institutionName}</li>
+            <li><b>Role:</b> ${registrationData.role || '-'}</li>
+            <li><b>Interested Events:</b> ${(registrationData.interestedEvents || []).join(', ') || '-'}</li>
+          </ul>
+          <p>We're excited to have you join us. Please save your registration ID for future reference.</p>
           <p>If you have any questions, feel free to reply to this email.</p>
-          <p>Best regards,<br/>BITS Hackathon Team</p>
+          <p>Best regards,<br/>BITS Event Team</p>
         </div>
       `
     };
@@ -88,45 +91,60 @@ app.get('/', (req, res) => {
   res.send('api active');
 });
 
-// --- HACKATHON TEAM REGISTRATION ROUTE ---
+// --- GENERAL REGISTRATION ROUTE ---
 app.post('/api/register', async (req, res) => {
-  const { teamName, members } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    affiliationType,
+    institutionName,
+    role,
+    interestedEvents,
+    agreeTerms
+  } = req.body;
 
   // Basic validation
-  if (!teamName || !Array.isArray(members) || members.length < 1 || members.length > 5) {
-    return res.status(400).json({ message: 'Invalid team data. Team name and 1-5 members required.' });
+  if (!firstName || !lastName || !email || !phone || !affiliationType || !institutionName || typeof agreeTerms !== 'boolean') {
+    return res.status(400).json({ message: 'Missing required fields.' });
   }
-  for (const m of members) {
-    if (
-      !m.firstName || !m.lastName || !m.email || !m.countryCode ||
-      !m.phoneNumber || !m.college || !['UG','PG','PhD'].includes(m.educationLevel)
-    ) {
-      return res.status(400).json({ message: 'All member fields are required.' });
-    }
+  if (!['company', 'university', 'school'].includes(affiliationType)) {
+    return res.status(400).json({ message: 'Invalid affiliation type.' });
+  }
+  if (!agreeTerms) {
+    return res.status(400).json({ message: 'You must agree to the terms.' });
   }
 
   try {
     const registrationId = generateRegistrationId();
-    const team = new HackathonTeam({
-      teamName,
-      members,
+    const registration = new Registration({
+      firstName,
+      lastName,
+      email,
+      phone,
+      affiliationType,
+      institutionName,
+      role,
+      interestedEvents,
+      agreeTerms,
       registrationId
     });
-    await team.save();
+    await registration.save();
 
-    // Send confirmation email to team leader (first member)
-    await sendTeamConfirmationEmail(
-      members[0].email,
-      members[0].firstName,
-      teamName,
+
+    // Send confirmation email
+    await sendRegistrationConfirmationEmail(
+      email,
+      firstName,
       registrationId,
-      members
+      req.body
     );
 
     res.status(201).json({
-      message: 'Team registration successful',
+      message: 'Registration successful',
       registrationId,
-      email: members[0].email
+      email
     });
   } catch (error) {
     console.error('Registration error:', error);
@@ -137,14 +155,22 @@ app.post('/api/register', async (req, res) => {
 // Get registration details
 app.get('/api/registration/:id', async (req, res) => {
   try {
-    const team = await HackathonTeam.findOne({ registrationId: req.params.id });
-    if (!team) {
+    const registration = await Registration.findOne({ registrationId: req.params.id });
+    if (!registration) {
       return res.status(404).json({ message: 'Registration not found' });
     }
     res.json({
-      teamName: team.teamName,
-      registrationId: team.registrationId,
-      members: team.members
+      firstName: registration.firstName,
+      lastName: registration.lastName,
+      email: registration.email,
+      phone: registration.phone,
+      affiliationType: registration.affiliationType,
+      institutionName: registration.institutionName,
+      role: registration.role,
+      interestedEvents: registration.interestedEvents,
+      agreeTerms: registration.agreeTerms,
+      registrationId: registration.registrationId,
+      registrationDate: registration.registrationDate
     });
   } catch (error) {
     console.error('Error fetching registration:', error);

@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Opening Ceremony",
+    "startTime": "2025-11-19T09:00:00+04:00",
+    "endTime": "2025-11-19T10:00:00+04:00",
+    "date": "2025-11-19",
+    "location": "Main Auditorium",
+    "shortDescription": "Kick-off ceremony for BTF 2025 with keynote speeches.",
+    "tag": "ceremony"
+  },
+  {
+    "title": "Registration",
+    "startTime": "2025-11-19T08:00:00+04:00",
+    "endTime": "2025-11-19T09:00:00+04:00",
+    "date": "2025-11-19",
+    "location": "Lobby",
+    "shortDescription": "On-site registration for all participants.",
+    "tag": "registration"
+  },
+  {
+    "title": "Hackathon Preparation",
+    "startTime": "2025-11-19T10:00:00+04:00",
+    "endTime": "2025-11-19T11:00:00+04:00",
+    "date": "2025-11-19",
+    "location": "Lab 1",
+    "shortDescription": "Team setup and hackathon briefing.",
+    "tag": "hackathon preparation"
+  },
+  {
+    "title": "Project Presentations",
+    "startTime": "2025-11-20T15:00:00+04:00",
+    "endTime": "2025-11-20T17:00:00+04:00",
+    "date": "2025-11-20",
+    "location": "Main Auditorium",
+    "shortDescription": "Teams present their projects to the judges.",
+    "tag": "presentation"
+  }
+]
