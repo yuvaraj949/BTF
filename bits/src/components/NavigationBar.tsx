@@ -13,7 +13,7 @@ const NavigationBar = () => {
           <div className="flex items-center space-x-2">
             <div className="w-10 h-10 flex items-center justify-center">
               <img 
-                src="/lovable-uploads/75563aab-1419-470f-86da-f6c102723c1d.png" 
+                src="/favicon.ico" 
                 alt="BTF Logo" 
                 className="w-10 h-10 object-contain"
               />
