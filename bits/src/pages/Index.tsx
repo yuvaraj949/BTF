@@ -1,21 +1,20 @@
 
-import React, { useEffect } from 'react';
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import Sponsors from '@/components/Sponsors';
-import Highlights from '@/components/Highlights';
-import Features from '@/components/Features';
-import AboutEvent from '@/components/AboutEvent';
-import Countdown from '@/components/Countdown';
-import Footer from '@/components/Footer';
-import Aurora from '@/components/Aurora';
+import React, { useState, useEffect } from 'react';
+import NavigationBar from '../components/NavigationBar';
+import HeroSection from '../components/HeroSection';
+import CountdownTimer from '../components/CountdownTimer';
+import BackgroundScene from '../components/BackgroundScene';
+import MagicalElements from '../components/MagicalElements';
+import HarryPotterCharacter from '../components/HarryPotterCharacter';
 
 const Index = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const [isDayTime, setIsDayTime] = useState(false); // Always night for Hogwarts Legacy theme
+
   useEffect(() => {
-    // Add scroll listener for parallax effects
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`);
+      const scrollPosition = window.scrollY;
+      setScrollY(scrollPosition);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -23,30 +22,36 @@ const Index = () => {
   }, []);
 
   return (
-    <main className="bg-black text-white min-h-screen relative overflow-x-hidden">
-      {/* Aurora background */}
-      <Aurora 
-        colorStops={["#8B5CF6", "#FF94B4", "#3A29FF"]} 
-        blend={0.5}
-        amplitude={1.0}
-        speed={0.5}
-      />
+    <div className="min-h-screen relative overflow-hidden bg-gray-900">
+      {/* Magical Background */}
+      <BackgroundScene isDayTime={isDayTime} scrollY={scrollY} />
       
-      {/* Glow effects */}
-      <div className="fixed top-0 left-0 w-full h-screen overflow-hidden pointer-events-none z-[-1]">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-purple/10 rounded-full filter blur-[120px]"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-neon-blue/10 rounded-full filter blur-[100px]"></div>
+      {/* Magical Elements Overlay */}
+      <MagicalElements isDayTime={isDayTime} />
+      
+      {/* Harry Potter Character */}
+      <HarryPotterCharacter />
+      
+      {/* Main Content */}
+      <div className="relative z-10">
+        <NavigationBar />
+        <HeroSection />
+        <CountdownTimer />
+        
+        {/* Content to enable scrolling */}
+        <div className="h-screen bg-gradient-to-b from-transparent to-gray-900/40 flex items-center justify-center">
+          <div className="text-center text-white max-w-4xl mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg font-cinzel">
+              Join the Magic
+            </h2>
+            <p className="text-xl md:text-2xl opacity-90 leading-relaxed font-cinzel">
+              Embark on a journey of innovation and discovery at the most enchanting tech fest of the year. 
+              Where technology meets magic, and ideas come to life.
+            </p>
+          </div>
+        </div>
       </div>
-      
-      <Navbar />
-      <Hero />
-      <Countdown targetDate="2025-11-19T09:00:00" />
-      <Highlights />
-      {/* <AboutEvent /> */}
-      {/* <Features /> */}
-      {/* <Sponsors /> */}
-      <Footer />
-    </main>
+    </div>
   );
 };
 

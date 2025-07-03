@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ['http://localhost:8080', 'http://localhost:3000', 'https://btfbpdc.vercel.app'],
+  origin: ['http://localhost:8080', 'http://localhost:3000', 'https://btf-2025.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   optionsSuccessStatus: 200
