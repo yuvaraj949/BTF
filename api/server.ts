@@ -19,8 +19,15 @@ app.use(cors({
 }));
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI_UNI || '')
-  .then(() => console.log('MongoDB connected successfully'))
+
+// Connect to MongoDB using DB name from .env
+const dbName = process.env.DB_NAME;
+const dbConnString = process.env.DB_CONN_STRING || process.env.MONGODB_URI_UNI || '';
+
+mongoose.connect(dbConnString, {
+  dbName: dbName
+})
+  .then(() => console.log(`MongoDB connected successfully to database: ${dbName}`))
   .catch(err => console.error('MongoDB connection error:', err));
 
 
