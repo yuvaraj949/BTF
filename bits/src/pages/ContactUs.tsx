@@ -26,11 +26,11 @@ export default function ContactUs() {
             <div className="mb-4 text-lg space-y-2">
               <p>
                 <span className="text-[#F66200] font-semibold">Email:</span>
-                <span className="text-white"> <a href="mailto:contact.btf@dubai.bits-pilani.ac.in" className="underline">contact.btf@dubai.bits-pilani.ac.in</a></span>
+                <span className="text-white"> <a href="mailto:contact.btf@dubai.bits-pilani.ac.in" className="no-underline hover:text-[#F66200]">contact.btf@dubai.bits-pilani.ac.in</a></span>
               </p>
               <p>
                 <span className="text-[#F66200] font-semibold">Phone:</span>
-                <span className="text-white"> <a href="tel:+971586290281" className="underline">+971 586290281</a></span>
+                <span className="text-white"> <a href="tel:+971586290281" className="no-underline hover:text-[#F66200]">+971 586290281</a></span>
               </p>
               <p>
                 <span className="text-[#F66200] font-semibold">Address:</span><br />

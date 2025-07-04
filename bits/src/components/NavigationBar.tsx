@@ -23,7 +23,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ showLogoTitle = true }) =
                   className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
                 />
               </span>
-              <span className="text-[#F66200] font-bold text-xl tracking-wider group-hover:underline">BITS TECH FEST</span>
+              <span className="text-[#F66200] font-bold text-xl tracking-wider">BITS TECH FEST</span>
             </a>
           </div>
           
