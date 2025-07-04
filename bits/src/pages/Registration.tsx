@@ -122,10 +122,8 @@ const Registration = () => {
         setResponseMessage(result.message);
         setRegistrationId(result.registrationId || '');
         form.reset();
-        // Show loading for 1s, then redirect to pass page
-        setTimeout(() => {
-          navigate(`/pass/${result.registrationId}`);
-        }, 1000);
+        // Force redirect to pass page immediately
+        window.location.href = `/pass/${result.registrationId}`;
       } else {
         setSubmitStatus('error');
         setResponseMessage(result.message || 'Registration failed');
