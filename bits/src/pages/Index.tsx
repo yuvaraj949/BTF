@@ -39,7 +39,7 @@ const Index = () => {
         {/* Content to enable scrolling */}
         <div className="bg-gradient-to-b from-transparent to-gray-900/40">
           <div className="text-center text-white max-w-4xl mx-auto px-4 min-h-[60vh] flex flex-col justify-center items-center">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-yellow-400 text-shadow-lg font-cinzel">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-[#F66200] text-shadow-lg font-cinzel">
               Join the Magic
             </h2>
             <p className="text-xl md:text-2xl opacity-90 leading-relaxed font-cinzel">
@@ -49,9 +49,9 @@ const Index = () => {
           </div>
           {/* About Section */}
           <div className="max-w-2xl mx-auto py-24 px-4 text-white font-cinzel" id="about">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400 text-center">About BTF</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#F66200] text-center">About BTF</h1>
             <p className="mb-4 text-lg">
-              <b>BTF</b> is Dubai's only tech fest, bringing together innovators, students, and professionals for a unique celebration of technology and creativity. With <span className="text-yellow-400 font-bold">180+ participants</span> in previous editions, BTF stands as the region's premier platform for tech enthusiasts to learn, compete, and network.
+              <b>BTF</b> is Dubai's only tech fest, bringing together innovators, students, and professionals for a unique celebration of technology and creativity. With <span className="text-[#F66200] font-bold">180+ participants</span> in previous editions, BTF stands as the region's premier platform for tech enthusiasts to learn, compete, and network.
             </p>
             <p className="text-lg">
               Hosted at BITS Pilani Dubai Campus, BTF features a variety of events, hackathons, workshops, and presentations, making it a must-attend for anyone passionate about technology in the UAE.
@@ -59,12 +59,12 @@ const Index = () => {
           </div>
           {/* Tracks Section */}
           <div className="max-w-2xl mx-auto py-24 px-4 text-white font-cinzel" id="tracks">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400 text-center">Tracks</h1>
-            <p className="mb-4 text-lg">Choose from a variety of competition tracks. <span className='text-yellow-400 font-bold'>180+ participants</span> joined us last year!</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#F66200] text-center">Tracks</h1>
+            <p className="mb-4 text-lg">Choose from a variety of competition tracks. <span className='text-[#F66200] font-bold'>180+ participants</span> joined us last year!</p>
             <ul className="space-y-4">
               {[{title: "Artificial Intelligence", description: "Explore the latest in AI, machine learning, and data science."}, {title: "Internet of Things", description: "Innovate with IoT devices, smart systems, and automation."}, {title: "Sustainability", description: "Build solutions for a greener, more sustainable future."}].map((track) => (
-                <li key={track.title} className="border border-yellow-400/30 rounded p-4 bg-black/40">
-                  <h2 className="text-2xl font-semibold text-yellow-300">{track.title}</h2>
+                <li key={track.title} className="border border-[#F66200]/30 rounded p-4 bg-black/40">
+                  <h2 className="text-2xl font-semibold text-[#F66200]">{track.title}</h2>
                   <p>{track.description}</p>
                 </li>
               ))}
@@ -72,7 +72,7 @@ const Index = () => {
           </div>
           {/* Sponsors Section */}
           <div className="max-w-2xl mx-auto py-24 px-4 text-white font-cinzel" id="sponsors">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400 text-center">Sponsors</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#F66200] text-center">Sponsors</h1>
             <ul className="flex flex-wrap gap-8 items-center justify-center">
               <li className="flex flex-col items-center bg-black/40 rounded p-4">
                 <img src="/hpe-aruba-logo.jpeg" alt="HPE Aruba Networking" className="mb-2" />

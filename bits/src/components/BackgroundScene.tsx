@@ -81,15 +81,15 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
           <rect x="600" y="250" width="80" height="30" fill="url(#castleGradient)" />
           
           {/* Glowing windows */}
-          <rect x="125" y="200" width="8" height="12" fill="#fbbf24" opacity="0.9" />
-          <rect x="145" y="220" width="8" height="12" fill="#fbbf24" opacity="0.9" />
-          <rect x="265" y="220" width="8" height="12" fill="#fbbf24" opacity="0.9" />
-          <rect x="425" y="140" width="10" height="15" fill="#fbbf24" opacity="0.9" />
-          <rect x="465" y="160" width="10" height="15" fill="#fbbf24" opacity="0.9" />
-          <rect x="515" y="140" width="10" height="15" fill="#fbbf24" opacity="0.9" />
-          <rect x="725" y="220" width="8" height="12" fill="#fbbf24" opacity="0.9" />
-          <rect x="845" y="200" width="8" height="12" fill="#fbbf24" opacity="0.9" />
-          <rect x="975" y="120" width="8" height="12" fill="#fbbf24" opacity="0.9" />
+          <rect x="125" y="200" width="8" height="12" fill="#F66200" opacity="0.9" />
+          <rect x="145" y="220" width="8" height="12" fill="#F66200" opacity="0.9" />
+          <rect x="265" y="220" width="8" height="12" fill="#F66200" opacity="0.9" />
+          <rect x="425" y="140" width="10" height="15" fill="#F66200" opacity="0.9" />
+          <rect x="465" y="160" width="10" height="15" fill="#F66200" opacity="0.9" />
+          <rect x="515" y="140" width="10" height="15" fill="#F66200" opacity="0.9" />
+          <rect x="725" y="220" width="8" height="12" fill="#F66200" opacity="0.9" />
+          <rect x="845" y="200" width="8" height="12" fill="#F66200" opacity="0.9" />
+          <rect x="975" y="120" width="8" height="12" fill="#F66200" opacity="0.9" />
         </svg>
       </div>
       

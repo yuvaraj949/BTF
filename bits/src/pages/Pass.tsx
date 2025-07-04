@@ -55,21 +55,21 @@ const Pass: React.FC = () => {
     pdf.save(`BTF25-Pass-${data?.registrationId}.pdf`);
   };
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center bg-black text-yellow-400">Loading Pass...</div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-black text-[#F66200]">Loading Pass...</div>;
   if (!data) return null;
 
   return (
-    <div className="min-h-screen flex flex-col bg-black text-yellow-100">
+    <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
       <main className="flex-1 flex flex-col items-center justify-center py-8">
-        <div ref={passRef} className="bg-gradient-to-br from-yellow-900/80 to-black/90 rounded-xl shadow-lg p-8 max-w-md w-full border border-yellow-700">
-          <h2 className="text-2xl font-bold text-yellow-400 text-center mb-2 font-cinzel">BITS TECHFEST 2025 PASS</h2>
+        <div ref={passRef} className="bg-gradient-to-br from-[#F66200]/80 to-black/90 rounded-xl shadow-lg p-8 max-w-md w-full border border-[#F66200]">
+          <h2 className="text-2xl font-bold text-[#F66200] text-center mb-2 font-cinzel">BITS TECHFEST 2025 PASS</h2>
           <div className="flex justify-center mb-4">
             <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #FFD600, 0 0 0 14px #181818' }}>
               <QRCodeSVG value={data.registrationId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
             </div>
           </div>
           <div className="text-center mb-2">
-            <span className="font-semibold">Registration ID:</span> <span className="text-yellow-300">{data.registrationId}</span>
+            <span className="font-semibold">Registration ID:</span> <span className="text-[#F66200]">{data.registrationId}</span>
           </div>
           <ul className="mb-4 text-sm">
             <li><b>Name:</b> {data.firstName} {data.lastName}</li>
@@ -79,9 +79,9 @@ const Pass: React.FC = () => {
             <li><b>Role:</b> {data.role || '-'}</li>
             <li><b>Interested Events:</b> {(data.interestedEvents || []).join(', ') || '-'}</li>
           </ul>
-          <div className="text-yellow-200 text-xs mb-2">Please carry this pass with you while attending the event.</div>
+          <div className="text-[#F66200]/80 text-xs mb-2">Please carry this pass with you while attending the event.</div>
         </div>
-        <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded shadow">Download PDF</button>
+        <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
       </main>
       <Footer />
     </div>

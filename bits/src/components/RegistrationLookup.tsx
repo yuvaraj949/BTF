@@ -56,9 +56,9 @@ const RegistrationLookup = () => {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <Card className="bg-black/40 border-yellow-400/20 backdrop-blur-md">
+      <Card className="bg-black/40 border-[#F66200]/20 backdrop-blur-md">
         <CardHeader>
-          <CardTitle className="text-yellow-400 font-cinzel">Registration Lookup</CardTitle>
+          <CardTitle className="text-[#F66200] font-cinzel">Registration Lookup</CardTitle>
           <CardDescription className="text-gray-400">
             Enter your registration ID to view your details
           </CardDescription>
@@ -69,12 +69,12 @@ const RegistrationLookup = () => {
               value={registrationId}
               onChange={(e) => setRegistrationId(e.target.value)}
               placeholder="Enter Registration ID"
-              className="bg-gray-800/50 border-yellow-400/30 text-white"
+              className="bg-gray-800/50 border-[#F66200]/30 text-white"
             />
             <Button 
               onClick={handleLookup}
               disabled={isLoading}
-              className="bg-yellow-600 hover:bg-yellow-700 text-black"
+              className="bg-[#F66200] hover:bg-orange-700 text-black"
             >
               {isLoading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -95,9 +95,9 @@ const RegistrationLookup = () => {
       </Card>
 
       {registrationData && (
-        <Card className="bg-black/40 border-yellow-400/20 backdrop-blur-md">
+        <Card className="bg-black/40 border-[#F66200]/20 backdrop-blur-md">
           <CardHeader>
-            <CardTitle className="text-yellow-400 font-cinzel flex items-center">
+            <CardTitle className="text-[#F66200] font-cinzel flex items-center">
               <User className="mr-2 h-5 w-5" />
               Registration Details
             </CardTitle>
@@ -105,7 +105,7 @@ const RegistrationLookup = () => {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <div className="flex items-center text-yellow-400">
+                <div className="flex items-center text-[#F66200]">
                   <User className="mr-2 h-4 w-4" />
                   <span className="font-semibold">Name</span>
                 </div>
@@ -113,7 +113,7 @@ const RegistrationLookup = () => {
               </div>
 
               <div className="space-y-2">
-                <div className="flex items-center text-yellow-400">
+                <div className="flex items-center text-[#F66200]">
                   <Mail className="mr-2 h-4 w-4" />
                   <span className="font-semibold">Email</span>
                 </div>
@@ -121,7 +121,7 @@ const RegistrationLookup = () => {
               </div>
 
               <div className="space-y-2">
-                <div className="flex items-center text-yellow-400">
+                <div className="flex items-center text-[#F66200]">
                   <Phone className="mr-2 h-4 w-4" />
                   <span className="font-semibold">Phone</span>
                 </div>
@@ -129,7 +129,7 @@ const RegistrationLookup = () => {
               </div>
 
               <div className="space-y-2">
-                <div className="flex items-center text-yellow-400">
+                <div className="flex items-center text-[#F66200]">
                   <GraduationCap className="mr-2 h-4 w-4" />
                   <span className="font-semibold">College</span>
                 </div>
@@ -139,19 +139,19 @@ const RegistrationLookup = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <span className="font-semibold text-yellow-400">Year</span>
+                <span className="font-semibold text-[#F66200]">Year</span>
                 <p className="text-white">{registrationData.year}</p>
               </div>
 
               <div className="space-y-2">
-                <span className="font-semibold text-yellow-400">Branch</span>
+                <span className="font-semibold text-[#F66200]">Branch</span>
                 <p className="text-white">{registrationData.branch}</p>
               </div>
             </div>
 
             {(registrationData.github || registrationData.linkedin || registrationData.portfolio) && (
               <div className="space-y-2">
-                <span className="font-semibold text-yellow-400">Links</span>
+                <span className="font-semibold text-[#F66200]">Links</span>
                 <div className="space-y-1">
                   {registrationData.github && (
                     <p className="text-white">GitHub: <a href={registrationData.github} className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">{registrationData.github}</a></p>
@@ -168,21 +168,21 @@ const RegistrationLookup = () => {
 
             {registrationData.skills && (
               <div className="space-y-2">
-                <span className="font-semibold text-yellow-400">Skills</span>
+                <span className="font-semibold text-[#F66200]">Skills</span>
                 <p className="text-white">{registrationData.skills}</p>
               </div>
             )}
 
             {registrationData.experience && (
               <div className="space-y-2">
-                <span className="font-semibold text-yellow-400">Experience</span>
+                <span className="font-semibold text-[#F66200]">Experience</span>
                 <p className="text-white">{registrationData.experience}</p>
               </div>
             )}
 
             {registrationData.expectations && (
               <div className="space-y-2">
-                <span className="font-semibold text-yellow-400">Expectations</span>
+                <span className="font-semibold text-[#F66200]">Expectations</span>
                 <p className="text-white">{registrationData.expectations}</p>
               </div>
             )}

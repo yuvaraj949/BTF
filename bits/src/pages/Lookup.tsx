@@ -10,7 +10,7 @@ const Lookup = () => {
         <NavigationBar />
         <div className="container mx-auto px-4 py-8 mt-16">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-yellow-400 mb-4 font-cinzel">
+            <h1 className="text-4xl font-bold text-[#F66200] mb-4 font-cinzel">
               Registration Lookup
             </h1>
             <p className="text-xl text-gray-300">

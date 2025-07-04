@@ -6,7 +6,7 @@ const NavigationBar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-yellow-400/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-[#F66200]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -18,7 +18,7 @@ const NavigationBar = () => {
                 className="w-10 h-10 object-contain"
               />
             </div>
-            <span className="text-yellow-400 font-bold text-xl tracking-wider">BTF 2025</span>
+            <span className="text-[#F66200] font-bold text-xl tracking-wider">BTF 2025</span>
           </div>
           
           {/* Navigation Links */}
@@ -57,7 +57,7 @@ const NavigationBar = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-white hover:text-yellow-400 transition-colors duration-300 font-medium tracking-wide text-sm"
+                  className="text-white hover:text-[#F66200] transition-colors duration-300 font-medium tracking-wide text-sm"
                   style={{ fontFamily: 'Cinzel, serif' }}
                   onClick={handleClick}
                 >
@@ -69,7 +69,7 @@ const NavigationBar = () => {
           
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button className="text-white hover:text-yellow-400 transition-colors">
+            <button className="text-white hover:text-[#F66200] transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>

@@ -35,7 +35,7 @@ const CountdownTimer = () => {
       <div className="relative group">
         {/* Lamp removed as requested */}
 
-        <div className="bg-gradient-to-b from-amber-900 to-amber-950 border-4 border-amber-800 rounded-xl p-6 shadow-2xl transform transition-all duration-300 hover:scale-105 ring-4 ring-yellow-400/60 magical-glow">
+        <div className="bg-gradient-to-b from-amber-900 to-amber-950 border-4 border-amber-800 rounded-xl p-6 shadow-2xl transform transition-all duration-300 hover:scale-105 ring-4 ring-[#F66200]/60 magical-glow">
           <div className="text-center">
             <div className="text-amber-300 font-semibold text-sm mb-3 tracking-wider font-cinzel">
               UNTIL BITS TECH FEST

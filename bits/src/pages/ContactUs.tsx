@@ -19,21 +19,21 @@ export default function ContactUs() {
         <div className="container mx-auto px-4 py-8 mt-16">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold text-yellow-400 mb-4 font-cinzel">
+              <h1 className="text-4xl font-bold text-[#F66200] mb-4 font-cinzel">
                 Contact Us
               </h1>
             </div>
             <div className="mb-4 text-lg space-y-2">
               <p>
-                <span className="text-yellow-400 font-semibold">Email:</span>
+                <span className="text-[#F66200] font-semibold">Email:</span>
                 <span className="text-white"> <a href="mailto:contact.btf@dubai.bits-pilani.ac.in" className="underline">contact.btf@dubai.bits-pilani.ac.in</a></span>
               </p>
               <p>
-                <span className="text-yellow-400 font-semibold">Phone:</span>
+                <span className="text-[#F66200] font-semibold">Phone:</span>
                 <span className="text-white"> <a href="tel:+971586290281" className="underline">+971 586290281</a></span>
               </p>
               <p>
-                <span className="text-yellow-400 font-semibold">Address:</span><br />
+                <span className="text-[#F66200] font-semibold">Address:</span><br />
                 <span className="text-white">
                   BITS Pilani Dubai Campus,<br />
                   Dubai International Academic City,<br />
@@ -41,7 +41,7 @@ export default function ContactUs() {
                 </span>
               </p>
             </div>
-            <div className="border border-yellow-400/30 rounded overflow-hidden" style={{height: 300}}>
+            <div className="border border-[#F66200]/30 rounded overflow-hidden" style={{height: 300}}>
               <iframe
                 title="BITS Pilani Dubai Campus Map"
                 src="https://www.google.com/maps?q=BITS+Pilani+Dubai+Campus&output=embed"

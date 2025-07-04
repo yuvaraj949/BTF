@@ -13,7 +13,7 @@ interface Particle {
 }
 
 const PARTICLE_COUNT = 30;
-const COLORS = ['#fbbf24', '#fde68a', '#fffbe9']; // yellow, light yellow, off-white
+const COLORS = ['#F66200', '#F66200', '#fffbe9']; // logo orange, logo orange, off-white
 
 function randomBetween(a: number, b: number) {
   return a + Math.random() * (b - a);

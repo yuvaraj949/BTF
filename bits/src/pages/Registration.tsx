@@ -167,7 +167,7 @@ const Registration = () => {
         <div className="container mx-auto px-4 py-8 mt-16">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold text-yellow-400 mb-4 font-cinzel">
+              <h1 className="text-4xl font-bold text-[#F66200] mb-4 font-cinzel">
                 Join BTF 2025
               </h1>
               <p className="text-xl text-gray-300">
@@ -198,9 +198,9 @@ const Registration = () => {
               </Alert>
             )}
 
-            <Card className="bg-black/40 border-yellow-400/20 backdrop-blur-md">
+            <Card className="bg-black/40 border-[#F66200]/20 backdrop-blur-md">
               <CardHeader>
-                <CardTitle className="text-yellow-400 font-cinzel">Registration Form</CardTitle>
+                <CardTitle className="text-[#F66200] font-cinzel">Registration Form</CardTitle>
                 <CardDescription className="text-gray-400">
                   Fill in your details to join the magical journey
                 </CardDescription>
@@ -214,11 +214,11 @@ const Registration = () => {
                         name="firstName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">First Name *</FormLabel>
+                            <FormLabel className="text-[#F66200]">First Name *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                 placeholder="Your first name"
                               />
                             </FormControl>
@@ -231,11 +231,11 @@ const Registration = () => {
                         name="lastName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">Last Name *</FormLabel>
+                            <FormLabel className="text-[#F66200]">Last Name *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                 placeholder="Your last name"
                               />
                             </FormControl>
@@ -251,12 +251,12 @@ const Registration = () => {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">Email *</FormLabel>
+                            <FormLabel className="text-[#F66200]">Email *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
                                 type="email"
-                                className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                 placeholder="your.email@example.com"
                               />
                             </FormControl>
@@ -269,11 +269,11 @@ const Registration = () => {
                         name="phone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">Phone *</FormLabel>
+                            <FormLabel className="text-[#F66200]">Phone *</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                 placeholder="Your phone number"
                               />
                             </FormControl>
@@ -289,11 +289,11 @@ const Registration = () => {
                         name="affiliationType"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">Affiliation Type *</FormLabel>
+                            <FormLabel className="text-[#F66200]">Affiliation Type *</FormLabel>
                             <FormControl>
                               <select
                                 {...field}
-                                className="bg-gray-800/50 border-yellow-400/30 text-white rounded px-3 py-2 w-full"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white rounded px-3 py-2 w-full"
                               >
                                 <option value="university">University/College</option>
                                 <option value="school">School</option>
@@ -309,13 +309,13 @@ const Registration = () => {
                         name="institutionName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">
+                            <FormLabel className="text-[#F66200]">
                               {form.watch('affiliationType') === 'university' ? 'College Name *' : form.watch('affiliationType') === 'school' ? 'School Name *' : 'Company Name *'}
                             </FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                 placeholder={form.watch('affiliationType') === 'university' ? 'Your college name' : form.watch('affiliationType') === 'school' ? 'Your school name' : 'Your company name'}
                               />
                             </FormControl>
@@ -333,11 +333,11 @@ const Registration = () => {
                           name="year"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-yellow-400">Year of Study *</FormLabel>
+                              <FormLabel className="text-[#F66200]">Year of Study *</FormLabel>
                               <FormControl>
                                 <Input 
                                   {...field} 
-                                  className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                  className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                   placeholder="e.g., 2nd Year"
                                 />
                               </FormControl>
@@ -350,11 +350,11 @@ const Registration = () => {
                           name="branch"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-yellow-400">Branch *</FormLabel>
+                              <FormLabel className="text-[#F66200]">Branch *</FormLabel>
                               <FormControl>
                                 <Input 
                                   {...field} 
-                                  className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                  className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                   placeholder="e.g., Computer Science"
                                 />
                               </FormControl>
@@ -371,11 +371,11 @@ const Registration = () => {
                           name="class"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-yellow-400">Class *</FormLabel>
+                              <FormLabel className="text-[#F66200]">Class *</FormLabel>
                               <FormControl>
                                 <Input 
                                   {...field} 
-                                  className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                  className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                   placeholder="e.g., 12th Grade"
                                 />
                               </FormControl>
@@ -392,11 +392,11 @@ const Registration = () => {
                         name="github"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">GitHub</FormLabel>
+                            <FormLabel className="text-[#F66200]">GitHub</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                 placeholder="GitHub profile URL"
                               />
                             </FormControl>
@@ -410,11 +410,11 @@ const Registration = () => {
                         name="linkedin"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">LinkedIn</FormLabel>
+                            <FormLabel className="text-[#F66200]">LinkedIn</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                 placeholder="LinkedIn profile URL"
                               />
                             </FormControl>
@@ -428,11 +428,11 @@ const Registration = () => {
                         name="portfolio"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-yellow-400">Portfolio</FormLabel>
+                            <FormLabel className="text-[#F66200]">Portfolio</FormLabel>
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="bg-gray-800/50 border-yellow-400/30 text-white"
+                                className="bg-gray-800/50 border-[#F66200]/30 text-white"
                                 placeholder="Portfolio website URL"
                               />
                             </FormControl>
@@ -447,11 +447,11 @@ const Registration = () => {
                       name="skills"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-yellow-400">Skills</FormLabel>
+                          <FormLabel className="text-[#F66200]">Skills</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field} 
-                              className="bg-gray-800/50 border-yellow-400/30 text-white"
+                              className="bg-gray-800/50 border-[#F66200]/30 text-white"
                               placeholder="List your technical skills..."
                               rows={3}
                             />
@@ -466,11 +466,11 @@ const Registration = () => {
                       name="experience"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-yellow-400">Experience</FormLabel>
+                          <FormLabel className="text-[#F66200]">Experience</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field} 
-                              className="bg-gray-800/50 border-yellow-400/30 text-white"
+                              className="bg-gray-800/50 border-[#F66200]/30 text-white"
                               placeholder="Tell us about your projects and experience..."
                               rows={3}
                             />
@@ -485,11 +485,11 @@ const Registration = () => {
                       name="expectations"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-yellow-400">Expectations</FormLabel>
+                          <FormLabel className="text-[#F66200]">Expectations</FormLabel>
                           <FormControl>
                             <Textarea 
                               {...field} 
-                              className="bg-gray-800/50 border-yellow-400/30 text-white"
+                              className="bg-gray-800/50 border-[#F66200]/30 text-white"
                               placeholder="What do you expect from BTF 2025?"
                               rows={3}
                             />
@@ -511,7 +511,7 @@ const Registration = () => {
                             />
                           </FormControl>
                           <div className="space-y-1 leading-none">
-                            <FormLabel className="text-yellow-400">
+                            <FormLabel className="text-[#F66200]">
                               I agree to the terms and conditions *
                             </FormLabel>
                           </div>
@@ -523,7 +523,7 @@ const Registration = () => {
                     <Button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="w-full bg-yellow-600 hover:bg-yellow-700 text-black font-bold py-3"
+                      className="w-full bg-[#F66200] hover:bg-orange-700 text-black font-bold py-3"
                     >
                       {isSubmitting ? (
                         <>
