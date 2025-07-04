@@ -7,7 +7,7 @@ interface MagicalElementsProps {
 
 const MagicalElements: React.FC<MagicalElementsProps> = ({ isDayTime }) => {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-10">
       {/* Spider Webs (removed top left and bottom left webs to remove cross marks) */}
       <div className="absolute inset-0">
         {/* Top right corner web */}

@@ -2,7 +2,7 @@ import React from "react";
 
 
 const Footer = () => (
-  <footer className="w-full bg-black/80 text-[#F66200]/80 py-8 px-4 border-t border-[#F66200]/40">
+  <footer className="w-full bg-black/80 text-[#F66200]/80 py-8 px-4 border-t border-[#F66200]/40 relative z-20">
     <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
       <div>
         <div className="text-xl font-bold text-orange-400 mb-2 tracking-wide">BITS TECHFEST</div>

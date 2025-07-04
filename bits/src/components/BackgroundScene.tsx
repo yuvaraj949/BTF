@@ -11,7 +11,7 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
   const parallaxOffset = scrollY * 0.3;
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden">
+    <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
       {/* Dark Night Sky */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-gray-900 to-black" />
       
