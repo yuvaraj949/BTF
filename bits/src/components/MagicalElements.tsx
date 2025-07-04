@@ -59,25 +59,28 @@ const MagicalElements: React.FC<MagicalElementsProps> = ({ isDayTime }) => {
           </div>
         ))}
       </div>
+      {/* Floating particles */}
+      <div className="absolute inset-0">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-pulse opacity-70"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${1 + Math.random() * 3}vw`,
+              height: `${1 + Math.random() * 3}vw`,
+              backgroundColor: isDayTime ? '#fbbf24' : '#f59e0b',
+              borderRadius: '50%',
+              filter: 'blur(2px)',
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
+            }}
+          />
+        ))}   
 
-      {/* Golden Snitch - Enhanced */}
-      <div 
-        className="absolute opacity-90"
-        style={{
-          animation: 'fly-snitch 18s linear infinite',
-          top: '65%'
-        }}
-      >
-        <div className="w-5 h-5 bg-gradient-to-br from-yellow-300 to-yellow-600 rounded-full shadow-xl relative border border-yellow-400/50"
-             style={{ boxShadow: '0 0 16px rgba(234, 179, 8, 0.8)' }}>
-          {/* Wings - more detailed */}
-          <div className="absolute -left-3 top-1 w-4 h-2 bg-gradient-to-br from-yellow-200 to-yellow-300 rounded-full opacity-90 animate-pulse border border-yellow-400/30"></div>
-          <div className="absolute -right-3 top-1 w-4 h-2 bg-gradient-to-bl from-yellow-200 to-yellow-300 rounded-full opacity-90 animate-pulse border border-yellow-400/30"></div>
-          {/* Snitch glow */}
-          <div className="absolute inset-0 bg-yellow-400 rounded-full animate-pulse opacity-50"></div>
-        </div>
       </div>
-    </div>
+    </div>  
   );
 };
 

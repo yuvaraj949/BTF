@@ -31,27 +31,21 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
         ))}
       </div>
 
-      {/* Moving Cloud */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 2 }}>
-        {/* Large moving cloud */}
-        <g style={{
-          transform: `translate(${(scrollY * 0.18) % 1200}px, ${90 + 10 * Math.sin(scrollY / 180)}px)`,
-          transition: 'transform 0.2s linear'
-        }}>
-          <ellipse cx="180" cy="100" rx="60" ry="22" fill="#e0e7ef" opacity="0.85" />
-          <ellipse cx="140" cy="110" rx="28" ry="14" fill="#e0e7ef" opacity="0.7" />
-          <ellipse cx="220" cy="110" rx="32" ry="16" fill="#e0e7ef" opacity="0.7" />
-          <ellipse cx="200" cy="90" rx="18" ry="10" fill="#f8fafc" opacity="0.8" />
-        </g>
-        {/* Small trailing cloud */}
-        <g style={{
-          transform: `translate(${(scrollY * 0.13 + 300) % 1200}px, ${120 + 8 * Math.cos(scrollY / 160)}px)`,
-          transition: 'transform 0.2s linear'
-        }}>
-          <ellipse cx="80" cy="100" rx="22" ry="10" fill="#e0e7ef" opacity="0.7" />
-          <ellipse cx="100" cy="110" rx="12" ry="6" fill="#f8fafc" opacity="0.6" />
-        </g>
-      </svg>
+      {/* Shooting Stars */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(5)].map((_, i) => (  
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-white rounded-full animate-shooting-star"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 70}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${1 + Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>  
       
       {/* Moon */}
       <div
