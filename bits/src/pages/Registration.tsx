@@ -122,8 +122,8 @@ const Registration = () => {
         setResponseMessage(result.message);
         setRegistrationId(result.registrationId || '');
         form.reset();
-        // Force redirect to pass page immediately
-        window.location.href = `/pass/${result.registrationId}`;
+        // Force redirect to pass page immediately (absolute path for Vercel)
+        window.location.href = `${window.location.origin}/pass/${result.registrationId}`;
       } else {
         setSubmitStatus('error');
         setResponseMessage(result.message || 'Registration failed');
