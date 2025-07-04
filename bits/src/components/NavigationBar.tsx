@@ -10,16 +10,16 @@ const NavigationBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 flex items-center justify-center">
+          <a href="/" className="flex items-center space-x-2 group" style={{ fontFamily: 'Cinzel, serif' }}>
+            <span className="w-10 h-10 flex items-center justify-center">
               <img 
                 src="/favicon.ico" 
                 alt="BTF Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
               />
-            </div>
-            <span className="text-[#F66200] font-bold text-xl tracking-wider">BTF 2025</span>
-          </div>
+            </span>
+            <span className="text-[#F66200] font-bold text-xl tracking-wider group-hover:underline">BTF</span>
+          </a>
           
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
