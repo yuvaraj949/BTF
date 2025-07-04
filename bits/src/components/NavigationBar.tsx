@@ -14,7 +14,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ showLogoTitle = true }) =
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Title (animated in/out) */}
-          <div className="flex items-center transition-all duration-500" style={{ opacity: showLogoTitle ? 1 : 0, transform: showLogoTitle ? 'translateY(0)' : 'translateY(-30px)', pointerEvents: showLogoTitle ? 'auto' : 'none' }}>
+          <div className="flex items-center transition-all duration-500" style={{ opacity: showLogoTitle ? 1 : 0, transform: showLogoTitle ? 'translateY(0)' : 'translateY(30px)', pointerEvents: showLogoTitle ? 'auto' : 'none' }}>
             <a href="/" className="flex items-center space-x-2 group" style={{ fontFamily: 'Cinzel, serif' }}>
               <span className="w-10 h-10 flex items-center justify-center">
                 <img 
