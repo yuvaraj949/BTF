@@ -2,13 +2,22 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  heroRef?: React.RefObject<HTMLDivElement>;
+  showLogoTitle?: boolean;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ heroRef, showLogoTitle = true }) => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center text-center px-4">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center text-center px-4">
       <div className="max-w-4xl mx-auto z-10">
-        <h1 className="text-6xl md:text-8xl font-bold text-[#F66200] mb-6 text-shadow-lg tracking-wider">
-          <span className="font-cinzel">BITS TECH FEST</span>
-        </h1>
+        {/* Logo and Title, animated out when scrolled */}
+        <div className={`flex flex-col items-center transition-all duration-500 ${showLogoTitle ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'} mb-4`}>
+          <img src="/favicon.ico" alt="BTF Logo" className="w-20 h-20 mb-2 object-contain" />
+          <h1 className="text-6xl md:text-8xl font-bold text-[#F66200] mb-2 text-shadow-lg tracking-wider">
+            <span className="font-cinzel">BITS TECH FEST</span>
+          </h1>
+        </div>
         <h2 className="text-4xl md:text-6xl font-bold text-white mb-2 text-shadow-lg">
           <span className="font-cinzel">2025</span>
         </h2>

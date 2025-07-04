@@ -9,14 +9,20 @@ import Footer from '../components/Footer';
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isDayTime, setIsDayTime] = useState(false); // Always night for Hogwarts Legacy theme
+  const [heroInView, setHeroInView] = useState(true);
+  const heroRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setScrollY(scrollPosition);
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        setHeroInView(rect.bottom > 80); // 80px for navbar height
+      }
     };
-
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -31,8 +37,8 @@ const Index = () => {
       
       {/* Main Content */}
       <main className="relative z-10 flex-1 flex flex-col">
-        <NavigationBar />
-        <HeroSection />
+        <NavigationBar showLogoTitle={!heroInView} />
+        <HeroSection heroRef={heroRef} showLogoTitle={heroInView} />
         <CountdownTimer />
         
         {/* Content to enable scrolling */}

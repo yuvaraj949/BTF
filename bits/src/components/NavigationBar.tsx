@@ -1,7 +1,11 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const NavigationBar = () => {
+interface NavigationBarProps {
+  showLogoTitle?: boolean;
+}
+
+const NavigationBar: React.FC<NavigationBarProps> = ({ showLogoTitle = true }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -9,17 +13,19 @@ const NavigationBar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-[#F66200]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a href="/" className="flex items-center space-x-2 group" style={{ fontFamily: 'Cinzel, serif' }}>
-            <span className="w-10 h-10 flex items-center justify-center">
-              <img 
-                src="/favicon.ico" 
-                alt="BTF Logo" 
-                className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
-              />
-            </span>
-            <span className="text-[#F66200] font-bold text-xl tracking-wider group-hover:underline">BTF</span>
-          </a>
+          {/* Logo & Title (animated in/out) */}
+          <div className="flex items-center transition-all duration-500" style={{ opacity: showLogoTitle ? 1 : 0, transform: showLogoTitle ? 'translateY(0)' : 'translateY(-30px)', pointerEvents: showLogoTitle ? 'auto' : 'none' }}>
+            <a href="/" className="flex items-center space-x-2 group" style={{ fontFamily: 'Cinzel, serif' }}>
+              <span className="w-10 h-10 flex items-center justify-center">
+                <img 
+                  src="/favicon.ico" 
+                  alt="BTF Logo" 
+                  className="w-10 h-10 object-contain group-hover:scale-105 transition-transform"
+                />
+              </span>
+              <span className="text-[#F66200] font-bold text-xl tracking-wider group-hover:underline">BITS TECH FEST</span>
+            </a>
+          </div>
           
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
