@@ -30,7 +30,30 @@ async function startServer() {
     await mongoose.connect(process.env.MONGODB_URI_UNI || '');
     console.log('MongoDB connected successfully');
     const db2025 = mongoose.connection.useDb('2025');
+
     Registration = db2025.model<IRegistration>('Registration', registrationSchema);
+
+    // Ensure the database and collection exist by inserting and deleting a dummy doc
+    try {
+      const dummy = new Registration({
+        firstName: 'dummy',
+        lastName: 'dummy',
+        email: 'dummy@dummy.com',
+        phone: '0000000000',
+        affiliationType: 'university',
+        institutionName: 'dummy',
+        role: 'dummy',
+        interestedEvents: [],
+        agreeTerms: true,
+        registrationId: 'DUMMY',
+        registrationDate: new Date()
+      });
+      await dummy.save();
+      await Registration.deleteOne({ registrationId: 'DUMMY' });
+      console.log('Database and Registration collection ensured.');
+    } catch (e) {
+      console.warn('Could not ensure db/collection:', e);
+    }
 
     // --- GENERAL REGISTRATION ROUTE ---
     app.post('/api/register', async (req, res) => {
