@@ -66,10 +66,10 @@ async function sendRegistrationConfirmationEmail(
   registrationData: any
 ): Promise<boolean> {
   try {
-    // Generate QR code as data URL (for email compatibility, no external requests)
-    const qrDataUrl = await QRCode.toDataURL(registrationId, {
+    // Generate QR code as a buffer (for attachment)
+    const qrBuffer = await QRCode.toBuffer(registrationId, {
       color: {
-        dark: '#FFD600', // yellow
+        dark: '#F66200', // logo orange
         light: '#000000' // black background
       },
       margin: 2,
@@ -80,35 +80,42 @@ async function sendRegistrationConfirmationEmail(
       to: recipient,
       subject: 'Your BITS Event 2025 Registration Confirmation',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background: #181818; color: #FFD600;">
-          <h2 style="color: #FFD600; text-align: center;">Registration Confirmation</h2>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background: #181818; color: #F66200;">
+          <h2 style="color: #F66200; text-align: center;">Registration Confirmation</h2>
           <p>Dear ${firstName},</p>
           <p>Thank you for registering for BITS Event 2025!</p>
           <div style="background-color: #111; padding: 15px; margin: 15px 0; border-radius: 5px;">
             <p style='color:#fff;'><strong>Event Date:</strong> Nov 19, 2025</p>
             <p style='color:#fff;'><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
-            <p><strong>Your Registration ID:</strong> <span style="color:#FFD600">${registrationId}</span></p>
+            <p><strong>Your Registration ID:</strong> <span style="color:#F66200">${registrationId}</span></p>
             <div style="text-align:center; margin: 10px 0;">
-              <img src="${qrDataUrl}" alt="QR Code" style="width:120px; height:120px; background:#000; padding:8px; border-radius:32px; box-shadow:0 0 0 6px #FFD600, 0 0 0 14px #181818;" />
+              <img src="cid:qrimage" alt="QR Code" style="width:120px; height:120px; background:#000; padding:8px; border-radius:32px; box-shadow:0 0 0 6px #F66200, 0 0 0 14px #181818;" />
             </div>
           </div>
           <p><b>Your Details:</b></p>
           <ul>
-            <li><b>Name:</b> <span style='color:#FFD600;'>${registrationData.firstName} ${registrationData.lastName}</span></li>
-            <li><b>Email:</b> <a href='mailto:${registrationData.email}' style='color:#FFD600;'>${registrationData.email}</a></li>
-            <li><b>Phone:</b> <span style='color:#FFD600;'>${registrationData.phone}</span></li>
-            <li><b>Affiliation:</b> <span style='color:#FFD600;'>${registrationData.affiliationType} - ${registrationData.institutionName}</span></li>
-            <li><b>Role:</b> <span style='color:#FFD600;'>${registrationData.role || '-'}</span></li>
-            <li><b>Interested Events:</b> <span style='color:#FFD600;'>${(registrationData.interestedEvents || []).join(', ') || '-'}</span></li>
+            <li><b>Name:</b> <span style='color:#F66200;'>${registrationData.firstName} ${registrationData.lastName}</span></li>
+            <li><b>Email:</b> <a href='mailto:${registrationData.email}' style='color:#F66200;'>${registrationData.email}</a></li>
+            <li><b>Phone:</b> <span style='color:#F66200;'>${registrationData.phone}</span></li>
+            <li><b>Affiliation:</b> <span style='color:#F66200;'>${registrationData.affiliationType} - ${registrationData.institutionName}</span></li>
+            <li><b>Role:</b> <span style='color:#F66200;'>${registrationData.role || '-'}</span></li>
+            <li><b>Interested Events:</b> <span style='color:#F66200;'>${(registrationData.interestedEvents || []).join(', ') || '-'}</span></li>
           </ul>
-          <p style="color:#FFD600; font-size:13px; margin:10px 0 0 0;">Please carry this pass with you while attending the event.</p>
+          <p style="color:#F66200; font-size:13px; margin:10px 0 0 0;">Please carry this pass with you while attending the event.</p>
           <div style="margin:18px 0 0 0; text-align:center;">
-            <a href="https://btf-2025.vercel.app/pass/${registrationId}" style="background:#FFD600; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
+            <a href="https://btf-2025.vercel.app/pass/${registrationId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
           </div>
           <p style="margin-top:18px; color:#aaa;">If you have any questions, feel free to reply to this email.</p>
           <p style="margin-top:8px;">Best regards,<br/>BITS Event Team</p>
         </div>
-      `
+      `,
+      attachments: [
+        {
+          filename: 'qrcode.png',
+          content: qrBuffer,
+          cid: 'qrimage'
+        }
+      ]
     };
     await transporter.sendMail(mailOptions);
     return true;
