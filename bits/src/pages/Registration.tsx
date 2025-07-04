@@ -115,9 +115,27 @@ const Registration = () => {
         body: JSON.stringify(payload),
       });
 
-      const result: RegistrationResponse = await response.json();
+      // Log status and response for debugging
+      console.log('API response status:', response.status);
+      let result: RegistrationResponse | null = null;
+      let errorText = '';
+      try {
+        result = await response.json();
+      } catch (jsonErr) {
+        errorText = await response.text();
+        console.error('Failed to parse JSON:', jsonErr, 'Raw response:', errorText);
+      }
 
-      if (result.success) {
+      if (!response.ok) {
+        setSubmitStatus('error');
+        setResponseMessage(
+          `Server error (${response.status}): ${result?.message || errorText || 'Unknown error.'}`
+        );
+        console.error('Server error:', response.status, result, errorText);
+        return;
+      }
+
+      if (result && result.success) {
         setSubmitStatus('success');
         setResponseMessage(result.message);
         setRegistrationId(result.registrationId || '');
@@ -127,7 +145,8 @@ const Registration = () => {
         window.location.href = `${window.location.origin}/pass/${result.registrationId}`;
       } else {
         setSubmitStatus('error');
-        setResponseMessage(result.message || 'Registration failed');
+        setResponseMessage(result?.message || 'Registration failed');
+        console.error('Registration failed:', result);
       }
     } catch (error) {
       setSubmitStatus('error');
