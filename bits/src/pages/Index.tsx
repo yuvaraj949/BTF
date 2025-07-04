@@ -3,7 +3,7 @@ import NavigationBar from '../components/NavigationBar';
 import HeroSection from '../components/HeroSection';
 import CountdownTimer from '../components/CountdownTimer';
 import BackgroundScene from '../components/BackgroundScene';
-import MagicalElements from '../components/MagicalElements';
+// import MagicalElements from '../components/MagicalElements';
 import Footer from '../components/Footer';
 
 const Index = () => {
@@ -25,8 +25,7 @@ const Index = () => {
       {/* Magical Background */}
       <BackgroundScene isDayTime={isDayTime} scrollY={scrollY} />
       
-      {/* Magical Elements Overlay */}
-      <MagicalElements isDayTime={isDayTime} />
+      {/* Magical Elements Overlay removed */}
       
       {/* Harry Potter Character removed as requested */}
       
