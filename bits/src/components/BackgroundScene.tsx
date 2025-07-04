@@ -1,5 +1,6 @@
 
 import React from 'react';
+import SmoothMagicalParticles from './SmoothMagicalParticles';
 
 interface BackgroundSceneProps {
   isDayTime: boolean;
@@ -129,21 +130,8 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
         </svg>
       </div>
       
-      {/* Floating magical particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 rounded-full bg-amber-300 animate-pulse opacity-70"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+      {/* Floating magical particles (smooth, scroll-matched, persistent) */}
+      <SmoothMagicalParticles scrollY={scrollY} />
     </div>
   );
 };

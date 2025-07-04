@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
 import Registration from './models/Registration';
+import QRCode from 'qrcode';
 
 dotenv.config();
 
@@ -65,9 +66,15 @@ async function sendRegistrationConfirmationEmail(
   registrationData: any
 ): Promise<boolean> {
   try {
-    // Generate QR code as data URL (using Google Chart API for email compatibility)
-    // Use Google Chart API for QR, with a white background and more rounded border (simulate with border-radius and box-shadow)
-    const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chco=FFD600,000000&chld=H|0&chl=${encodeURIComponent(registrationId)}`;
+    // Generate QR code as data URL (for email compatibility, no external requests)
+    const qrDataUrl = await QRCode.toDataURL(registrationId, {
+      color: {
+        dark: '#FFD600', // yellow
+        light: '#000000' // black background
+      },
+      margin: 2,
+      width: 200
+    });
     const mailOptions = {
       from: `"BITS Event 2025" <${process.env.EMAIL_USER}>`,
       to: recipient,
@@ -82,7 +89,7 @@ async function sendRegistrationConfirmationEmail(
             <p style='color:#fff;'><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
             <p><strong>Your Registration ID:</strong> <span style="color:#FFD600">${registrationId}</span></p>
             <div style="text-align:center; margin: 10px 0;">
-              <img src="${qrUrl}" alt="QR Code" style="width:120px; height:120px; background:#000; padding:8px; border-radius:32px; box-shadow:0 0 0 6px #FFD600, 0 0 0 14px #181818;" />
+              <img src="${qrDataUrl}" alt="QR Code" style="width:120px; height:120px; background:#000; padding:8px; border-radius:32px; box-shadow:0 0 0 6px #FFD600, 0 0 0 14px #181818;" />
             </div>
           </div>
           <p><b>Your Details:</b></p>

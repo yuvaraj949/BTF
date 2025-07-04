@@ -14,8 +14,8 @@ const HeroSection = () => {
         </h2>
         {/* Event Date Below Year */}
         <div className="mb-8">
-          <span className="inline-block bg-yellow-900/80 text-yellow-200 font-bold rounded-lg px-4 py-2 text-lg shadow-md font-cinzel">
-            Nov 13–15, 2025
+          <span className="text-yellow-300 font-bold text-lg font-cinzel">
+            Nov 13–15
           </span>
         </div>
         <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed max-w-3xl mx-auto font-cinzel">
