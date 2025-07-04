@@ -66,7 +66,8 @@ async function sendRegistrationConfirmationEmail(
 ): Promise<boolean> {
   try {
     // Generate QR code as data URL (using Google Chart API for email compatibility)
-    const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(registrationId)}`;
+    // Use Google Chart API for QR, with a white background and more rounded border (simulate with border-radius and box-shadow)
+    const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chco=FFD600,000000&chld=H|0&chl=${encodeURIComponent(registrationId)}`;
     const mailOptions = {
       from: `"BITS Event 2025" <${process.env.EMAIL_USER}>`,
       to: recipient,
@@ -77,23 +78,23 @@ async function sendRegistrationConfirmationEmail(
           <p>Dear ${firstName},</p>
           <p>Thank you for registering for BITS Event 2025!</p>
           <div style="background-color: #23272F; padding: 15px; margin: 15px 0; border-radius: 5px;">
-            <p><strong>Event Date:</strong> Nov 19, 2025</p>
-            <p><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
+            <p style='color:#fff;'><strong>Event Date:</strong> Nov 19, 2025</p>
+            <p style='color:#fff;'><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
             <p><strong>Your Registration ID:</strong> <span style="color:#FFD600">${registrationId}</span></p>
             <div style="text-align:center; margin: 10px 0;">
-              <img src="${qrUrl}" alt="QR Code" style="width:120px; height:120px; background:#000; padding:8px; border-radius:12px;" />
+              <img src="${qrUrl}" alt="QR Code" style="width:120px; height:120px; background:#000; padding:8px; border-radius:32px; box-shadow:0 0 0 6px #FFD600, 0 0 0 14px #181818;" />
             </div>
           </div>
           <p><b>Your Details:</b></p>
           <ul>
-            <li><b>Name:</b> ${registrationData.firstName} ${registrationData.lastName}</li>
-            <li><b>Email:</b> ${registrationData.email}</li>
-            <li><b>Phone:</b> ${registrationData.phone}</li>
-            <li><b>Affiliation:</b> ${registrationData.affiliationType} - ${registrationData.institutionName}</li>
-            <li><b>Role:</b> ${registrationData.role || '-'}</li>
-            <li><b>Interested Events:</b> ${(registrationData.interestedEvents || []).join(', ') || '-'}</li>
+            <li><b>Name:</b> <span style='color:#FFD600;'>${registrationData.firstName} ${registrationData.lastName}</span></li>
+            <li><b>Email:</b> <a href='mailto:${registrationData.email}' style='color:#FFD600;'>${registrationData.email}</a></li>
+            <li><b>Phone:</b> <span style='color:#FFD600;'>${registrationData.phone}</span></li>
+            <li><b>Affiliation:</b> <span style='color:#FFD600;'>${registrationData.affiliationType} - ${registrationData.institutionName}</span></li>
+            <li><b>Role:</b> <span style='color:#FFD600;'>${registrationData.role || '-'}</span></li>
+            <li><b>Interested Events:</b> <span style='color:#FFD600;'>${(registrationData.interestedEvents || []).join(', ') || '-'}</span></li>
           </ul>
-          <p style="color:#FFD600; font-size:13px; margin:10px 0 0 0;">Please carry this pass with you while joining the event.</p>
+          <p style="color:#FFD600; font-size:13px; margin:10px 0 0 0;">Please carry this pass with you while attending the event.</p>
           <div style="margin:18px 0 0 0; text-align:center;">
             <a href="https://btf-2025.vercel.app/pass/${registrationId}" style="background:#FFD600; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
           </div>

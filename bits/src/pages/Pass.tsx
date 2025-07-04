@@ -44,7 +44,9 @@ const Pass: React.FC = () => {
 
   const downloadPDF = async () => {
     if (!passRef.current) return;
-    const canvas = await html2canvas(passRef.current);
+    // Use higher scale for better quality
+    const scale = 3;
+    const canvas = await html2canvas(passRef.current, { scale });
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
     const width = pdf.internal.pageSize.getWidth();
@@ -75,7 +77,7 @@ const Pass: React.FC = () => {
             <li><b>Role:</b> {data.role || '-'}</li>
             <li><b>Interested Events:</b> {(data.interestedEvents || []).join(', ') || '-'}</li>
           </ul>
-          <div className="text-yellow-200 text-xs mb-2">Please carry this pass with you while joining the event.</div>
+          <div className="text-yellow-200 text-xs mb-2">Please carry this pass with you while attending the event.</div>
         </div>
         <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded shadow">Download PDF</button>
       </main>
