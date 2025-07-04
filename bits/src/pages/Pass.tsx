@@ -27,7 +27,12 @@ const Pass: React.FC = () => {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`/api/registration/${id}`)
+    // Use full API URL in production, relative in dev
+    const apiUrl =
+      window.location.hostname === 'localhost'
+        ? `/api/registration/${id}`
+        : `https://btf-server-2025.vercel.app/api/registration/${id}`;
+    fetch(apiUrl)
       .then(res => res.json())
       .then(json => {
         if (json.registrationId) setData(json);
