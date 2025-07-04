@@ -59,28 +59,7 @@ const MagicalElements: React.FC<MagicalElementsProps> = ({ isDayTime }) => {
           </div>
         ))}
       </div>
-      {/* Floating particles */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-pulse opacity-70"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${1 + Math.random() * 3}vw`,
-              height: `${1 + Math.random() * 3}vw`,
-              backgroundColor: isDayTime ? '#fbbf24' : '#f59e0b',
-              borderRadius: '50%',
-              filter: 'blur(2px)',
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
-        ))}   
-
-      </div>
-    </div>  
+    </div>
   );
 };
 

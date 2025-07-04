@@ -30,22 +30,6 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
           />
         ))}
       </div>
-
-      {/* Shooting Stars */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(5)].map((_, i) => (  
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-white rounded-full animate-shooting-star"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 70}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${1 + Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>  
       
       {/* Moon */}
       <div
