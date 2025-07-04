@@ -3,11 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
-import type { Model } from 'mongoose';
+import Registration from './models/Registration';
 import QRCode from 'qrcode';
-import type { IRegistration } from './models/Registration';
-import { registrationSchema } from './models/Registration';
-let Registration: Model<IRegistration>;
 
 dotenv.config();
 
@@ -22,136 +19,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
-
-
-// Connect to MongoDB, then switch to '2025' db and re-initialize Registration model
-async function startServer() {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI_UNI || '');
-    console.log('MongoDB connected successfully');
-    const db2025 = mongoose.connection.useDb('2025');
-
-    Registration = db2025.model<IRegistration>('Registration', registrationSchema);
-
-    // Ensure the database and collection exist by inserting and deleting a dummy doc
-    try {
-      const dummy = new Registration({
-        firstName: 'dummy',
-        lastName: 'dummy',
-        email: 'dummy@dummy.com',
-        phone: '0000000000',
-        affiliationType: 'university',
-        institutionName: 'dummy',
-        role: 'dummy',
-        interestedEvents: [],
-        agreeTerms: true,
-        registrationId: 'DUMMY',
-        registrationDate: new Date()
-      });
-      await dummy.save();
-      await Registration.deleteOne({ registrationId: 'DUMMY' });
-      console.log('Database and Registration collection ensured.');
-    } catch (e) {
-      console.warn('Could not ensure db/collection:', e);
-    }
-
-    // --- GENERAL REGISTRATION ROUTE ---
-    app.post('/api/register', async (req, res) => {
-      const {
-        firstName,
-        lastName,
-        email,
-        phone,
-        affiliationType,
-        institutionName,
-        role,
-        interestedEvents,
-        agreeTerms
-      } = req.body;
-
-      // Basic validation
-      if (!firstName || !lastName || !email || !phone || !affiliationType || !institutionName || typeof agreeTerms !== 'boolean') {
-        return res.status(400).json({ message: 'Missing required fields.' });
-      }
-      if (!['company', 'university', 'school'].includes(affiliationType)) {
-        return res.status(400).json({ message: 'Invalid affiliation type.' });
-      }
-      if (!agreeTerms) {
-        return res.status(400).json({ message: 'You must agree to the terms.' });
-      }
-
-      try {
-        const registrationId = await generateRegistrationId();
-        const registration = new Registration({
-          firstName,
-          lastName,
-          email,
-          phone,
-          affiliationType,
-          institutionName,
-          role,
-          interestedEvents,
-          agreeTerms,
-          registrationId
-        });
-        await registration.save();
-
-        // Send confirmation email
-        await sendRegistrationConfirmationEmail(
-          email,
-          firstName,
-          registrationId,
-          req.body
-        );
-
-        res.status(201).json({
-          message: 'Registration successful',
-          registrationId,
-          email
-        });
-      } catch (error) {
-        console.error('Registration error:', error);
-        res.status(500).json({ message: 'Server error during registration' });
-      }
-    });
-
-    // Get registration details
-    app.get('/api/registration/:id', async (req, res) => {
-      try {
-        const registration = await Registration.findOne({ registrationId: req.params.id });
-        if (!registration) {
-          return res.status(404).json({ message: 'Registration not found' });
-        }
-        res.json({
-          firstName: registration.firstName,
-          lastName: registration.lastName,
-          email: registration.email,
-          phone: registration.phone,
-          affiliationType: registration.affiliationType,
-          institutionName: registration.institutionName,
-          role: registration.role,
-          interestedEvents: registration.interestedEvents,
-          agreeTerms: registration.agreeTerms,
-          registrationId: registration.registrationId,
-          registrationDate: registration.registrationDate
-        });
-      } catch (error) {
-        console.error('Error fetching registration:', error);
-        res.status(500).json({ message: 'Server error' });
-      }
-    });
-
-    if (process.env.NODE_ENV !== 'production') {
-      app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-      });
-    }
-  } catch (err) {
-    console.error('MongoDB connection error:', err);
-  }
-}
-
-startServer();
+mongoose.connect(process.env.MONGODB_URI_UNI || '')
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 
 // Generate registration ID in ascending order (no clashes)
@@ -261,6 +131,91 @@ app.get('/', (req, res) => {
   res.send('api active');
 });
 
+// --- GENERAL REGISTRATION ROUTE ---
+app.post('/api/register', async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    affiliationType,
+    institutionName,
+    role,
+    interestedEvents,
+    agreeTerms
+  } = req.body;
+
+  // Basic validation
+  if (!firstName || !lastName || !email || !phone || !affiliationType || !institutionName || typeof agreeTerms !== 'boolean') {
+    return res.status(400).json({ message: 'Missing required fields.' });
+  }
+  if (!['company', 'university', 'school'].includes(affiliationType)) {
+    return res.status(400).json({ message: 'Invalid affiliation type.' });
+  }
+  if (!agreeTerms) {
+    return res.status(400).json({ message: 'You must agree to the terms.' });
+  }
+
+  try {
+    const registrationId = await generateRegistrationId();
+    const registration = new Registration({
+      firstName,
+      lastName,
+      email,
+      phone,
+      affiliationType,
+      institutionName,
+      role,
+      interestedEvents,
+      agreeTerms,
+      registrationId
+    });
+    await registration.save();
+
+    // Send confirmation email
+    await sendRegistrationConfirmationEmail(
+      email,
+      firstName,
+      registrationId,
+      req.body
+    );
+
+    res.status(201).json({
+      message: 'Registration successful',
+      registrationId,
+      email
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'Server error during registration' });
+  }
+});
+
+// Get registration details
+app.get('/api/registration/:id', async (req, res) => {
+  try {
+    const registration = await Registration.findOne({ registrationId: req.params.id });
+    if (!registration) {
+      return res.status(404).json({ message: 'Registration not found' });
+    }
+    res.json({
+      firstName: registration.firstName,
+      lastName: registration.lastName,
+      email: registration.email,
+      phone: registration.phone,
+      affiliationType: registration.affiliationType,
+      institutionName: registration.institutionName,
+      role: registration.role,
+      interestedEvents: registration.interestedEvents,
+      agreeTerms: registration.agreeTerms,
+      registrationId: registration.registrationId,
+      registrationDate: registration.registrationDate
+    });
+  } catch (error) {
+    console.error('Error fetching registration:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
