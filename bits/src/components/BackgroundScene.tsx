@@ -1,6 +1,5 @@
-
-
 import React from 'react';
+
 interface BackgroundSceneProps {
   isDayTime: boolean;
   scrollY: number;
