@@ -135,7 +135,9 @@ const Registration = () => {
         return;
       }
 
-      if (result && result.success) {
+      // Accept both the old and new API response formats
+      const isSuccess = (result && (result.success === true || (response.status === 201 && result.registrationId && result.message && result.message.toLowerCase().includes('success'))));
+      if (isSuccess) {
         setSubmitStatus('success');
         setResponseMessage(result.message);
         setRegistrationId(result.registrationId || '');
