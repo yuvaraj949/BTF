@@ -116,7 +116,7 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
       </div>
       
       {/* Floating magical particles (smooth, scroll-matched, persistent) */}
-      <SmoothMagicalParticles scrollY={scrollY} />
+      <SmoothMagicalParticles scrollY={-scrollY} />
     </div>
   );
 };
