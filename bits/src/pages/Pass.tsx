@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import QRCode from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Footer from '../components/Footer';
@@ -57,7 +57,7 @@ const Pass: React.FC = () => {
         <div ref={passRef} className="bg-gradient-to-br from-yellow-900/80 to-black/90 rounded-xl shadow-lg p-8 max-w-md w-full border border-yellow-700">
           <h2 className="text-2xl font-bold text-yellow-400 text-center mb-2 font-cinzel">BITS TECHFEST 2025 PASS</h2>
           <div className="flex justify-center mb-4">
-            <QRCode value={data.registrationId} size={120} bgColor="#000" fgColor="#FFD600" />
+            <QRCodeSVG value={data.registrationId} size={120} bgColor="#000" fgColor="#FFD600" />
           </div>
           <div className="text-center mb-2">
             <span className="font-semibold">Registration ID:</span> <span className="text-yellow-300">{data.registrationId}</span>
