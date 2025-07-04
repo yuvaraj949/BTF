@@ -18,7 +18,7 @@ const Index = () => {
       setScrollY(scrollPosition);
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
-        setHeroInView(rect.bottom > 40); // 40px for navbar height, triggers earlier
+        setHeroInView(rect.bottom > 10); // 40px for navbar height, triggers earlier
       }
     };
     window.addEventListener('scroll', handleScroll);
