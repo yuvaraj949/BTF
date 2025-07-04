@@ -22,8 +22,25 @@ mongoose.connect(process.env.MONGODB_URI_UNI || '')
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-const generateRegistrationId = (): string => {
-  return `BTF25-${Math.floor(100000 + Math.random() * 900000)}`;
+
+// Generate registration ID in ascending order (no clashes)
+const generateRegistrationId = async (): Promise<string> => {
+  // Find the latest registration
+  const latest = await Registration.findOne({})
+    .sort({ registrationDate: -1 })
+    .select('registrationId')
+    .lean();
+  let nextNumber = 1;
+  if (latest && latest.registrationId) {
+    // Extract the number part from the registrationId (e.g., BTF25-000001)
+    const match = latest.registrationId.match(/BTF25-(\d{6})/);
+    if (match) {
+      nextNumber = parseInt(match[1], 10) + 1;
+    }
+  }
+  // Pad with leading zeros
+  const nextId = `BTF25-${String(nextNumber).padStart(6, '0')}`;
+  return nextId;
 };
 
 const transporter = nodemailer.createTransport({
@@ -48,19 +65,24 @@ async function sendRegistrationConfirmationEmail(
   registrationData: any
 ): Promise<boolean> {
   try {
+    // Generate QR code as data URL (using Google Chart API for email compatibility)
+    const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(registrationId)}`;
     const mailOptions = {
       from: `"BITS Event 2025" <${process.env.EMAIL_USER}>`,
       to: recipient,
       subject: 'Your BITS Event 2025 Registration Confirmation',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-          <h2 style="color: #333; text-align: center;">Registration Confirmation</h2>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background: #181818; color: #FFD600;">
+          <h2 style="color: #FFD600; text-align: center;">Registration Confirmation</h2>
           <p>Dear ${firstName},</p>
           <p>Thank you for registering for BITS Event 2025!</p>
-          <div style="background-color: #f5f5f5; padding: 15px; margin: 15px 0; border-radius: 5px;">
+          <div style="background-color: #23272F; padding: 15px; margin: 15px 0; border-radius: 5px;">
             <p><strong>Event Date:</strong> Nov 19, 2025</p>
             <p><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
-            <p><strong>Your Registration ID:</strong> ${registrationId}</p>
+            <p><strong>Your Registration ID:</strong> <span style="color:#FFD600">${registrationId}</span></p>
+            <div style="text-align:center; margin: 10px 0;">
+              <img src="${qrUrl}" alt="QR Code" style="width:120px; height:120px; background:#000; padding:8px; border-radius:12px;" />
+            </div>
           </div>
           <p><b>Your Details:</b></p>
           <ul>
@@ -71,9 +93,12 @@ async function sendRegistrationConfirmationEmail(
             <li><b>Role:</b> ${registrationData.role || '-'}</li>
             <li><b>Interested Events:</b> ${(registrationData.interestedEvents || []).join(', ') || '-'}</li>
           </ul>
-          <p>We're excited to have you join us. Please save your registration ID for future reference.</p>
-          <p>If you have any questions, feel free to reply to this email.</p>
-          <p>Best regards,<br/>BITS Event Team</p>
+          <p style="color:#FFD600; font-size:13px; margin:10px 0 0 0;">Please carry this pass with you while joining the event.</p>
+          <div style="margin:18px 0 0 0; text-align:center;">
+            <a href="https://btf-2025.vercel.app/pass/${registrationId}" style="background:#FFD600; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
+          </div>
+          <p style="margin-top:18px; color:#aaa;">If you have any questions, feel free to reply to this email.</p>
+          <p style="margin-top:8px;">Best regards,<br/>BITS Event Team</p>
         </div>
       `
     };
@@ -117,7 +142,7 @@ app.post('/api/register', async (req, res) => {
   }
 
   try {
-    const registrationId = generateRegistrationId();
+    const registrationId = await generateRegistrationId();
     const registration = new Registration({
       firstName,
       lastName,
@@ -131,7 +156,6 @@ app.post('/api/register', async (req, res) => {
       registrationId
     });
     await registration.save();
-
 
     // Send confirmation email
     await sendRegistrationConfirmationEmail(

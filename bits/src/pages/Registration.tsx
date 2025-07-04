@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -44,6 +45,7 @@ interface RegistrationResponse {
 }
 
 const Registration = () => {
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [responseMessage, setResponseMessage] = useState('');
@@ -120,6 +122,10 @@ const Registration = () => {
         setResponseMessage(result.message);
         setRegistrationId(result.registrationId || '');
         form.reset();
+        // Show loading for 1s, then redirect to pass page
+        setTimeout(() => {
+          navigate(`/pass/${result.registrationId}`);
+        }, 1000);
       } else {
         setSubmitStatus('error');
         setResponseMessage(result.message || 'Registration failed');
