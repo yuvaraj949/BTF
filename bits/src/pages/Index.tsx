@@ -35,16 +35,11 @@ const Index = () => {
         <NavigationBar />
         <HeroSection />
         <CountdownTimer />
-        <div className="text-center mt-2">
-          <span className="inline-block bg-yellow-900/80 text-yellow-200 font-bold rounded-lg px-4 py-2 text-lg shadow-md font-cinzel">
-            Nov 13–15, 2025
-          </span>
-        </div>
         
         {/* Content to enable scrolling */}
         <div className="bg-gradient-to-b from-transparent to-gray-900/40">
           <div className="text-center text-white max-w-4xl mx-auto px-4 min-h-[60vh] flex flex-col justify-center items-center">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg font-cinzel">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-yellow-400 text-shadow-lg font-cinzel">
               Join the Magic
             </h2>
             <p className="text-xl md:text-2xl opacity-90 leading-relaxed font-cinzel">
@@ -54,7 +49,7 @@ const Index = () => {
           </div>
           {/* About Section */}
           <div className="max-w-2xl mx-auto py-24 px-4 text-white font-cinzel" id="about">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400">About BTF</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400 text-center">About BTF</h1>
             <p className="mb-4 text-lg">
               <b>BTF</b> is Dubai's only tech fest, bringing together innovators, students, and professionals for a unique celebration of technology and creativity. With <span className="text-yellow-400 font-bold">180+ participants</span> in previous editions, BTF stands as the region's premier platform for tech enthusiasts to learn, compete, and network.
             </p>
@@ -64,7 +59,7 @@ const Index = () => {
           </div>
           {/* Tracks Section */}
           <div className="max-w-2xl mx-auto py-24 px-4 text-white font-cinzel" id="tracks">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400">Tracks</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400 text-center">Tracks</h1>
             <p className="mb-4 text-lg">Choose from a variety of competition tracks. <span className='text-yellow-400 font-bold'>180+ participants</span> joined us last year!</p>
             <ul className="space-y-4">
               {[{title: "Artificial Intelligence", description: "Explore the latest in AI, machine learning, and data science."}, {title: "Internet of Things", description: "Innovate with IoT devices, smart systems, and automation."}, {title: "Sustainability", description: "Build solutions for a greener, more sustainable future."}].map((track) => (
@@ -77,7 +72,7 @@ const Index = () => {
           </div>
           {/* Sponsors Section */}
           <div className="max-w-2xl mx-auto py-24 px-4 text-white font-cinzel" id="sponsors">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400">Sponsors</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-400 text-center">Sponsors</h1>
             <ul className="flex flex-wrap gap-8 items-center justify-center">
               <li className="flex flex-col items-center bg-black/40 rounded p-4">
                 <img src="/hpe-aruba-logo.jpeg" alt="HPE Aruba Networking" className="mb-2" />
