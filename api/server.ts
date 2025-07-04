@@ -77,7 +77,7 @@ async function sendRegistrationConfirmationEmail(
           <h2 style="color: #FFD600; text-align: center;">Registration Confirmation</h2>
           <p>Dear ${firstName},</p>
           <p>Thank you for registering for BITS Event 2025!</p>
-          <div style="background-color: #23272F; padding: 15px; margin: 15px 0; border-radius: 5px;">
+          <div style="background-color: #111; padding: 15px; margin: 15px 0; border-radius: 5px;">
             <p style='color:#fff;'><strong>Event Date:</strong> Nov 19, 2025</p>
             <p style='color:#fff;'><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
             <p><strong>Your Registration ID:</strong> <span style="color:#FFD600">${registrationId}</span></p>

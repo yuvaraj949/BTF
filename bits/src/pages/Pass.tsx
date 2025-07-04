@@ -64,7 +64,9 @@ const Pass: React.FC = () => {
         <div ref={passRef} className="bg-gradient-to-br from-yellow-900/80 to-black/90 rounded-xl shadow-lg p-8 max-w-md w-full border border-yellow-700">
           <h2 className="text-2xl font-bold text-yellow-400 text-center mb-2 font-cinzel">BITS TECHFEST 2025 PASS</h2>
           <div className="flex justify-center mb-4">
-            <QRCodeSVG value={data.registrationId} size={120} bgColor="#000" fgColor="#FFD600" />
+            <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #FFD600, 0 0 0 14px #181818' }}>
+              <QRCodeSVG value={data.registrationId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
+            </div>
           </div>
           <div className="text-center mb-2">
             <span className="font-semibold">Registration ID:</span> <span className="text-yellow-300">{data.registrationId}</span>
