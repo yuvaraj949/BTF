@@ -19,8 +19,14 @@ app.use(cors({
 }));
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI_UNI || '')
-  .then(() => console.log('MongoDB connected successfully'))
+// Always use the 2025 database, regardless of the original DB in the URI
+let baseUri = process.env.MONGODB_URI_UNI || '';
+if (baseUri) {
+  // Replace the database name in the URI with '2025'
+  baseUri = baseUri.replace(/(mongodb(?:\+srv)?:\/\/[^/]+)\/(\w+)/, '$1/2025');
+}
+mongoose.connect(baseUri)
+  .then(() => console.log('MongoDB connected to 2025 database successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 
