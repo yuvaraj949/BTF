@@ -35,6 +35,11 @@ const Index = () => {
         <NavigationBar />
         <HeroSection />
         <CountdownTimer />
+        <div className="text-center mt-2">
+          <span className="inline-block bg-yellow-900/80 text-yellow-200 font-bold rounded-lg px-4 py-2 text-lg shadow-md font-cinzel">
+            Nov 13–15, 2025
+          </span>
+        </div>
         
         {/* Content to enable scrolling */}
         <div className="bg-gradient-to-b from-transparent to-gray-900/40">

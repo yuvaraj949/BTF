@@ -10,7 +10,8 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    const targetDate = new Date('2025-11-09T00:00:00');
+    // Countdown to the start of the event: Nov 13, 2025, 00:00
+    const targetDate = new Date('2025-11-13T00:00:00');
     
     const timer = setInterval(() => {
       const now = new Date().getTime();

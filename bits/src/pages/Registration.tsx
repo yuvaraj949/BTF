@@ -122,6 +122,7 @@ const Registration = () => {
         setResponseMessage(result.message);
         setRegistrationId(result.registrationId || '');
         form.reset();
+        console.log('Registration API result:', result);
         // Force redirect to pass page immediately (absolute path for Vercel)
         window.location.href = `${window.location.origin}/pass/${result.registrationId}`;
       } else {
