@@ -3,8 +3,11 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
-import Registration from './models/Registration';
+import type { Model } from 'mongoose';
 import QRCode from 'qrcode';
+import type { IRegistration } from './models/Registration';
+import { registrationSchema } from './models/Registration';
+let Registration: Model<IRegistration>;
 
 dotenv.config();
 
@@ -19,8 +22,14 @@ app.use(cors({
 }));
 app.use(express.json());
 
+
+// Connect to MongoDB, then switch to '2025' db and re-initialize Registration model
 mongoose.connect(process.env.MONGODB_URI_UNI || '')
-  .then(() => console.log('MongoDB connected successfully'))
+  .then(() => {
+    console.log('MongoDB connected successfully');
+    const db2025 = mongoose.connection.useDb('2025');
+    Registration = db2025.model<IRegistration>('Registration', registrationSchema);
+  })
   .catch(err => console.error('MongoDB connection error:', err));
 
 

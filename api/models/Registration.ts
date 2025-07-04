@@ -14,7 +14,7 @@ export interface IRegistration extends Document {
   registrationDate: Date;
 }
 
-const registrationSchema = new Schema({
+export const registrationSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true }, // Removed unique: true
