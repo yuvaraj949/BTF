@@ -1,3 +1,12 @@
+/**
+ * HackathonTeam model
+ * Mongoose schema for hackathon team registrations.
+ * Includes validation for team size and member details.
+ */
+/**
+ * Mongoose schema for hackathon team registrations.
+ * Fields: team name, members, registrationId, etc.
+ */
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITeamMember {

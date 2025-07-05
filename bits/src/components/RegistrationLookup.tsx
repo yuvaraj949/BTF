@@ -1,3 +1,7 @@
+/**
+ * RegistrationLookup component
+ * Allows users to check their registration status by entering their ID or email.
+ */
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';

@@ -1,14 +1,22 @@
+// Home page: Landing, about, tracks, sponsors, and main event info.
+
+/**
+ * Index (Home) page
+ * - Shows the landing hero, about, tracks, sponsors, and footer
+ * - Handles scroll-based UI effects (e.g. logo animation)
+ * - Uses BackgroundScene for animated background
+ */
 import React, { useState, useEffect } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import HeroSection from '../components/HeroSection';
 import CountdownTimer from '../components/CountdownTimer';
 import BackgroundScene from '../components/BackgroundScene';
-// import MagicalElements from '../components/MagicalElements';
+// (Optional) import MagicalElements from '../components/MagicalElements';
 import Footer from '../components/Footer';
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [isDayTime, setIsDayTime] = useState(false); // Always night for Hogwarts Legacy theme
+  const [isDayTime, setIsDayTime] = useState(false); // Always night for Hogwarts Legacy theme (can be extended)
   const [heroInView, setHeroInView] = useState(true);
   const heroRef = React.useRef<HTMLDivElement>(null);
 
@@ -18,11 +26,11 @@ const Index = () => {
       setScrollY(scrollPosition);
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
-        setHeroInView(rect.bottom > 10); // 40px for navbar height, triggers earlier
+        setHeroInView(rect.bottom > 10); // Triggers earlier for navbar animation
       }
     };
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    handleScroll(); // Initial check to set scroll state
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

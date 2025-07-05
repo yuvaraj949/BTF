@@ -1,3 +1,7 @@
+/**
+ * Lookup page
+ * Allows users to look up their registration status by ID or email.
+ */
 import React from 'react';
 import NavigationBar from '@/components/NavigationBar';
 import RegistrationLookup from '@/components/RegistrationLookup';

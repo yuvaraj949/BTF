@@ -1,3 +1,7 @@
+/**
+ * useToast hook
+ * Provides toast notification logic for the app.
+ */
 import * as React from "react"
 
 import type {

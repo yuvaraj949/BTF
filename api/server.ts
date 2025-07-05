@@ -1,3 +1,14 @@
+/**
+ * server.ts
+ * Main Express server for BITS Tech Fest 2025 API.
+ * Handles API endpoints, MongoDB connection, CORS, and email sending.
+ * Entry point for backend services.
+ */
+/**
+ * Main Express server for BITS Tech Fest 2025 API.
+ * Handles API endpoints, MongoDB connection, CORS, and email sending.
+ * Entry point for backend services.
+ */
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -20,7 +31,9 @@ app.use(cors({
 app.use(express.json());
 
 
-// Connect to MongoDB using DB name from .env
+/**
+ * Connect to MongoDB using DB name from .env
+ */
 const dbName = process.env.DB_NAME;
 const dbConnString = process.env.DB_CONN_STRING || process.env.MONGODB_URI_UNI || '';
 
@@ -31,9 +44,11 @@ mongoose.connect(dbConnString, {
   .catch(err => console.error('MongoDB connection error:', err));
 
 
-// Generate registration ID in ascending order (no clashes)
+/**
+ * Generate registration ID in ascending order (no clashes)
+ */
 const generateRegistrationId = async (): Promise<string> => {
-  // Find the latest registration
+  // Find the latest registration document
   const latest = await Registration.findOne({})
     .sort({ registrationDate: -1 })
     .select('registrationId')
@@ -46,7 +61,7 @@ const generateRegistrationId = async (): Promise<string> => {
       nextNumber = parseInt(match[1], 10) + 1;
     }
   }
-  // Pad with leading zeros
+  // Pad with leading zeros for consistent formatting
   const nextId = `BTF25-${String(nextNumber).padStart(6, '0')}`;
   return nextId;
 };
@@ -65,7 +80,9 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Send confirmation email for general registration
+/**
+ * Send confirmation email for general registration
+ */
 async function sendRegistrationConfirmationEmail(
   recipient: string,
   firstName: string,

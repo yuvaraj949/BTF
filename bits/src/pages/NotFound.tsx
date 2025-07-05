@@ -1,3 +1,7 @@
+/**
+ * NotFound page
+ * Renders a 404 error message for unknown routes.
+ */
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Footer from "../components/Footer";

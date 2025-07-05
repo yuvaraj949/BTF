@@ -1,3 +1,8 @@
+/**
+ * useIsMobile hook
+ * Returns true if the screen width is below the mobile breakpoint.
+ * Listens to window resize and updates state accordingly.
+ */
 import * as React from "react"
 
 const MOBILE_BREAKPOINT = 768

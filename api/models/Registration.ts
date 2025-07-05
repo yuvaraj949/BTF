@@ -1,3 +1,12 @@
+/**
+ * Registration model
+ * Mongoose schema for individual registrations.
+ * Includes validation for required fields and unique registrationId.
+ */
+/**
+ * Mongoose schema for individual registrations.
+ * Fields: name, email, phone, affiliation, events, etc.
+ */
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IRegistration extends Document {
@@ -17,7 +26,7 @@ export interface IRegistration extends Document {
 export const registrationSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  email: { type: String, required: true }, // Removed unique: true
+  email: { type: String, required: true }, // Email must be provided
   phone: { type: String, required: true },
   affiliationType: {
     type: String,

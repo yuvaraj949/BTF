@@ -1,3 +1,12 @@
+/**
+ * registration route
+ * Express route for handling registration-related API endpoints.
+ * Includes validation, email sending, and error handling.
+ */
+/**
+ * Registration API routes for BITS Tech Fest 2025.
+ * Handles registration, validation, and confirmation email logic.
+ */
 import express, { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import nodemailer from 'nodemailer';
@@ -5,12 +14,16 @@ import Registration from '../models/Registration';
 
 const router = express.Router();
 
-// Generate unique registration ID
+/**
+ * Generate a unique registration ID for each new registration
+ */
 const generateRegistrationId = (): string => {
   return `BTF25-${Math.floor(100000 + Math.random() * 900000)}`;
 };
 
-// Email transporter setup - optimized for Vercel
+/**
+ * Email transporter setup - optimized for Vercel
+ */
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
@@ -25,7 +38,9 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Function to send confirmation email
+/**
+ * Function to send confirmation email to the user after registration
+ */
 async function sendConfirmationEmail(
   recipient: string, 
   firstName: string, 

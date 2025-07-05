@@ -44,7 +44,7 @@ const Pass: React.FC = () => {
 
   const downloadPDF = async () => {
     if (!passRef.current) return;
-    // Use higher scale for better quality
+    // Use higher scale for better quality when generating QR code
     const scale = 3;
     const canvas = await html2canvas(passRef.current, { scale });
     const imgData = canvas.toDataURL('image/png');

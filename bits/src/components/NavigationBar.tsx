@@ -1,3 +1,12 @@
+// Top navigation bar for BITS Tech Fest site. Handles logo, links, and navigation.
+
+/**
+ * NavigationBar component
+ * - Shows the BITS Tech Fest logo and title
+ * - Provides navigation links to all main sections/pages
+ * - Responsive: hides links on mobile, shows hamburger if needed
+ * - Accepts showLogoTitle prop to animate logo/title in/out
+ */
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 

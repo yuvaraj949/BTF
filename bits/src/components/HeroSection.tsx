@@ -1,3 +1,12 @@
+// Hero section: Main landing banner with event title, date, and call-to-action.
+
+/**
+ * HeroSection component
+ * - Displays the main event logo, title, year, and date
+ * - Includes a call-to-action button for registration
+ * - Animates in/out based on scroll position (showLogoTitle)
+ * - Uses Cinzel font and magical styling
+ */
 
 import React from 'react';
 import { Button } from '@/components/ui/button';

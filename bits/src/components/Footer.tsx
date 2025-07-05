@@ -1,3 +1,11 @@
+// Footer component: Contact info, social links, and quick navigation.
+
+/**
+ * Footer component
+ * - Shows BITS Tech Fest branding, social links, and contact info
+ * - Provides quick navigation links
+ * - Responsive and styled for dark backgrounds
+ */
 import React from "react";
 
 

@@ -1,3 +1,4 @@
+// Contact Us page: Shows contact information for the event organizers.
 import React, { useState, useEffect } from "react";
 import NavigationBar from "../components/NavigationBar";
 import Footer from '../components/Footer';

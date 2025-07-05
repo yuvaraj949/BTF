@@ -1,3 +1,8 @@
+/**
+ * Registration page
+ * Provides the registration form for BITS Tech Fest.
+ * Handles form validation, submission, and confirmation.
+ */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';

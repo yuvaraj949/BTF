@@ -1,3 +1,7 @@
+/**
+ * CountdownTimer component
+ * Displays a countdown to the event start date/time.
+ */
 
 
 import React, { useState, useEffect } from 'react';
