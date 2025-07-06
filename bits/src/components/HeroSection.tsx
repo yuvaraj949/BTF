@@ -22,7 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroRef, showLogoTitle = true
       <div className="max-w-4xl mx-auto z-10">
         {/* Logo and Title, animated out when scrolled */}
         <div className={`flex flex-col items-center transition-all duration-500 ${showLogoTitle ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'} mb-4`}>
-          <img src="/favicon.ico" alt="BTF Logo" className="w-28 h-28 md:w-36 md:h-36 mb-2 object-contain" />
+          <img src="/favicon.ico" alt="BTF Logo" className="w-32 h-32 md:w-48 md:h-48 mb-2 object-contain" />
           <h1 className="text-6xl md:text-8xl font-bold text-[#F66200] mb-2 text-shadow-lg tracking-wider">
             <span className="font-cinzel">BITS TECH FEST</span>
           </h1>
