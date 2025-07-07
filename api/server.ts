@@ -71,12 +71,16 @@ const generateRegistrationId = async (): Promise<string> => {
 };
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp-relay.brevo.com',
+  service: 'gmail',
+  host: 'smtp.gmail.com',
   port: 465,
-  secure: false,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 });
 
