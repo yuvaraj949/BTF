@@ -27,6 +27,7 @@ interface RegistrationData {
 
 const RegistrationLookup = () => {
   const [registrationId, setRegistrationId] = useState('');
+  const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [registrationData, setRegistrationData] = useState<RegistrationData | null>(null);
   const [error, setError] = useState('');
@@ -36,7 +37,10 @@ const RegistrationLookup = () => {
       setError('Please enter a registration ID');
       return;
     }
-
+    if (!email.trim()) {
+      setError('Please enter your email');
+      return;
+    }
     setIsLoading(true);
     setError('');
     setRegistrationData(null);
@@ -46,7 +50,11 @@ const RegistrationLookup = () => {
       
       if (response.ok) {
         const data = await response.json();
-        setRegistrationData(data);
+        if (data.email && data.email.toLowerCase() === email.trim().toLowerCase()) {
+          setRegistrationData(data);
+        } else {
+          setError('Email does not match our records for this registration ID.');
+        }
       } else {
         setError('Registration not found or invalid ID');
       }
@@ -64,16 +72,23 @@ const RegistrationLookup = () => {
         <CardHeader>
           <CardTitle className="text-[#F66200] font-cinzel">Registration Lookup</CardTitle>
           <CardDescription className="text-gray-400">
-            Enter your registration ID to view your details
+            Enter your registration ID and email to view your details
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex space-x-2">
+          <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
             <Input
               value={registrationId}
               onChange={(e) => setRegistrationId(e.target.value)}
               placeholder="Enter Registration ID"
               className="bg-gray-800/50 border-[#F66200]/30 text-white"
+            />
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your Email"
+              className="bg-gray-800/50 border-[#F66200]/30 text-white"
+              type="email"
             />
             <Button 
               onClick={handleLookup}

@@ -80,6 +80,8 @@ const Registration = () => {
   const [hackathonStatus, setHackathonStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [hackathonMessage, setHackathonMessage] = useState('');
   const [hackathonTeamId, setHackathonTeamId] = useState('');
+  const [hackathonTeamName, setHackathonTeamName] = useState('');
+  const [hackathonMemberNames, setHackathonMemberNames] = useState<string[]>([]);
 
   const form = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
@@ -229,8 +231,13 @@ const Registration = () => {
         setHackathonStatus('success');
         setHackathonMessage(result.message);
         setHackathonTeamId(result.teamId);
+        setHackathonTeamName(data.teamName);
+        setHackathonMemberNames([
+          data.leaderName,
+          ...(data.teammates || []).map(m => m.name)
+        ]);
         hackathonForm.reset();
-        window.location.href = `${window.location.origin}/pass/${result.teamId}`;
+        // window.location.href = `${window.location.origin}/pass/${result.teamId}`;
       } else {
         setHackathonStatus('error');
         setHackathonMessage(result?.message || 'Registration failed');
@@ -672,8 +679,16 @@ const Registration = () => {
                       <CheckCircle className="h-4 w-4 text-green-500" />
                       <AlertDescription className="text-green-400">
                         {hackathonMessage}
-                        {hackathonTeamId && (
-                          <div className="mt-2 font-semibold">Team ID: {hackathonTeamId}</div>
+                        {hackathonTeamId && hackathonTeamName && (
+                          <div className="mt-2 font-semibold">
+                            <div>Team Name: {hackathonTeamName}</div>
+                            <div className="mt-1">Team Members:</div>
+                            <ul className="list-disc pl-6">
+                              {hackathonMemberNames.map((name, idx) => (
+                                <li key={idx}>{name}</li>
+                              ))}
+                            </ul>
+                          </div>
                         )}
                       </AlertDescription>
                     </Alert>

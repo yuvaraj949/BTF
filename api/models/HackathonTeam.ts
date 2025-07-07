@@ -10,6 +10,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IHackathonTeammate {
+  memberId: string;
   name: string;
   email: string;
   phone: string;
@@ -26,6 +27,7 @@ export interface IHackathonTeam extends Document {
 }
 
 const hackathonTeammateSchema = new Schema<IHackathonTeammate>({
+  memberId: { type: String, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },

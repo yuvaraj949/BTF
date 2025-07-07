@@ -2,6 +2,7 @@ import mongoose, { Document, Schema, Model } from 'mongoose';
 
 export interface IRegistrationLog extends Document {
   registrationId: string;
+  memberId?: string;
   type: 'workshop' | 'engunity';
   name: string;
   email: string;
@@ -12,6 +13,7 @@ export interface IRegistrationLog extends Document {
 
 const registrationLogSchema = new Schema<IRegistrationLog>({
   registrationId: { type: String, unique: true },
+  memberId: { type: String },
   type: { type: String, enum: ['workshop', 'engunity'], required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },

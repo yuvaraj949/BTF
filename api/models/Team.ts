@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 
 export interface ITeamMember {
+  memberId: string;
   name: string;
   email: string;
   phone: string;
@@ -21,6 +22,7 @@ interface TeamModel extends Model<ITeam> {
 }
 
 const teamMemberSchema = new Schema<ITeamMember>({
+  memberId: { type: String, required: true },
   name: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },

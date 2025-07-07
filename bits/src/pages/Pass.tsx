@@ -18,9 +18,34 @@ interface RegistrationData {
   registrationDate: string;
 }
 
+interface MemberPassData {
+  type: 'member';
+  memberId: string;
+  name: string;
+  email: string;
+  phone: string;
+  degree: string;
+  teamId: string;
+  teamName: string;
+  university: string;
+  registrationDate: string;
+}
+
+interface TeamPassData {
+  type: 'team';
+  teamId: string;
+  teamName: string;
+  university: string;
+  leader: any;
+  teammates: any[];
+  registrationDate: string;
+}
+
 const Pass: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [data, setData] = useState<RegistrationData | null>(null);
+  const [memberData, setMemberData] = useState<MemberPassData | null>(null);
+  const [teamData, setTeamData] = useState<TeamPassData | null>(null);
   const [loading, setLoading] = useState(true);
   const passRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -35,7 +60,9 @@ const Pass: React.FC = () => {
     fetch(apiUrl)
       .then(res => res.json())
       .then(json => {
-        if (json.registrationId) setData(json);
+        if (json.type === 'member') setMemberData(json);
+        else if (json.type === 'team') setTeamData(json);
+        else if (json.registrationId) setData(json);
         else navigate('/notfound');
       })
       .catch(() => navigate('/notfound'))
@@ -56,7 +83,74 @@ const Pass: React.FC = () => {
   };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-black text-[#F66200]">Loading Pass...</div>;
-  if (!data) return null;
+  if (!data && !memberData && !teamData) return null;
+
+  if (memberData) {
+    // Individual member pass
+    return (
+      <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
+        <main className="flex-1 flex flex-col items-center justify-center py-8">
+          <div ref={passRef} className="bg-gradient-to-br from-[#F66200]/80 to-black/90 rounded-xl shadow-lg p-8 max-w-md w-full border border-[#F66200]">
+            <h2 className="text-2xl font-bold text-[#F66200] text-center mb-2 font-cinzel">ENGENITY HACKATHON PASS</h2>
+            <div className="flex justify-center mb-4">
+              <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #FFD600, 0 0 0 14px #181818' }}>
+                <QRCodeSVG value={memberData.memberId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
+              </div>
+            </div>
+            <div className="text-center mb-2">
+              <span className="font-semibold">Member ID:</span> <span className="text-[#F66200]">{memberData.memberId}</span>
+            </div>
+            <ul className="mb-4 text-sm">
+              <li><b>Name:</b> {memberData.name}</li>
+              <li><b>Email:</b> {memberData.email}</li>
+              <li><b>Phone:</b> {memberData.phone}</li>
+              <li><b>Degree:</b> {memberData.degree}</li>
+              <li><b>Team:</b> {memberData.teamName} ({memberData.teamId})</li>
+              <li><b>University:</b> {memberData.university}</li>
+            </ul>
+            <div className="text-[#F66200]/80 text-xs mb-2">Please carry this pass with you while attending the event.</div>
+          </div>
+          <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  if (teamData) {
+    // Team pass
+    return (
+      <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
+        <main className="flex-1 flex flex-col items-center justify-center py-8">
+          <div ref={passRef} className="bg-gradient-to-br from-[#F66200]/80 to-black/90 rounded-xl shadow-lg p-8 max-w-md w-full border border-[#F66200]">
+            <h2 className="text-2xl font-bold text-[#F66200] text-center mb-2 font-cinzel">ENGENITY HACKATHON TEAM PASS</h2>
+            <div className="flex justify-center mb-4">
+              <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #FFD600, 0 0 0 14px #181818' }}>
+                <QRCodeSVG value={teamData.teamId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
+              </div>
+            </div>
+            <div className="text-center mb-2">
+              <span className="font-semibold">Team ID:</span> <span className="text-[#F66200]">{teamData.teamId}</span>
+            </div>
+            <ul className="mb-4 text-sm">
+              <li><b>Team Name:</b> {teamData.teamName}</li>
+              <li><b>University:</b> {teamData.university}</li>
+              <li><b>Leader:</b> {teamData.leader.name} ({teamData.leader.email}, {teamData.leader.phone}, {teamData.leader.degree}, ID: {teamData.leader.memberId})</li>
+              <li><b>Teammates:</b>
+                <ul className="pl-4">
+                  {teamData.teammates.map((m, i) => (
+                    <li key={i}>{m.name} ({m.email}, {m.phone}, {m.degree}, ID: {m.memberId})</li>
+                  ))}
+                </ul>
+              </li>
+            </ul>
+            <div className="text-[#F66200]/80 text-xs mb-2">Please carry this pass with you while attending the event.</div>
+          </div>
+          <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
@@ -65,19 +159,19 @@ const Pass: React.FC = () => {
           <h2 className="text-2xl font-bold text-[#F66200] text-center mb-2 font-cinzel">BITS TECHFEST 2025 PASS</h2>
           <div className="flex justify-center mb-4">
             <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #FFD600, 0 0 0 14px #181818' }}>
-              <QRCodeSVG value={data.registrationId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
+              <QRCodeSVG value={data?.registrationId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
             </div>
           </div>
           <div className="text-center mb-2">
-            <span className="font-semibold">Registration ID:</span> <span className="text-[#F66200]">{data.registrationId}</span>
+            <span className="font-semibold">Registration ID:</span> <span className="text-[#F66200]">{data?.registrationId}</span>
           </div>
           <ul className="mb-4 text-sm">
-            <li><b>Name:</b> {data.firstName} {data.lastName}</li>
-            <li><b>Email:</b> {data.email}</li>
-            <li><b>Phone:</b> {data.phone}</li>
-            <li><b>Affiliation:</b> {data.affiliationType} - {data.institutionName}</li>
-            <li><b>Role:</b> {data.role || '-'}</li>
-            <li><b>Interested Events:</b> {(data.interestedEvents || []).join(', ') || '-'}</li>
+            <li><b>Name:</b> {data?.firstName} {data?.lastName}</li>
+            <li><b>Email:</b> {data?.email}</li>
+            <li><b>Phone:</b> {data?.phone}</li>
+            <li><b>Affiliation:</b> {data?.affiliationType} - {data?.institutionName}</li>
+            <li><b>Role:</b> {data?.role || '-'}</li>
+            <li><b>Interested Events:</b> {(data?.interestedEvents || []).join(', ') || '-'}</li>
           </ul>
           <div className="text-[#F66200]/80 text-xs mb-2">Please carry this pass with you while attending the event.</div>
         </div>
