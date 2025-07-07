@@ -14,7 +14,7 @@ interface BackgroundSceneProps {
   scrollY: number;
 }
 
-const FONT_SIZE = 18;
+const FONT_SIZE = 16;
 const CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const TRAIL_COLOR = '#F66200';
 const HEAD_COLOR = '#F66200';
@@ -34,28 +34,29 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    // High-DPI support
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
-    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
-    ctx.scale(dpr, dpr);
-
-    let columns = Math.floor(width / FONT_SIZE);
-    columnsRef.current = Array(columns).fill(0);
-    dropsRef.current = Array(columns).fill(0).map(() => Math.floor(Math.random() * height / FONT_SIZE));
+    function setCanvasSize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+      // No ctx.scale for dpr
+      const columns = Math.floor(width / FONT_SIZE);
+      columnsRef.current = Array(columns).fill(0);
+      dropsRef.current = Array(columns).fill(0).map(() => Math.floor(Math.random() * height / FONT_SIZE));
+    }
+    setCanvasSize();
 
     function draw() {
+      const width = canvas.width;
+      const height = canvas.height;
       // Fade the canvas slightly to create trailing effect
       ctx.fillStyle = BG_COLOR;
       ctx.fillRect(0, 0, width, height);
-
       ctx.font = `${FONT_SIZE}px monospace`;
-
+      const columns = columnsRef.current.length;
       for (let i = 0; i < columns; i++) {
         // Draw the trail
         for (let j = TRAIL_LENGTH; j >= 0; j--) {
@@ -95,15 +96,7 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
     draw();
 
     function handleResize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      canvas.style.width = width + 'px';
-      canvas.style.height = height + 'px';
-      columns = Math.floor(width / FONT_SIZE);
-      columnsRef.current = Array(columns).fill(0);
-      dropsRef.current = Array(columns).fill(0).map(() => Math.floor(Math.random() * height / FONT_SIZE));
+      setCanvasSize();
     }
     window.addEventListener('resize', handleResize);
 

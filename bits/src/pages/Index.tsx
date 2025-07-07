@@ -103,6 +103,25 @@ const Index = () => {
               </li>
             </ul>
           </div>
+          {/* Become a Sponsor Section */}
+          <div className="max-w-2xl mx-auto py-16 px-4 text-white font-cinzel" id="become-sponsor">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#F66200] text-center">Become a Sponsor</h2>
+            <div className="mb-8 text-center">
+            <p className="mb-4 text-lg font-semibold">
+                Interested in sponsoring our event? <br/>
+                Promote your company and reach a wider audience.<br/>
+                Click below to download our sponsorship brochure.
+              </p>
+              <a
+                href="/brochure.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-6 py-2 bg-[#F66200] text-white font-bold rounded shadow hover:bg-[#d94e00] transition-colors duration-200"
+              >
+                Brochure
+              </a>
+            </div>
+          </div>
         </div>
       </main>
       <Footer />
