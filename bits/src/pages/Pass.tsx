@@ -143,7 +143,7 @@ const Pass: React.FC = () => {
           <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
             {/* Watermark image, centered and semi-transparent */}
             <img
-              src={'/favicon.ico'}
+              src={'https://btf-2025.vercel.app/lovable-uploads/75563aab-1419-470f-86da-f6c102723c1d.png'}
               alt="Event Watermark"
               style={{
                 position: 'absolute',
@@ -193,7 +193,7 @@ const Pass: React.FC = () => {
         <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
           {/* Watermark image, centered and semi-transparent */}
           <img
-            src={process.env.PUBLIC_URL + '/lovable-uploads/75563aab-1419-470f-86da-f6c102723c1d.png'}
+            src={'https://btf-2025.vercel.app/lovable-uploads/75563aab-1419-470f-86da-f6c102723c1d.png'}
             alt="Event Watermark"
             style={{
               position: 'absolute',
