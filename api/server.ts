@@ -273,7 +273,7 @@ app.get('/api/registration/:id', async (req, res) => {
         degree: member.degree,
         year: member.year || '',
         branch: member.branch || '',
-        college: team.university,
+        university: team.university,
         teamId: team.teamId,
         teamName: team.teamName,
         registrationDate: regLog ? regLog.registrationDate : team.registrationDate

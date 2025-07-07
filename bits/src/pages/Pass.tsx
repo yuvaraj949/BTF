@@ -156,7 +156,7 @@ const Pass: React.FC = () => {
               userSelect: 'none',
             }}
           />
-          <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>BITS TECHFEST 2025 PASS</h2>
+          <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>BITS TECH FEST 2025 PASS</h2>
           <div className="flex justify-center mb-4 z-10">
             <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #F66200, 0 0 0 14px #101010' }}>
               <QRCodeSVG value={data?.registrationId} size={120} bgColor="#000" fgColor="#F66200" style={{ borderRadius: 16 }} />
