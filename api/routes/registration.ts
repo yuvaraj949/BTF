@@ -78,6 +78,13 @@ async function sendConfirmationEmail(
   }
 }
 
+// Add base64 decode helper
+function decodeBase64(str: string): string {
+  str = str.replace(/-/g, '+').replace(/_/g, '/');
+  while (str.length % 4) str += '=';
+  return Buffer.from(str, 'base64').toString('utf8');
+}
+
 router.post(
   '/register',
   [
@@ -146,7 +153,8 @@ router.post(
 
 router.get('/registration/:id', async (req, res) => {
   try {
-    const registration = await Registration.findOne({ registrationId: req.params.id });
+    const id = decodeBase64(req.params.id);
+    const registration = await Registration.findOne({ registrationId: id });
     if (!registration) {
       return res.status(404).json({ message: 'Registration not found' });
     }

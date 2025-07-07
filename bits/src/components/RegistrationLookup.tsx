@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Search, User, Mail, Phone, GraduationCap } from 'lucide-react';
+import { encodeBase64 } from '../lib/utils';
 
 interface RegistrationData {
   name: string;
@@ -48,7 +49,7 @@ const RegistrationLookup = () => {
     setRegistrationData(null);
 
     try {
-      const response = await fetch(`https://btf-server-2025.vercel.app/api/registration/${registrationId}`);
+      const response = await fetch(`https://btf-server-2025.vercel.app/api/registration/${encodeBase64(registrationId)}`);
       
       if (response.ok) {
         const data = await response.json();

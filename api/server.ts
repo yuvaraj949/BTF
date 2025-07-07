@@ -131,7 +131,7 @@ async function sendRegistrationConfirmationEmail(
           </ul>
           <p style="color:#F66200; font-size:13px; margin:10px 0 0 0;">Please carry this pass with you while attending the event.</p>
           <div style="margin:18px 0 0 0; text-align:center;">
-            <a href="https://btf-2025.vercel.app/pass/${registrationId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
+            <a href="https://btf-2025.vercel.app/pass/${encodeBase64(registrationId)}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
           </div>
           <p style="margin-top:18px; color:#aaa;">If you have any questions, feel free to reply to this email.</p>
           <p style="margin-top:8px;">Best regards,<br/>BITS Event Team</p>
@@ -221,8 +221,9 @@ app.post('/api/register', async (req, res) => {
 
 // Get registration details
 app.get('/api/registration/:id', async (req, res) => {
-  const { id } = req.params;
+  let { id } = req.params;
   try {
+    id = decodeBase64(id);
     if (/^BTF25-\d{6}$/.test(id)) {
       // Workshop/regular registration
       const registration = await Registration.findOne({ registrationId: id });
@@ -240,10 +241,10 @@ app.get('/api/registration/:id', async (req, res) => {
         registrationId: registration.registrationId,
         registrationDate: registration.registrationDate
       });
-    } else if (/^ENG25-\d{6}$/.test(id)) {
-      // Team pass
-      const team = await Team.findOne({ teamId: id });
-      if (!team) return res.status(404).json({ message: 'Team not found' });
+    }
+    // Team pass
+    const team = await Team.findOne({ teamId: id });
+    if (team) {
       return res.json({
         type: 'team',
         teamId: team.teamId,
@@ -431,7 +432,7 @@ app.post('/api/hackathon-register', async (req, res) => {
             </ul>
             <p style="color:#F66200; font-size:13px; margin:10px 0 0 0;">This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</p>
             <div style="margin:18px 0 0 0; text-align:center;">
-              <a href="https://btf-2025.vercel.app/pass/${member.memberId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
+              <a href="https://btf-2025.vercel.app/pass/${encodeBase64(member.memberId)}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
             </div>
             <p style="margin-top:18px; color:#aaa;">If you have any questions, feel free to reply to this email.</p>
             <p style="margin-top:8px;">Best regards,<br/>BITS Event Team</p>
@@ -459,6 +460,25 @@ app.post('/api/hackathon-register', async (req, res) => {
     res.status(500).json({ message: 'Server error during hackathon registration' });
   }
 });
+
+/**
+ * Base64 encode (URL-safe, no padding)
+ */
+function encodeBase64(str: string): string {
+  return Buffer.from(str, 'utf8').toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+}
+
+/**
+ * Base64 decode (URL-safe, no padding)
+ */
+function decodeBase64(str: string): string {
+  str = str.replace(/-/g, '+').replace(/_/g, '/');
+  while (str.length % 4) str += '=';
+  return Buffer.from(str, 'base64').toString('utf8');
+}
 
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {

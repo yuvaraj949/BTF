@@ -19,6 +19,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import NavigationBar from '@/components/NavigationBar';
 import Footer from '../components/Footer';
+import { encodeBase64 } from '../lib/utils';
 
 const registrationSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -191,7 +192,7 @@ const Registration = () => {
         form.reset();
         console.log('Registration API result:', result);
         // Force redirect to pass page immediately (absolute path for Vercel)
-        window.location.href = `${window.location.origin}/pass/${result.registrationId}`;
+        window.location.href = `${window.location.origin}/pass/${encodeBase64(result.registrationId)}`;
       } else {
         setSubmitStatus('error');
         setResponseMessage(result?.message || 'Registration failed');
@@ -237,7 +238,7 @@ const Registration = () => {
           ...(data.teammates || []).map(m => m.name)
         ]);
         hackathonForm.reset();
-        // window.location.href = `${window.location.origin}/pass/${result.teamId}`;
+        // window.location.href = `${window.location.origin}/pass/${encodeBase64(result.teamId)}`;
       } else {
         setHackathonStatus('error');
         setHackathonMessage(result?.message || 'Registration failed');
