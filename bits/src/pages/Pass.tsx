@@ -4,7 +4,6 @@ import { QRCodeSVG } from 'qrcode.react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Footer from '../components/Footer';
-import { decodeBase64 } from '../lib/utils';
 
 interface RegistrationData {
   firstName: string;
@@ -44,7 +43,7 @@ interface TeamPassData {
 
 const Pass: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const decodedId = id ? decodeBase64(id) : '';
+  const apiId = id || '';
   const [data, setData] = useState<RegistrationData | null>(null);
   const [memberData, setMemberData] = useState<MemberPassData | null>(null);
   const [teamData, setTeamData] = useState<TeamPassData | null>(null);
@@ -53,12 +52,12 @@ const Pass: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!decodedId) return;
+    if (!apiId) return;
     // Use full API URL in production, relative in dev
     const apiUrl =
       window.location.hostname === 'localhost'
-        ? `/api/registration/${decodedId}`
-        : `https://btf-server-2025.vercel.app/api/registration/${decodedId}`;
+        ? `/api/registration/${apiId}`
+        : `https://btf-server-2025.vercel.app/api/registration/${apiId}`;
     fetch(apiUrl)
       .then(res => res.json())
       .then(json => {
@@ -69,7 +68,7 @@ const Pass: React.FC = () => {
       })
       .catch(() => navigate('/notfound'))
       .finally(() => setLoading(false));
-  }, [decodedId, navigate]);
+  }, [apiId, navigate]);
 
   const downloadPDF = async () => {
     if (!passRef.current) return;
