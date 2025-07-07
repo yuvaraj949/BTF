@@ -94,7 +94,22 @@ const Pass: React.FC = () => {
       <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
         <main className="flex-1 flex flex-col items-center justify-center py-8">
           <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
-            <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0, color:'#F66200'}}>BTF 2025</div>
+            {/* Watermark image, centered and semi-transparent */}
+            <img
+              src={process.env.PUBLIC_URL + '/lovable-uploads/75563aab-1419-470f-86da-f6c102723c1d.png'}
+              alt="Event Watermark"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '70%',
+                opacity: 0.10,
+                zIndex: 0,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
+            />
             <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>ENGENITY HACKATHON PASS</h2>
             <div className="flex justify-center mb-4 z-10">
               <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #F66200, 0 0 0 14px #101010' }}>
@@ -126,7 +141,22 @@ const Pass: React.FC = () => {
       <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
         <main className="flex-1 flex flex-col items-center justify-center py-8">
           <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
-            <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0, color:'#F66200'}}>BTF 2025</div>
+            {/* Watermark image, centered and semi-transparent */}
+            <img
+              src={process.env.PUBLIC_URL + '/lovable-uploads/75563aab-1419-470f-86da-f6c102723c1d.png'}
+              alt="Event Watermark"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '70%',
+                opacity: 0.10,
+                zIndex: 0,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
+            />
             <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>ENGENITY HACKATHON TEAM PASS</h2>
             <div className="flex justify-center mb-4 z-10">
               <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #F66200, 0 0 0 14px #101010' }}>
@@ -161,7 +191,22 @@ const Pass: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
       <main className="flex-1 flex flex-col items-center justify-center py-8">
         <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
-          <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0, color:'#F66200'}}>BTF 2025</div>
+          {/* Watermark image, centered and semi-transparent */}
+          <img
+            src={process.env.PUBLIC_URL + '/lovable-uploads/75563aab-1419-470f-86da-f6c102723c1d.png'}
+            alt="Event Watermark"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '70%',
+              opacity: 0.10,
+              zIndex: 0,
+              pointerEvents: 'none',
+              userSelect: 'none',
+            }}
+          />
           <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>BITS TECHFEST 2025 PASS</h2>
           <div className="flex justify-center mb-4 z-10">
             <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #F66200, 0 0 0 14px #101010' }}>
