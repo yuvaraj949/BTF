@@ -94,6 +94,83 @@ This repository contains the full-stack codebase for BITS Tech Fest 2025, includ
 
 ---
 
+## Backend Data Models
+
+### 1. Registration (`models/Registration.ts`)
+- **Purpose:** Stores individual registrations for workshops/events (non-hackathon).
+- **Fields:**
+  - `firstName`, `lastName`: Name of the registrant
+  - `email`: Email address
+  - `phone`: Phone number
+  - `affiliationType`: 'university', 'school', or 'company'
+  - `institutionName`: Name of the college/school/company
+  - `role`: Optional role (student, faculty, etc)
+  - `year`, `branch`, `class`: Optional academic details
+  - `interestedEvents`: Array of event names
+  - `github`, `linkedin`, `portfolio`: Optional links
+  - `skills`, `experience`, `expectations`: Optional text fields
+  - `agreeTerms`: Boolean (must be true)
+  - `registrationId`: Unique, ascending ID (e.g., BTF25-000001)
+  - `registrationDate`: Timestamp
+
+### 2. HackathonTeam (`models/HackathonTeam.ts`)
+- **Purpose:** Stores Engenity hackathon team registrations (legacy/compatibility).
+- **Fields:**
+  - `teamName`: Name of the team
+  - `teamId`: Unique, ascending team ID (e.g., ENG25-000001)
+  - `university`: University name
+  - `leader`: Object with member details (see below)
+  - `teammates`: Array of member objects (see below)
+  - `registrationDate`: Timestamp
+- **Member Object:**
+  - `memberId`: Unique, ascending member ID (e.g., ENGMEM-000001)
+  - `name`, `email`, `phone`, `degree`
+
+### 3. Team (`models/Team.ts`)
+- **Purpose:** Stores Engenity hackathon team details (main model for teams).
+- **Fields:**
+  - `teamId`: Unique, ascending team ID (e.g., ENG25-000001)
+  - `teamName`: Name of the team
+  - `university`: University name
+  - `leader`: Member object (see above)
+  - `teammates`: Array of member objects (see above)
+  - `registrationDate`: Timestamp
+
+### 4. RegistrationLog (`models/RegistrationLog.ts`)
+- **Purpose:** Logs every registration (workshop or Engenity), including all team members for Engenity.
+- **Fields:**
+  - `registrationId`: Unique, ascending registration ID (e.g., BTF25-000001)
+  - `memberId`: Unique, ascending member ID (for Engenity, e.g., ENGMEM-000001)
+  - `type`: 'workshop' or 'engunity'
+  - `name`, `email`: Registrant/member details
+  - `teamName`, `teamId`: If Engenity, the team info
+  - `registrationDate`: Timestamp
+
+### 5. Counter (`models/Counter.ts`)
+- **Purpose:** Atomic counter for generating unique, strictly ascending member IDs for Engenity (prevents race conditions).
+- **Fields:**
+  - `_id`: Counter name (e.g., 'engunity_memberId')
+  - `seq`: Current sequence number
+- **Usage:**
+  - Each time a team registers, the counter is atomically incremented by the number of members, and each member gets a unique, strictly ascending ID (ENGMEM-xxxxxx).
+
+---
+
+## Additional Notes for Developers
+
+- **Member ID Uniqueness:**
+  - Engenity member IDs (`ENGMEM-xxxxxx`) are globally unique and strictly ascending, even if multiple teams register at the same time. This is enforced by the Counter model and atomic MongoDB operations.
+- **Team ID Uniqueness:**
+  - Team IDs (`ENG25-xxxxxx`) are unique and strictly ascending, generated in order of registration.
+- **Registration ID Uniqueness:**
+  - Workshop/event registration IDs (`BTF25-xxxxxx`) are unique and strictly ascending.
+- **Email Privacy:**
+  - Registration lookup requires both registration ID and email for privacy.
+- **Extensibility:**
+  - The models are designed to be extensible for future event types, additional fields, or admin features.
+
+---
+
 ## How to Run & Edit
 
 1. **Clone the repository:**

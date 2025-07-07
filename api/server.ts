@@ -19,6 +19,7 @@ import QRCode from 'qrcode';
 import Team from './models/Team';
 import RegistrationLog from './models/RegistrationLog';
 import HackathonTeam from './models/HackathonTeam';
+import Counter from './models/Counter';
 
 dotenv.config();
 
@@ -284,22 +285,18 @@ app.get('/api/registration/:id', async (req, res) => {
   }
 });
 
-// Helper to generate the next N unique memberIds for Engenity
+// Helper to generate the next N unique memberIds for Engenity using atomic counter
 async function generateNextMemberIds(count: number) {
-  // Use RegistrationLog to find the latest memberId
-  const latest = await RegistrationLog.findOne({ memberId: { $exists: true } })
-    .sort({ registrationDate: -1 })
-    .select('memberId')
-    .lean();
-  let nextNumber = 1;
-  if (latest && latest.memberId) {
-    const match = latest.memberId.match(/ENGMEM-(\d{6})/);
-    if (match) {
-      nextNumber = parseInt(match[1], 10) + 1;
-    }
-  }
-  // Generate an array of unique memberIds
-  return Array.from({ length: count }, (_, i) => `ENGMEM-${String(nextNumber + i).padStart(6, '0')}`);
+  // Use a counter collection for atomic increments
+  const counterId = 'engunity_memberId';
+  // Atomically increment the counter by count and get the starting value
+  const counter = await Counter.findOneAndUpdate(
+    { _id: counterId },
+    { $inc: { seq: count } },
+    { new: true, upsert: true }
+  );
+  const start = counter.seq - count + 1;
+  return Array.from({ length: count }, (_, i) => `ENGMEM-${String(start + i).padStart(6, '0')}`);
 }
 
 // --- HACKATHON (ENGENITY) REGISTRATION ROUTE ---
@@ -381,6 +378,7 @@ app.post('/api/hackathon-register', async (req, res) => {
           ${teammatesWithIds.map((m, i) => `<li>${i+1}. ${m.name} (${m.email}, ${m.phone}, ${m.degree}, <b>ID:</b> ${m.memberId})</li>`).join('')}
         </ul>
         <p style="color:#F66200; font-size:13px;">Please carry your pass while attending the event.</p>
+        <p style="color:#F66200; font-size:13px;">Note: Each team member will receive their individual Engenity pass by email. This pass is valid for both days of the event (12th and 15th November 2025).</p>
         <div style="margin:18px 0 0 0; text-align:center;">
           <a href="https://btf-2025.vercel.app/pass/${teamId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Team Pass (PDF)</a>
         </div>
@@ -430,7 +428,7 @@ app.post('/api/hackathon-register', async (req, res) => {
               <li><b>Team ID:</b> <span style='color:#F66200;'>${teamId}</span></li>
               <li><b>Member ID:</b> <span style='color:#F66200;'>${member.memberId}</span></li>
             </ul>
-            <p style="color:#F66200; font-size:13px; margin:10px 0 0 0;">Please carry this pass with you while attending the event.</p>
+            <p style="color:#F66200; font-size:13px; margin:10px 0 0 0;">This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</p>
             <div style="margin:18px 0 0 0; text-align:center;">
               <a href="https://btf-2025.vercel.app/pass/${member.memberId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
             </div>
