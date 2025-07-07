@@ -13,6 +13,7 @@ import CountdownTimer from '../components/CountdownTimer';
 import BackgroundScene from '../components/BackgroundScene';
 // (Optional) import MagicalElements from '../components/MagicalElements';
 import Footer from '../components/Footer';
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -20,13 +21,15 @@ const Index = () => {
   const [heroInView, setHeroInView] = useState(true);
   const heroRef = React.useRef<HTMLDivElement>(null);
 
+  const location = useLocation();
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setScrollY(scrollPosition);
       if (heroRef.current) {
         const rect = heroRef.current.getBoundingClientRect();
-        setHeroInView(rect.bottom > 10); // Triggers earlier for navbar animation
+        setHeroInView(rect.bottom > 575); // Triggers earlier for navbar animation
       }
     };
     window.addEventListener('scroll', handleScroll);
@@ -34,15 +37,23 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (location.hash) {
+      // Wait for DOM to paint
+      setTimeout(() => {
+        const id = location.hash.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 0);
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen flex flex-col overflow-hidden bg-gray-900">
-      {/* Magical Background */}
+      {/* Background */}
       <BackgroundScene isDayTime={isDayTime} scrollY={scrollY} />
-      
-      {/* Magical Elements Overlay removed */}
-      
-      {/* Harry Potter Character removed as requested */}
-      
       {/* Main Content */}
       <main className="relative z-10 flex-1 flex flex-col">
         <NavigationBar showLogoTitle={!heroInView} />
@@ -50,7 +61,7 @@ const Index = () => {
         <CountdownTimer />
         
         {/* Content to enable scrolling */}
-        <div className="bg-gradient-to-b from-transparent to-gray-900/40">
+        <div className="bg-gradient-to-b from-transparent ">
           <div className="text-center text-white max-w-4xl mx-auto px-4 min-h-[60vh] flex flex-col justify-center items-center">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-[#F66200] text-shadow-lg font-cinzel">
               Join the Magic

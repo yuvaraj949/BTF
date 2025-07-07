@@ -14,15 +14,19 @@ interface BackgroundSceneProps {
   scrollY: number;
 }
 
-const MATRIX_COLOR = '#F66200';
-const FONT_SIZE = 14;
+const FONT_SIZE = 18;
 const CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const TRAIL_COLOR = '#F66200';
+const HEAD_COLOR = '#F66200';
+const BG_COLOR = 'rgba(0, 0, 0, 1)';
+const TRAIL_LENGTH = 10;
+const FRAME_DELAY = 80; // ~80fps
 
 const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const animationRef = useRef<number>();
   const columnsRef = useRef<number[]>([]);
+  const dropsRef = useRef<number[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,30 +36,60 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
 
     let width = window.innerWidth;
     let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
+    // High-DPI support
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+    ctx.scale(dpr, dpr);
 
     let columns = Math.floor(width / FONT_SIZE);
-    columnsRef.current = Array(columns).fill(Math.floor(Math.random() * 10));
+    columnsRef.current = Array(columns).fill(0);
+    dropsRef.current = Array(columns).fill(0).map(() => Math.floor(Math.random() * height / FONT_SIZE));
 
     function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+      // Fade the canvas slightly to create trailing effect
+      ctx.fillStyle = BG_COLOR;
       ctx.fillRect(0, 0, width, height);
+
       ctx.font = `${FONT_SIZE}px monospace`;
-      ctx.fillStyle = MATRIX_COLOR;
+
       for (let i = 0; i < columns; i++) {
-        const text = CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length));
-        ctx.fillText(text, i * FONT_SIZE, columnsRef.current[i] * FONT_SIZE);
-        if (columnsRef.current[i] * FONT_SIZE > height && Math.random() > 0.7) {
-          columnsRef.current[i] = 0;
+        // Draw the trail
+        for (let j = TRAIL_LENGTH; j >= 0; j--) {
+          const y = (dropsRef.current[i] - j) * FONT_SIZE;
+          if (y < 0 || y > height) continue;
+
+          const char = CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length));
+          if (j === 0) {
+            // Head of the drop: brighter
+            ctx.fillStyle = HEAD_COLOR;
+          } else {
+            // Trail: faded
+            ctx.fillStyle = TRAIL_COLOR;
+            ctx.globalAlpha = 1 - j / (TRAIL_LENGTH + 2);
+          }
+          ctx.fillText(char, i * FONT_SIZE, y);
+          ctx.globalAlpha = 1;
         }
-        if (Math.random() > 0.7) {
-          columnsRef.current[i]++;
+
+        // Randomly reset drop to top
+        if (
+          dropsRef.current[i] * FONT_SIZE > height &&
+          Math.random() > 0.95
+        ) {
+          dropsRef.current[i] = 0;
         }
+
+        // Move drop down
+        dropsRef.current[i]++;
       }
-      timeoutRef.current = setTimeout(() => {
-        animationFrameRef.current = requestAnimationFrame(draw);
-      }, 50);
+
+      animationRef.current = window.setTimeout(() => {
+        requestAnimationFrame(draw);
+      }, FRAME_DELAY);
     }
 
     draw();
@@ -63,22 +97,24 @@ const BackgroundScene: React.FC<BackgroundSceneProps> = ({ isDayTime, scrollY })
     function handleResize() {
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
       columns = Math.floor(width / FONT_SIZE);
-      columnsRef.current = Array(columns).fill(Math.floor(Math.random() * 10));
+      columnsRef.current = Array(columns).fill(0);
+      dropsRef.current = Array(columns).fill(0).map(() => Math.floor(Math.random() * height / FONT_SIZE));
     }
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      if (animationRef.current) clearTimeout(animationRef.current);
     };
   }, []);
 
   // Optionally, you can use parallaxOffset for future effects
-  // const parallaxOffset = scrollY * 0.3;
+  const parallaxOffset = scrollY * 0.3;
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden z-0 bg-black">
