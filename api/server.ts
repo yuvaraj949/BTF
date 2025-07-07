@@ -19,6 +19,7 @@ import QRCode from 'qrcode';
 import Team from './models/Team';
 import RegistrationLog from './models/RegistrationLog';
 import HackathonTeam from './models/HackathonTeam';
+import Counter from './models/Counter';
 
 dotenv.config();
 
@@ -284,21 +285,18 @@ app.get('/api/registration/:id', async (req, res) => {
   }
 });
 
-// Helper to generate unique memberId for Engenity
-async function generateMemberId() {
-  // Use RegistrationLog to find the latest memberId
-  const latest = await RegistrationLog.findOne({ memberId: { $exists: true } })
-    .sort({ registrationDate: -1 })
-    .select('memberId')
-    .lean();
-  let nextNumber = 1;
-  if (latest && latest.memberId) {
-    const match = latest.memberId.match(/ENGMEM-(\d{6})/);
-    if (match) {
-      nextNumber = parseInt(match[1], 10) + 1;
-    }
-  }
-  return `ENGMEM-${String(nextNumber).padStart(6, '0')}`;
+// Helper to generate the next N unique memberIds for Engenity using atomic counter
+async function generateNextMemberIds(count: number) {
+  // Use a counter collection for atomic increments
+  const counterId = 'engunity_memberId';
+  // Atomically increment the counter by count and get the starting value
+  const counter = await Counter.findOneAndUpdate(
+    { _id: counterId },
+    { $inc: { seq: count } },
+    { new: true, upsert: true }
+  );
+  const start = counter.seq - count + 1;
+  return Array.from({ length: count }, (_, i) => `ENGMEM-${String(start + i).padStart(6, '0')}`);
 }
 
 // --- HACKATHON (ENGENITY) REGISTRATION ROUTE ---
@@ -326,16 +324,13 @@ app.post('/api/hackathon-register', async (req, res) => {
   try {
     // Generate teamId
     const teamId = await Team.generateTeamId();
-    // Generate memberIds for all members
+    // Generate memberIds for all members (atomic)
     const allMembersRaw = [
       { name: leaderName, email: leaderEmail, phone: leaderPhone, degree: leaderDegree },
       ...teammates
     ];
-    const allMembers = [];
-    for (const member of allMembersRaw) {
-      const memberId = await generateMemberId();
-      allMembers.push({ ...member, memberId });
-    }
+    const memberIds = await generateNextMemberIds(allMembersRaw.length);
+    const allMembers = allMembersRaw.map((member, idx) => ({ ...member, memberId: memberIds[idx] }));
     const leader = allMembers[0];
     const teammatesWithIds = allMembers.slice(1);
     // Save team in Team model
