@@ -104,7 +104,7 @@ const Pass: React.FC = () => {
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
                 width: '70%',
-                opacity: 0.20,
+                opacity: 0.30,
                 zIndex: 0,
                 pointerEvents: 'none',
                 userSelect: 'none',
@@ -127,58 +127,7 @@ const Pass: React.FC = () => {
               <li><b style={{color:'#F66200'}}>Team:</b> <span style={{color:'#F66200'}}>{memberData.teamName} ({memberData.teamId})</span></li>
               <li><b style={{color:'#F66200'}}>University:</b> <span style={{color:'#F66200'}}>{memberData.university}</span></li>
             </ul>
-            <div className="text-xs mb-2 z-10" style={{color:'#F66200'}}>This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
-          </div>
-          <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
-  if (teamData) {
-    // Team pass
-    return (
-      <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
-        <main className="flex-1 flex flex-col items-center justify-center py-8">
-          <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
-            {/* Watermark image, centered and semi-transparent */}
-            <img
-              src={'https://btf-2025.vercel.app/lovable-uploads/75563aab-1419-470f-86da-f6c102723c1d.png'}
-              alt="Event Watermark"
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '70%',
-                opacity: 0.20,
-                zIndex: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              }}
-            />
-            <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>ENGENITY HACKATHON TEAM PASS</h2>
-            <div className="flex justify-center mb-4 z-10">
-              <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #F66200, 0 0 0 14px #101010' }}>
-                <QRCodeSVG value={teamData.teamId} size={120} bgColor="#000" fgColor="#F66200" style={{ borderRadius: 16 }} />
-              </div>
-            </div>
-            <div className="text-center mb-2 z-10">
-              <span className="font-semibold" style={{color:'#F66200'}}>Team ID:</span> <span className="font-bold" style={{color:'#F66200'}}>{teamData.teamId}</span>
-            </div>
-            <ul className="mb-4 text-base z-10">
-              <li><b style={{color:'#F66200'}}>Team Name:</b> <span style={{color:'#F66200'}}>{teamData.teamName}</span></li>
-              <li><b style={{color:'#F66200'}}>University:</b> <span style={{color:'#F66200'}}>{teamData.university}</span></li>
-              <li><b style={{color:'#F66200'}}>Leader:</b> <span style={{color:'#F66200'}}>{teamData.leader.name} ({teamData.leader.email}, {teamData.leader.phone}, {teamData.leader.degree}, ID: {teamData.leader.memberId})</span></li>
-              <li><b style={{color:'#F66200'}}>Teammates:</b>
-                <ul className="pl-4">
-                  {teamData.teammates.map((m, i) => (
-                    <li key={i}><span style={{color:'#F66200'}}>{m.name} ({m.email}, {m.phone}, {m.degree}, ID: {m.memberId})</span></li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-            <div className="text-xs mb-2 z-10" style={{color:'#F66200'}}>This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
+            <div className="text-xs mb-2 z-10" style={{color:'#F66200'}}>This pass is valid for both days of the event (12th and 15th November 2025).<br/>Please carry this pass with you while attending the event.</div>
           </div>
           <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
         </main>
@@ -201,7 +150,7 @@ const Pass: React.FC = () => {
               left: '50%',
               transform: 'translate(-50%, -50%)',
               width: '70%',
-              opacity: 0.20,
+              opacity: 0.30,
               zIndex: 0,
               pointerEvents: 'none',
               userSelect: 'none',
@@ -222,7 +171,7 @@ const Pass: React.FC = () => {
             <li><b style={{color:'#F66200'}}>Phone:</b> <span style={{color:'#F66200'}}>{data?.phone}</span></li>
             <li><b style={{color:'#F66200'}}>Affiliation:</b> <span style={{color:'#F66200'}}>{data?.affiliationType} - {data?.institutionName}</span></li>
           </ul>
-          <div className="text-xs mb-2 z-10" style={{color:'#F66200'}}>This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
+          <div className="text-xs mb-2 z-10" style={{color:'#F66200'}}>This pass is valid only for the first day of the event (12th November 2025).<br/>Please carry this pass with you while attending the event.</div>
         </div>
         <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
       </main>
