@@ -383,9 +383,6 @@ app.post('/api/hackathon-register', async (req, res) => {
         </ul>
         <p style="color:#F66200; font-size:13px;">Please carry your pass while attending the event.</p>
         <p style="color:#F66200; font-size:13px;">Note: Each team member will receive their individual Engenity pass by email. This pass is valid for both days of the event (12th and 15th November 2025).</p>
-        <div style="margin:18px 0 0 0; text-align:center;">
-          <a href="https://btf-2025.vercel.app/pass/${teamId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Team Pass (PDF)</a>
-        </div>
       </div>
     `;
     // Send one email to all team members with team details
@@ -433,6 +430,9 @@ app.post('/api/hackathon-register', async (req, res) => {
               <li><b>Member ID:</b> <span style='color:#F66200;'>${member.memberId}</span></li>
             </ul>
             <p style="color:#F66200; font-size:13px; margin:10px 0 0 0;">This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</p>
+            <div style="margin:18px 0 0 0; text-align:center;">
+              <a href="https://btf-2025.vercel.app/pass/${member.memberId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
+            </div>
             <p style="margin-top:18px; color:#aaa;">If you have any questions, feel free to reply to this email.</p>
             <p style="margin-top:8px;">Best regards,<br/>BITS Event Team</p>
           </div>
