@@ -33,7 +33,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroRef, showLogoTitle = true
         {/* Event Date Below Year */}
         <div className="mb-8">
           <span className="text-[#F66200] font-bold text-lg font-cinzel">
-            Nov 13–15
+            Nov 12 & 15
           </span>
         </div>
         <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed max-w-3xl mx-auto font-cinzel">

@@ -16,6 +16,9 @@ import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
 import Registration from './models/Registration';
 import QRCode from 'qrcode';
+import Team from './models/Team';
+import RegistrationLog from './models/RegistrationLog';
+import HackathonTeam from './models/HackathonTeam';
 
 dotenv.config();
 
@@ -238,6 +241,154 @@ app.get('/api/registration/:id', async (req, res) => {
   } catch (error) {
     console.error('Error fetching registration:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// --- HACKATHON (ENGENITY) REGISTRATION ROUTE ---
+app.post('/api/hackathon-register', async (req, res) => {
+  const {
+    teamName,
+    university,
+    leaderName,
+    leaderEmail,
+    leaderPhone,
+    leaderDegree,
+    teammates,
+    agreeTerms
+  } = req.body;
+
+  if (!teamName || !university || !leaderName || !leaderEmail || !leaderPhone || !leaderDegree || !Array.isArray(teammates) || typeof agreeTerms !== 'boolean') {
+    return res.status(400).json({ message: 'Missing required fields.' });
+  }
+  if (!agreeTerms) {
+    return res.status(400).json({ message: 'You must agree to the terms.' });
+  }
+  if (teammates.length > 4) {
+    return res.status(400).json({ message: 'Max 4 teammates allowed (5 including leader).' });
+  }
+  try {
+    // Generate teamId
+    const teamId = await Team.generateTeamId();
+    // Save team in Team model
+    const leader = { name: leaderName, email: leaderEmail, phone: leaderPhone, degree: leaderDegree };
+    const teamDoc = new Team({
+      teamId,
+      teamName,
+      university,
+      leader,
+      teammates,
+    });
+    await teamDoc.save();
+    // Save in HackathonTeam model (for legacy/compatibility)
+    const hackathonTeamDoc = new HackathonTeam({
+      teamName,
+      teamId,
+      university,
+      leader,
+      teammates,
+    });
+    await hackathonTeamDoc.save();
+    // Log all members in RegistrationLog
+    const allMembers = [leader, ...teammates];
+    for (const member of allMembers) {
+      const registrationId = await RegistrationLog.generateRegistrationId();
+      await RegistrationLog.create({
+        registrationId,
+        type: 'engunity',
+        name: member.name,
+        email: member.email,
+        teamName,
+        teamId,
+      });
+    }
+    // --- EMAIL LOGIC ---
+    // Prepare team details HTML
+    const teamDetailsHtml = `
+      <div style="font-family: Arial, sans-serif;">
+        <h2 style="color: #F66200;">Engenity Hackathon Team Registration</h2>
+        <p><b>Team Name:</b> <span style='color:#F66200;'>${teamName}</span></p>
+        <p><b>Team ID:</b> <span style='color:#F66200;'>${teamId}</span></p>
+        <p><b>University:</b> <span style='color:#F66200;'>${university}</span></p>
+        <p><b>Leader:</b> ${leader.name} (${leader.email}, ${leader.phone}, ${leader.degree})</p>
+        <p><b>Teammates:</b></p>
+        <ul>
+          ${teammates.map((m, i) => `<li>${i+1}. ${m.name} (${m.email}, ${m.phone}, ${m.degree})</li>`).join('')}
+        </ul>
+        <p style="color:#F66200; font-size:13px;">Please carry your pass while attending the event.</p>
+        <div style="margin:18px 0 0 0; text-align:center;">
+          <a href="https://btf-2025.vercel.app/pass/${teamId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Team Pass (PDF)</a>
+        </div>
+      </div>
+    `;
+    // Send one email to all team members with team details
+    const allEmails = allMembers.map(m => m.email).join(',');
+    await transporter.sendMail({
+      from: `"BITS Event 2025" <${process.env.EMAIL_USER}>`,
+      to: allEmails,
+      subject: `Engenity Hackathon Registration Confirmation - Team ${teamName}`,
+      html: teamDetailsHtml
+    });
+    // Send individual pass emails
+    for (const member of allMembers) {
+      // Generate QR code for their teamId
+      const qrBuffer = await QRCode.toBuffer(teamId, {
+        color: { dark: '#F66200', light: '#000000' },
+        margin: 2,
+        width: 200
+      });
+      const mailOptions = {
+        from: `"BITS Event 2025" <${process.env.EMAIL_USER}>`,
+        to: member.email,
+        subject: 'Your Engenity Hackathon Pass',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background: #181818; color: #F66200;">
+            <h2 style="color: #F66200; text-align: center;">Engenity Hackathon Pass</h2>
+            <p>Dear ${member.name},</p>
+            <p>You are registered for Engenity Hackathon as part of <b>Team ${teamName}</b> (ID: <span style='color:#F66200;'>${teamId}</span>).</p>
+            <div style="background-color: #111; padding: 15px; margin: 15px 0; border-radius: 5px;">
+              <p style='color:#fff;'><strong>Event Date:</strong> Nov 15, 2025</p>
+              <p style='color:#fff;'><strong>Venue:</strong> BITS Pilani Dubai Campus, Dubai, UAE</p>
+              <p><strong>Your Team ID:</strong> <span style="color:#F66200">${teamId}</span></p>
+              <div style="text-align:center; margin: 10px 0;">
+                <img src="cid:qrimage" alt="QR Code" style="width:120px; height:120px; background:#000; padding:8px; border-radius:32px; box-shadow:0 0 0 6px #F66200, 0 0 0 14px #181818;" />
+              </div>
+            </div>
+            <p><b>Your Details:</b></p>
+            <ul>
+              <li><b>Name:</b> <span style='color:#F66200;'>${member.name}</span></li>
+              <li><b>Email:</b> <a href='mailto:${member.email}' style='color:#F66200;'>${member.email}</a></li>
+              <li><b>Phone:</b> <span style='color:#F66200;'>${member.phone}</span></li>
+              <li><b>Degree:</b> <span style='color:#F66200;'>${member.degree}</span></li>
+              <li><b>Team:</b> <span style='color:#F66200;'>${teamName}</span></li>
+              <li><b>Team ID:</b> <span style='color:#F66200;'>${teamId}</span></li>
+            </ul>
+            <p style="color:#F66200; font-size:13px; margin:10px 0 0 0;">Please carry this pass with you while attending the event.</p>
+            <div style="margin:18px 0 0 0; text-align:center;">
+              <a href="https://btf-2025.vercel.app/pass/${teamId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
+            </div>
+            <p style="margin-top:18px; color:#aaa;">If you have any questions, feel free to reply to this email.</p>
+            <p style="margin-top:8px;">Best regards,<br/>BITS Event Team</p>
+          </div>
+        `,
+        attachments: [
+          {
+            filename: 'qrcode.png',
+            content: qrBuffer,
+            cid: 'qrimage'
+          }
+        ]
+      };
+      await transporter.sendMail(mailOptions);
+    }
+    // --- END EMAIL LOGIC ---
+    res.status(201).json({
+      success: true,
+      message: 'Hackathon registration successful',
+      teamId,
+    });
+  } catch (error) {
+    console.error('Hackathon registration error:', error);
+    res.status(500).json({ message: 'Server error during hackathon registration' });
   }
 });
 

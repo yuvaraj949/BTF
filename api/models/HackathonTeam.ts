@@ -9,46 +9,44 @@
  */
 import mongoose, { Document, Schema } from 'mongoose';
 
-export interface ITeamMember {
-  firstName: string;
-  lastName: string;
+export interface IHackathonTeammate {
+  name: string;
   email: string;
-  countryCode: string;
-  phoneNumber: string;
-  college: string;
-  educationLevel: 'UG' | 'PG' | 'PhD';
+  phone: string;
+  degree: string;
 }
 
 export interface IHackathonTeam extends Document {
   teamName: string;
-  members: ITeamMember[];
-  registrationId: string;
+  teamId: string;
+  university: string;
+  leader: IHackathonTeammate;
+  teammates: IHackathonTeammate[];
   registrationDate: Date;
 }
 
-const teamMemberSchema = new Schema<ITeamMember>({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+const hackathonTeammateSchema = new Schema<IHackathonTeammate>({
+  name: { type: String, required: true },
   email: { type: String, required: true },
-  countryCode: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
-  college: { type: String, required: true },
-  educationLevel: { type: String, enum: ['UG', 'PG', 'PhD'], required: true }
+  phone: { type: String, required: true },
+  degree: { type: String, required: true },
 });
 
 const hackathonTeamSchema = new Schema<IHackathonTeam>({
   teamName: { type: String, required: true },
-  members: { 
-    type: [teamMemberSchema], 
-    required: true, 
+  teamId: { type: String, unique: true },
+  university: { type: String, required: true },
+  leader: { type: hackathonTeammateSchema, required: true },
+  teammates: {
+    type: [hackathonTeammateSchema],
+    required: true,
     validate: {
-      validator: function(arr: ITeamMember[]) {
-        return Array.isArray(arr) && arr.length >= 1 && arr.length <= 5;
+      validator: function(arr: IHackathonTeammate[]) {
+        return Array.isArray(arr) && arr.length >= 0 && arr.length <= 4;
       },
-      message: 'Team must have 1-5 members'
+      message: 'Team can have 0-4 teammates (max 5 including leader)'
     }
   },
-  registrationId: { type: String, unique: true },
   registrationDate: { type: Date, default: Date.now }
 });
 
