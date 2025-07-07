@@ -15,8 +15,10 @@ interface RegistrationData {
   email: string;
   phone: string;
   college: string;
-  year: string;
-  branch: string;
+  year?: string;
+  branch?: string;
+  degree?: string;
+  type?: string;
   github?: string;
   linkedin?: string;
   portfolio?: string;
@@ -50,8 +52,32 @@ const RegistrationLookup = () => {
       
       if (response.ok) {
         const data = await response.json();
-        if (data.email && data.email.toLowerCase() === email.trim().toLowerCase()) {
-          setRegistrationData(data);
+        if (data.type === 'member') {
+          if (data.email && data.email.toLowerCase() === email.trim().toLowerCase()) {
+            setRegistrationData({
+              name: data.name,
+              email: data.email,
+              phone: data.phone,
+              college: data.college,
+              year: data.year,
+              branch: data.branch,
+              degree: data.degree,
+              type: data.type
+            });
+          } else {
+            setError('Email does not match our records for this member ID.');
+          }
+        } else if (data.email && data.email.toLowerCase() === email.trim().toLowerCase()) {
+          setRegistrationData({
+            name: data.firstName + ' ' + data.lastName,
+            email: data.email,
+            phone: data.phone,
+            college: data.institutionName || data.college,
+            year: data.year,
+            branch: data.branch,
+            degree: data.degree,
+            type: data.type
+          });
         } else {
           setError('Email does not match our records for this registration ID.');
         }

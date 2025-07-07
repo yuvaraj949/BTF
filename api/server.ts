@@ -271,9 +271,11 @@ app.get('/api/registration/:id', async (req, res) => {
         email: member.email,
         phone: member.phone,
         degree: member.degree,
+        year: member.year || '',
+        branch: member.branch || '',
+        college: team.university,
         teamId: team.teamId,
         teamName: team.teamName,
-        university: team.university,
         registrationDate: regLog ? regLog.registrationDate : team.registrationDate
       });
     } else {
@@ -308,6 +310,8 @@ app.post('/api/hackathon-register', async (req, res) => {
     leaderEmail,
     leaderPhone,
     leaderDegree,
+    leaderYear,
+    leaderBranch,
     teammates,
     agreeTerms
   } = req.body;
@@ -326,7 +330,7 @@ app.post('/api/hackathon-register', async (req, res) => {
     const teamId = await Team.generateTeamId();
     // Generate memberIds for all members (atomic)
     const allMembersRaw = [
-      { name: leaderName, email: leaderEmail, phone: leaderPhone, degree: leaderDegree },
+      { name: leaderName, email: leaderEmail, phone: leaderPhone, degree: leaderDegree, year: leaderYear, branch: leaderBranch },
       ...teammates
     ];
     const memberIds = await generateNextMemberIds(allMembersRaw.length);
@@ -429,9 +433,6 @@ app.post('/api/hackathon-register', async (req, res) => {
               <li><b>Member ID:</b> <span style='color:#F66200;'>${member.memberId}</span></li>
             </ul>
             <p style="color:#F66200; font-size:13px; margin:10px 0 0 0;">This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</p>
-            <div style="margin:18px 0 0 0; text-align:center;">
-              <a href="https://btf-2025.vercel.app/pass/${member.memberId}" style="background:#F66200; color:#181818; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">View & Download Pass (PDF)</a>
-            </div>
             <p style="margin-top:18px; color:#aaa;">If you have any questions, feel free to reply to this email.</p>
             <p style="margin-top:8px;">Best regards,<br/>BITS Event Team</p>
           </div>

@@ -6,6 +6,8 @@ export interface ITeamMember {
   email: string;
   phone: string;
   degree: string;
+  year?: string;
+  branch?: string;
 }
 
 export interface ITeam extends Document {
@@ -27,6 +29,8 @@ const teamMemberSchema = new Schema<ITeamMember>({
   email: { type: String, required: true },
   phone: { type: String, required: true },
   degree: { type: String, required: true },
+  year: { type: String },
+  branch: { type: String },
 });
 
 const teamSchema = new Schema<ITeam>({

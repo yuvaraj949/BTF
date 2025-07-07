@@ -15,6 +15,8 @@ export interface IHackathonTeammate {
   email: string;
   phone: string;
   degree: string;
+  year?: string;
+  branch?: string;
 }
 
 export interface IHackathonTeam extends Document {
@@ -32,6 +34,8 @@ const hackathonTeammateSchema = new Schema<IHackathonTeammate>({
   email: { type: String, required: true },
   phone: { type: String, required: true },
   degree: { type: String, required: true },
+  year: { type: String },
+  branch: { type: String },
 });
 
 const hackathonTeamSchema = new Schema<IHackathonTeam>({
