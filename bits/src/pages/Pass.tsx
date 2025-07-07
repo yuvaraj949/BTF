@@ -73,17 +73,15 @@ const Pass: React.FC = () => {
     if (!passRef.current) return;
     // Use higher scale for better quality when generating QR code
     const scale = 3;
-    const canvas = await html2canvas(passRef.current, { scale, backgroundColor: '#181818' });
+    const canvas = await html2canvas(passRef.current, { scale, backgroundColor: '#101010' });
     const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
     const width = pdf.internal.pageSize.getWidth();
     const height = (canvas.height * width) / canvas.width;
-    // Fill background with dark color for better contrast
-    pdf.setFillColor(24, 24, 24); // #181818
+    // Fill background with even darker color
+    pdf.setFillColor(16, 16, 16); // #101010
     pdf.rect(0, 0, width, pdf.internal.pageSize.getHeight(), 'F');
     pdf.addImage(imgData, 'PNG', 0, 40, width, height);
-    // Optionally add a watermark or event logo (if available)
-    // pdf.addImage('/path/to/logo.png', 'PNG', width-120, 20, 100, 40);
     pdf.save(`BTF25-Pass-${id}.pdf`);
   };
 
@@ -95,26 +93,26 @@ const Pass: React.FC = () => {
     return (
       <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
         <main className="flex-1 flex flex-col items-center justify-center py-8">
-          <div ref={passRef} className="bg-gradient-to-br from-[#181818] via-[#1a1a1a] to-[#F66200]/80 rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#FFD600] relative overflow-hidden">
-            <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0}}>BTF 2025</div>
-            <h2 className="text-3xl font-extrabold text-[#FFD600] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>ENGENITY HACKATHON PASS</h2>
+          <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
+            <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0, color:'#F66200'}}>BTF 2025</div>
+            <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>ENGENITY HACKATHON PASS</h2>
             <div className="flex justify-center mb-4 z-10">
-              <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #FFD600, 0 0 0 14px #181818' }}>
-                <QRCodeSVG value={memberData.memberId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
+              <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #F66200, 0 0 0 14px #101010' }}>
+                <QRCodeSVG value={memberData.memberId} size={120} bgColor="#000" fgColor="#F66200" style={{ borderRadius: 16 }} />
               </div>
             </div>
             <div className="text-center mb-2 z-10">
-              <span className="font-semibold text-white">Member ID:</span> <span className="text-[#FFD600] font-bold">{memberData.memberId}</span>
+              <span className="font-semibold" style={{color:'#F66200'}}>Member ID:</span> <span className="font-bold" style={{color:'#F66200'}}>{memberData.memberId}</span>
             </div>
             <ul className="mb-4 text-base z-10">
-              <li><b className="text-[#FFD600]">Name:</b> <span className="text-white">{memberData.name}</span></li>
-              <li><b className="text-[#FFD600]">Email:</b> <span className="text-white">{memberData.email}</span></li>
-              <li><b className="text-[#FFD600]">Phone:</b> <span className="text-white">{memberData.phone}</span></li>
-              <li><b className="text-[#FFD600]">Degree:</b> <span className="text-white">{memberData.degree}</span></li>
-              <li><b className="text-[#FFD600]">Team:</b> <span className="text-white">{memberData.teamName} ({memberData.teamId})</span></li>
-              <li><b className="text-[#FFD600]">University:</b> <span className="text-white">{memberData.university}</span></li>
+              <li><b style={{color:'#F66200'}}>Name:</b> <span style={{color:'#F66200'}}>{memberData.name}</span></li>
+              <li><b style={{color:'#F66200'}}>Email:</b> <span style={{color:'#F66200'}}>{memberData.email}</span></li>
+              <li><b style={{color:'#F66200'}}>Phone:</b> <span style={{color:'#F66200'}}>{memberData.phone}</span></li>
+              <li><b style={{color:'#F66200'}}>Degree:</b> <span style={{color:'#F66200'}}>{memberData.degree}</span></li>
+              <li><b style={{color:'#F66200'}}>Team:</b> <span style={{color:'#F66200'}}>{memberData.teamName} ({memberData.teamId})</span></li>
+              <li><b style={{color:'#F66200'}}>University:</b> <span style={{color:'#F66200'}}>{memberData.university}</span></li>
             </ul>
-            <div className="text-[#FFD600]/90 text-xs mb-2 z-10">This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
+            <div className="text-xs mb-2 z-10" style={{color:'#F66200'}}>This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
           </div>
           <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
         </main>
@@ -127,30 +125,30 @@ const Pass: React.FC = () => {
     return (
       <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
         <main className="flex-1 flex flex-col items-center justify-center py-8">
-          <div ref={passRef} className="bg-gradient-to-br from-[#181818] via-[#1a1a1a] to-[#F66200]/80 rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#FFD600] relative overflow-hidden">
-            <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0}}>BTF 2025</div>
-            <h2 className="text-3xl font-extrabold text-[#FFD600] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>ENGENITY HACKATHON TEAM PASS</h2>
+          <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
+            <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0, color:'#F66200'}}>BTF 2025</div>
+            <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>ENGENITY HACKATHON TEAM PASS</h2>
             <div className="flex justify-center mb-4 z-10">
-              <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #FFD600, 0 0 0 14px #181818' }}>
-                <QRCodeSVG value={teamData.teamId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
+              <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #F66200, 0 0 0 14px #101010' }}>
+                <QRCodeSVG value={teamData.teamId} size={120} bgColor="#000" fgColor="#F66200" style={{ borderRadius: 16 }} />
               </div>
             </div>
             <div className="text-center mb-2 z-10">
-              <span className="font-semibold text-white">Team ID:</span> <span className="text-[#FFD600] font-bold">{teamData.teamId}</span>
+              <span className="font-semibold" style={{color:'#F66200'}}>Team ID:</span> <span className="font-bold" style={{color:'#F66200'}}>{teamData.teamId}</span>
             </div>
             <ul className="mb-4 text-base z-10">
-              <li><b className="text-[#FFD600]">Team Name:</b> <span className="text-white">{teamData.teamName}</span></li>
-              <li><b className="text-[#FFD600]">University:</b> <span className="text-white">{teamData.university}</span></li>
-              <li><b className="text-[#FFD600]">Leader:</b> <span className="text-white">{teamData.leader.name} ({teamData.leader.email}, {teamData.leader.phone}, {teamData.leader.degree}, ID: {teamData.leader.memberId})</span></li>
-              <li><b className="text-[#FFD600]">Teammates:</b>
+              <li><b style={{color:'#F66200'}}>Team Name:</b> <span style={{color:'#F66200'}}>{teamData.teamName}</span></li>
+              <li><b style={{color:'#F66200'}}>University:</b> <span style={{color:'#F66200'}}>{teamData.university}</span></li>
+              <li><b style={{color:'#F66200'}}>Leader:</b> <span style={{color:'#F66200'}}>{teamData.leader.name} ({teamData.leader.email}, {teamData.leader.phone}, {teamData.leader.degree}, ID: {teamData.leader.memberId})</span></li>
+              <li><b style={{color:'#F66200'}}>Teammates:</b>
                 <ul className="pl-4">
                   {teamData.teammates.map((m, i) => (
-                    <li key={i}><span className="text-white">{m.name} ({m.email}, {m.phone}, {m.degree}, ID: {m.memberId})</span></li>
+                    <li key={i}><span style={{color:'#F66200'}}>{m.name} ({m.email}, {m.phone}, {m.degree}, ID: {m.memberId})</span></li>
                   ))}
                 </ul>
               </li>
             </ul>
-            <div className="text-[#FFD600]/90 text-xs mb-2 z-10">This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
+            <div className="text-xs mb-2 z-10" style={{color:'#F66200'}}>This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
           </div>
           <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
         </main>
@@ -162,26 +160,24 @@ const Pass: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-black text-[#F66200]/90">
       <main className="flex-1 flex flex-col items-center justify-center py-8">
-        <div ref={passRef} className="bg-gradient-to-br from-[#181818] via-[#1a1a1a] to-[#F66200]/80 rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#FFD600] relative overflow-hidden">
-          <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0}}>BTF 2025</div>
-          <h2 className="text-3xl font-extrabold text-[#FFD600] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>BITS TECHFEST 2025 PASS</h2>
+        <div ref={passRef} className="bg-gradient-to-br from-[#101010] via-black to-[#181818] rounded-2xl shadow-2xl p-8 max-w-md w-full border-2 border-[#F66200] relative overflow-hidden">
+          <div className="absolute top-4 right-4 opacity-10 text-6xl font-extrabold select-none pointer-events-none" style={{zIndex:0, color:'#F66200'}}>BTF 2025</div>
+          <h2 className="text-3xl font-extrabold text-[#F66200] text-center mb-2 font-cinzel drop-shadow-lg" style={{letterSpacing:'2px'}}>BITS TECHFEST 2025 PASS</h2>
           <div className="flex justify-center mb-4 z-10">
-            <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #FFD600, 0 0 0 14px #181818' }}>
-              <QRCodeSVG value={data?.registrationId} size={120} bgColor="#000" fgColor="#FFD600" style={{ borderRadius: 16 }} />
+            <div style={{ borderRadius: 24, overflow: 'hidden', background: '#000', padding: 8, boxShadow: '0 0 0 6px #F66200, 0 0 0 14px #101010' }}>
+              <QRCodeSVG value={data?.registrationId} size={120} bgColor="#000" fgColor="#F66200" style={{ borderRadius: 16 }} />
             </div>
           </div>
           <div className="text-center mb-2 z-10">
-            <span className="font-semibold text-white">Registration ID:</span> <span className="text-[#FFD600] font-bold">{data?.registrationId}</span>
+            <span className="font-semibold" style={{color:'#F66200'}}>Registration ID:</span> <span className="font-bold" style={{color:'#F66200'}}>{data?.registrationId}</span>
           </div>
           <ul className="mb-4 text-base z-10">
-            <li><b className="text-[#FFD600]">Name:</b> <span className="text-white">{data?.firstName} {data?.lastName}</span></li>
-            <li><b className="text-[#FFD600]">Email:</b> <span className="text-white">{data?.email}</span></li>
-            <li><b className="text-[#FFD600]">Phone:</b> <span className="text-white">{data?.phone}</span></li>
-            <li><b className="text-[#FFD600]">Affiliation:</b> <span className="text-white">{data?.affiliationType} - {data?.institutionName}</span></li>
-            <li><b className="text-[#FFD600]">Role:</b> <span className="text-white">{data?.role || '-'}</span></li>
-            <li><b className="text-[#FFD600]">Interested Events:</b> <span className="text-white">{(data?.interestedEvents || []).join(', ') || '-'}</span></li>
+            <li><b style={{color:'#F66200'}}>Name:</b> <span style={{color:'#F66200'}}>{data?.firstName} {data?.lastName}</span></li>
+            <li><b style={{color:'#F66200'}}>Email:</b> <span style={{color:'#F66200'}}>{data?.email}</span></li>
+            <li><b style={{color:'#F66200'}}>Phone:</b> <span style={{color:'#F66200'}}>{data?.phone}</span></li>
+            <li><b style={{color:'#F66200'}}>Affiliation:</b> <span style={{color:'#F66200'}}>{data?.affiliationType} - {data?.institutionName}</span></li>
           </ul>
-          <div className="text-[#FFD600]/90 text-xs mb-2 z-10">This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
+          <div className="text-xs mb-2 z-10" style={{color:'#F66200'}}>This pass is valid for both days of the event (12th and 15th November 2025). Please carry this pass with you while attending the event.</div>
         </div>
         <button onClick={downloadPDF} className="mt-6 px-6 py-2 bg-[#F66200] hover:bg-orange-700 text-black font-bold rounded shadow">Download PDF</button>
       </main>
