@@ -159,6 +159,13 @@ app.get('/', (req, res) => {
   res.send('api active');
 });
 
+// Helper to check if a string is base64url encoded
+function isBase64Url(str: string): boolean {
+  // Accepts base64url (no padding, url-safe)
+  // Only allow A-Z, a-z, 0-9, -, _ and length at least 8
+  return /^[A-Za-z0-9\-_]{8,}$/.test(str);
+}
+
 // --- GENERAL REGISTRATION ROUTE ---
 app.post('/api/register', async (req, res) => {
   const {
@@ -223,7 +230,14 @@ app.post('/api/register', async (req, res) => {
 app.get('/api/registration/:id', async (req, res) => {
   let { id } = req.params;
   try {
-    id = decodeBase64(id);
+    // Only decode if it looks like base64url, otherwise treat as plain
+    if (isBase64Url(id)) {
+      try {
+        id = decodeBase64(id);
+      } catch (e) {
+        // If decoding fails, fallback to original id
+      }
+    }
     if (/^BTF25-\d{6}$/.test(id)) {
       // Workshop/regular registration
       const registration = await Registration.findOne({ registrationId: id });
