@@ -55,8 +55,6 @@ const hackathonMemberSchema = z.object({
   email: z.string().email('Invalid email'),
   phone: z.string().min(1, 'Phone is required'),
   degree: z.string().min(1, 'Degree is required'),
-  year: z.string().min(1, 'Year is required'),
-  branch: z.string().min(1, 'Branch is required'),
 });
 const hackathonSchema = z.object({
   teamName: z.string().min(1, 'Team name is required'),
@@ -65,8 +63,6 @@ const hackathonSchema = z.object({
   leaderEmail: z.string().email('Invalid email'),
   leaderPhone: z.string().min(1, 'Phone is required'),
   leaderDegree: z.string().min(1, 'Degree is required'),
-  leaderYear: z.string().min(1, 'Year is required'),
-  leaderBranch: z.string().min(1, 'Branch is required'),
   teammatesCount: z.number().min(0).max(4),
   teammates: z.array(hackathonMemberSchema).max(4),
   agreeTerms: z.boolean().refine(val => val === true, 'You must agree to the terms and conditions'),
@@ -120,8 +116,6 @@ const Registration = () => {
       leaderEmail: '',
       leaderPhone: '',
       leaderDegree: '',
-      leaderYear: '',
-      leaderBranch: '',
       teammatesCount: 0,
       teammates: [],
       agreeTerms: false,
@@ -763,20 +757,6 @@ const Registration = () => {
                           <FormMessage />
                         </FormItem>
                       )} />
-                      <FormField control={hackathonForm.control} name="leaderYear" render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-[#F66200]">Leader Year *</FormLabel>
-                          <FormControl><Input {...field} className="bg-gray-800/50 border-[#F66200]/30 text-white" placeholder="e.g., 2nd Year" /></FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )} />
-                      <FormField control={hackathonForm.control} name="leaderBranch" render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-[#F66200]">Leader Branch *</FormLabel>
-                          <FormControl><Input {...field} className="bg-gray-800/50 border-[#F66200]/30 text-white" placeholder="e.g., Computer Science" /></FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )} />
                       <FormField control={hackathonForm.control} name="teammatesCount" render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-[#F66200]">Number of Teammates (excluding leader, max 4)</FormLabel>
@@ -787,7 +767,7 @@ const Registration = () => {
                               // Update teammates array length
                               const arr = hackathonForm.getValues('teammates');
                               if (arr.length < val) {
-                                hackathonForm.setValue('teammates', arr.concat(Array(val - arr.length).fill({ name: '', email: '', phone: '', degree: '', year: '', branch: '' })));
+                                hackathonForm.setValue('teammates', arr.concat(Array(val - arr.length).fill({ name: '', email: '', phone: '', degree: '' })));
                               } else if (arr.length > val) {
                                 hackathonForm.setValue('teammates', arr.slice(0, val));
                               }
@@ -840,23 +820,6 @@ const Registration = () => {
                                     <option value="Other">Other</option>
                                   </select>
                                 </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )} />
-                          </div>
-                          {/* Row 3: Year and Branch */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <FormField control={hackathonForm.control} name={`teammates.${idx}.year`} render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-[#F66200]">Year *</FormLabel>
-                                <FormControl><Input {...field} className="bg-gray-800/50 border-[#F66200]/30 text-white" placeholder="e.g., 2nd Year" /></FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )} />
-                            <FormField control={hackathonForm.control} name={`teammates.${idx}.branch`} render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-[#F66200]">Branch *</FormLabel>
-                                <FormControl><Input {...field} className="bg-gray-800/50 border-[#F66200]/30 text-white" placeholder="e.g., Computer Science" /></FormControl>
                                 <FormMessage />
                               </FormItem>
                             )} />

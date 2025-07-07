@@ -15,6 +15,8 @@ interface RegistrationData {
   email: string;
   phone: string;
   college: string;
+  year?: string;
+  branch?: string;
   degree?: string;
   type?: string;
   github?: string;
@@ -57,6 +59,8 @@ const RegistrationLookup = () => {
               email: data.email,
               phone: data.phone,
               college: data.college,
+              year: data.year,
+              branch: data.branch,
               degree: data.degree,
               type: data.type
             });
@@ -69,6 +73,8 @@ const RegistrationLookup = () => {
             email: data.email,
             phone: data.phone,
             college: data.institutionName || data.college,
+            year: data.year,
+            branch: data.branch,
             degree: data.degree,
             type: data.type
           });
